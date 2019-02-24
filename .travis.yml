@@ -14,7 +14,7 @@ before_script:
 script: 
   - yarn run test
   - CI=false yarn run build
-  - SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | cut -d$'\n' -f1)
+  - SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | cut -d$'\n' -f1 | cut -d " " -f1)
   - rm -rf $REPO
   - git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git
   - rm -rf $REPO/react && cp -R build $REPO/react
