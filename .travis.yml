@@ -1,5 +1,7 @@
 sudo: true
 language: node_js
+node_js:
+  - "11"
 cache: npm
 
 install:
@@ -21,10 +23,6 @@ script:
     git add --all react &&
     git commit -m 'Updating to $USERNAME/$REPO@$SHA.' &&
     git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git react --quiet ;
-
-
-
-
 
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
