@@ -20,9 +20,7 @@ script:
   - rm -rf $REPO/react && cp -R build $REPO/react
   - cd $REPO
   - git add --all react
-  - COMMIT_MESSAGE='Updating to '$USERNAME'/'$REPO' from '$USERNAME'/portfolio@'$SHA
-  - echo $COMMIT_MESSAGE
-  - git commit -m $COMMIT_MESSAGE
+  - git commit -m "Updating to $USERNAME/$REPO from $USERNAME/portfolio@$SHA"
   - git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
 
 # Generate your secure token with the travis gem:
