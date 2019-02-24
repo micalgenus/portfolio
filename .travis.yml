@@ -17,12 +17,11 @@ script:
   - SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | cut -d$'\n' -f1)
   - rm -rf $REPO
   - git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git
-  - cp -R build $REPO/react
-  - |
-    cd $REPO &&
-    git add --all react &&
-    git commit -m 'Updating to '$USERNAME'/'$REPO' from '$USERNAME'/portfolio@'$SHA &&
-    git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet ;
+  - rm -rf $REPO/react && cp -R build $REPO/react
+  - cd $REPO
+  - git add --all react
+  - git commit -m 'Updating to '$USERNAME'/'$REPO' from '$USERNAME'/portfolio@'$SHA
+  - git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
 
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
