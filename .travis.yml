@@ -13,12 +13,13 @@ script:
   - yarn run test
   - yarn run build
   - |
-    git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git
-    SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | cut -d$'\n' -f1)
-    cp -R build $REPO/react
-    cd $REPO
-    git add --all react
-    git commit -m 'Updating to $USERNAME/$REPO@$SHA.'
+    yarn run build &&
+    git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git &&
+    SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | cut -d$'\n' -f1) &&
+    cp -R build $REPO/react &&
+    cd $REPO &&
+    git add --all react &&
+    git commit -m 'Updating to $USERNAME/$REPO@$SHA.' &&
     git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git react --quiet ;
 
 
