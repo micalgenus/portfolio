@@ -1,19 +1,29 @@
 sudo: true
-language: ruby
+language: node_js
 cache: npm
-rvm:
-  - 2.4.2
 
 install:
-  # Install Jekyll and dependencies
-  - npm install -g yarn
   - yarn 
 
 before_script:
   - git config --global user.email "micalgenus@gmail.com"
   - git config --global user.name "GyeongSu Han"
 
-script: bundle exec rake site:deploy --quiet #--trace
+script: 
+  - yarn run test
+  - yarn run build
+  - |
+    git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git
+    SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | cut -d$'\n' -f1)
+    cp -R build $REPO/react
+    cd $REPO
+    git add --all react
+    git commit -m 'Updating to $USERNAME/$REPO@$SHA.'
+    git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git react --quiet ;
+
+
+
+
 
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
