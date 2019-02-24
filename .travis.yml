@@ -13,7 +13,6 @@ before_script:
 
 script: 
   - yarn run test
-  - yarn run build
   - |
     CI=false yarn run build &&
     git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git &&
