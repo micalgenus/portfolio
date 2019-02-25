@@ -117,10 +117,5 @@
       "D:\\Github\\portfolio\\node_modules\\jest-watch-typeahead\\filename.js",
       "D:\\Github\\portfolio\\node_modules\\jest-watch-typeahead\\testname.js"
     ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
   }
 }
