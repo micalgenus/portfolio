@@ -1,5 +1,5 @@
 {
-  "presets": ["react-app"],
+  "presets": [["@babel/preset-env", { "targets": { "browsers": ["last 1 version", "ie >= 11"] } }], "@babel/preset-react", "react-app"],
   "plugins": [
     [
       "module-resolver",

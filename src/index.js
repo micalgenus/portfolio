@@ -1,6 +1,4 @@
-// Polyfill
 import "@babel/polyfill";
-import "es5-shim";
 
 import React from "react";
 import ReactDOM from "react-dom";
