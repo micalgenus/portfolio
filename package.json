@@ -75,5 +75,7 @@
     "not op_mini all"
   ],
   "homepage": "https://portfolio.micalgenus.com/",
+  "devDependencies": {
+    "react-test-renderer": "^16.8.3"
   }
 }
