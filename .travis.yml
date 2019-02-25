@@ -12,16 +12,16 @@ before_script:
   - git config --global user.name "GyeongSu Han"
 
 script: 
-  - yarn run test
-  - CI=false yarn run build
-  - SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | head -1)
-  - rm -rf $REPO
-  - git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git
-  - rm -rf $REPO/react && cp -R build $REPO/react
-  - cd $REPO
-  - git add --all react
-  - git commit -m "Updating from $USERNAME/portfolio@$SHA"
-  - git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
+  - yarn run test &&
+    CI=false yarn run build &&
+    SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | head -1) &&
+    rm -rf $REPO &&
+    git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git &&
+    rm -rf $REPO/react && cp -R build $REPO/react &&
+    cd $REPO &&
+    git add --all react &&
+    git commit -m "Updating from $USERNAME/portfolio@$SHA" &&
+    git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
 
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
