@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "babel-plugin-module-resolver": "^3.2.0",
     "node-sass": "^4.11.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5"
   },
   "scripts": {
