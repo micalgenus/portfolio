@@ -10,6 +10,9 @@ install:
 before_script:
   - git config --global user.email "micalgenus@gmail.com"
   - git config --global user.name "GyeongSu Han"
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - yarn run test &&
@@ -22,6 +25,9 @@ script:
     git add --all react &&
     git commit -m "Updating from $USERNAME/portfolio@$SHA" &&
     git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
 # gem install travis
