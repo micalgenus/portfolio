@@ -4,7 +4,17 @@ import { Link } from 'react-router-dom';
 
 export default class LayoutHeader extends Component {
   render() {
-    return <div>{this.props.routers.map((router, idx) => (router.path ? <Link to={router.path}>{router.title}</Link> : null))}</div>;
+    return (
+      <div>
+        {this.props.routers.map((router, idx) =>
+          router.path ? (
+            <Link key={idx} to={router.path}>
+              {router.title}
+            </Link>
+          ) : null
+        )}
+      </div>
+    );
   }
 }
 

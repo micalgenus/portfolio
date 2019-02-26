@@ -14,7 +14,7 @@ export default class Layout extends Component {
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               {this.props.routers.map((route, idx) =>
-                route.Component ? <Route key={idx} exact={route.exact} path={route.path} component={route.Component} /> : null
+                route.Component ? <Route key={idx} exact={route.exact} path={route.path} component={props => <route.Component {...props} />} /> : null
               )}
             </Switch>
           </Suspense>
