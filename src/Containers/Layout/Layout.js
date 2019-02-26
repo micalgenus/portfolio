@@ -11,13 +11,15 @@ export default class Layout extends Component {
       <Router>
         <div>
           <Header routers={this.props.routers} />
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              {this.props.routers.map((route, idx) =>
-                route.Component ? <Route key={idx} exact={route.exact} path={route.path} component={props => <route.Component {...props} />} /> : null
-              )}
-            </Switch>
-          </Suspense>
+          <div className="container">
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                {this.props.routers.map((route, idx) =>
+                  route.Component ? <Route key={idx} exact={route.exact} path={route.path} component={props => <route.Component {...props} />} /> : null
+                )}
+              </Switch>
+            </Suspense>
+          </div>
         </div>
       </Router>
     );

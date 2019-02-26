@@ -1,3 +1,7 @@
+/**
+  * Global CSS
+  */
+
 ::selection {
   background: #8d7edc;
   color: #fff;
@@ -12,4 +16,41 @@
   background: #8d7edc;
   color: #fff;
   text-shadow: none;
+}
+
+* {
+  font-family: 'BMJUA', 'Source Sans Pro';
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+/**
+  * Configuration variable
+  */
+$header-height: 3em;
+
+/**
+  * Layout CSS
+  */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: $header-height;
+  box-shadow: 0px 1px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  margin-top: $header-height;
 }

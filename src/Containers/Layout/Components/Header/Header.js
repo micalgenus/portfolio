@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default class LayoutHeader extends Component {
   render() {
     return (
-      <div>
+      <header>
         {this.props.routers.map((router, idx) =>
           router.path ? (
             <Link key={idx} to={router.path}>
@@ -13,7 +13,7 @@ export default class LayoutHeader extends Component {
             </Link>
           ) : null
         )}
-      </div>
+      </header>
     );
   }
 }
