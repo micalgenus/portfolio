@@ -8,9 +8,9 @@ import './Layout.scss';
 export default class Layout extends Component {
   render() {
     return (
-      <div>
-        <Header />
-        <Router>
+      <Router>
+        <div>
+          <Header routers={this.props.routers} />
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               {this.props.routers.map((route, idx) =>
@@ -18,8 +18,8 @@ export default class Layout extends Component {
               )}
             </Switch>
           </Suspense>
-        </Router>
-      </div>
+        </div>
+      </Router>
     );
   }
 }
