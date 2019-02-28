@@ -3,7 +3,7 @@
 exports[`/App snapshot test 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__unrendered__): <component />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -16,69 +16,21 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
-    "props": Object {
-      "routers": Array [
-        Object {
-          "Component": Object {
-            "$$typeof": Symbol(react.lazy),
-            "_ctor": [Function],
-            "_result": null,
-            "_status": -1,
-          },
-          "exact": true,
-          "path": "/",
-          "title": "홈",
-        },
-        Object {
-          "Component": Object {
-            "$$typeof": Symbol(react.lazy),
-            "_ctor": [Function],
-            "_result": null,
-            "_status": -1,
-          },
-          "path": "/intro",
-          "title": "소개",
-        },
-      ],
-    },
+    "nodeType": "host",
+    "props": Object {},
     "ref": null,
     "rendered": null,
-    "type": [Function],
+    "type": "component",
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "routers": Array [
-          Object {
-            "Component": Object {
-              "$$typeof": Symbol(react.lazy),
-              "_ctor": [Function],
-              "_result": null,
-              "_status": -1,
-            },
-            "exact": true,
-            "path": "/",
-            "title": "홈",
-          },
-          Object {
-            "Component": Object {
-              "$$typeof": Symbol(react.lazy),
-              "_ctor": [Function],
-              "_result": null,
-              "_status": -1,
-            },
-            "path": "/intro",
-            "title": "소개",
-          },
-        ],
-      },
+      "nodeType": "host",
+      "props": Object {},
       "ref": null,
       "rendered": null,
-      "type": [Function],
+      "type": "component",
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -102,6 +54,5 @@ ShallowWrapper {
       },
     },
   },
-  Symbol(enzyme.__childContext__): null,
 }
 `;
