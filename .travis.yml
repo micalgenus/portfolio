@@ -7,8 +7,8 @@ cache:
   yarn: true
 
 before_install:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ~/cc-test-reporter
-  - chmod +x ~/cc-test-reporter
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
 
 install:
   - yarn
@@ -16,23 +16,24 @@ install:
 before_script:
   - git config --global user.email "micalgenus@gmail.com"
   - git config --global user.name "GyeongSu Han"
-  - ~/cc-test-reporter before-build
+  - SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | head -1)
+  - rm -rf $REPO
+  - ./cc-test-reporter before-build
 
 script:
-  - yarn run test &&
-    CI=false yarn run build &&
-    SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | head -1) &&
-    rm -rf $REPO &&
-    git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git &&
-    rm -rf $REPO/react &&
-    cp -R build $REPO/react &&
-    cd $REPO &&
-    git add --all react &&
-    git commit -m "Updating from $USERNAME/portfolio@$SHA" &&
-    git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
+  - yarn run test
+  - yarn run test --coverage
+  - yarn run build
 
 after_script:
-  - ~/cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
+  - git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git
+  - rm -rf $REPO/react
+  - cp -R build $REPO/react
+  - cd $REPO
+  - git add --all react
+  - git commit -m "Updating from $USERNAME/portfolio@$SHA"
+  - git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
 # gem install travis
