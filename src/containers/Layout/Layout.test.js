@@ -1,11 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Layout from './Layout';
+import { Route } from 'react-router-dom';
 
-describe('Layout', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Layout />, div);
-    ReactDOM.unmountComponentAtNode(div);
+import { expect } from 'chai';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+import Layout from './Layout';
+import Routers from '@/Router';
+
+Enzyme.configure({ adapter: new Adapter() });
+
+describe('/Containers/Layout', () => {
+  it('Route render check', () => {
+    const wrapper = shallow(<Layout routers={Routers} />);
+    expect(wrapper.find(Route)).to.have.lengthOf(Routers.length);
   });
 });
