@@ -23,15 +23,15 @@ before_script:
 script:
   - yarn run test
   - yarn run test --coverage
-  - yarn run build
+  - PUBLIC_URL=https://micalgenus.github.io/portfolio yarn run build
 
 after_script:
   - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
   - git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git
-  - rm -rf $REPO/react
-  - cp -R build $REPO/react
+  - rm -rf $REPO/portfolio
+  - cp -R build $REPO/portfolio
   - cd $REPO
-  - git add --all react
+  - git add --all portfolio
   - git commit -m "Updating from $USERNAME/portfolio@$SHA"
   - git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
 # Generate your secure token with the travis gem:
