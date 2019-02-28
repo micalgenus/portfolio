@@ -1,12 +1,13 @@
 {
-  "presets": [["@babel/preset-env", { "targets": { "browsers": ["last 1 version", "ie >= 11"] } }], "@babel/preset-react", "react-app"],
   "plugins": [
     [
       "module-resolver",
       {
         "root": ["./src"],
         "alias": {
-          "test": "./test",
+          "@/Containers": "./src/containers",
+          "@/Pages": "./src/pages",
+          "@": "./src",
           "underscore": "lodash"
         }
       }
