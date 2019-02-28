@@ -5,6 +5,7 @@
       {
         "root": ["./src"],
         "alias": {
+          "@/TestComponent": "./src/components/TestComponent",
           "@/Containers": "./src/containers",
           "@/Pages": "./src/pages",
           "@": "./src",
