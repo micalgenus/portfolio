@@ -1,11 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import TestComponent from '@/TestComponent';
 import Introduce from './Introduce';
 
-describe('Introduce', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Introduce />, div);
-    ReactDOM.unmountComponentAtNode(div);
-  });
-});
+const IntroduceTest = new TestComponent({ name: '/Pages/Introduce', component: Introduce, snapshot: true });
+IntroduceTest.run(() => {});
