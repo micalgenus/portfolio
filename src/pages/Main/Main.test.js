@@ -1,11 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import TestComponent from '@/TestComponent';
 import Main from './Main';
 
-describe('Main', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Main />, div);
-    ReactDOM.unmountComponentAtNode(div);
-  });
-});
+const MainTest = new TestComponent({ name: '/Pages/Main', component: Main, snapshot: true });
+MainTest.run(() => {});
