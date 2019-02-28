@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "babel-plugin-module-resolver": "^3.2.0",
     "node-sass": "^4.11.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -28,6 +27,7 @@
   ],
   "homepage": "https://portfolio.micalgenus.com/",
   "devDependencies": {
+    "babel-plugin-module-resolver": "^3.2.0",
     "react-snap": "^1.23.0"
   },
   "reactSnap": {
