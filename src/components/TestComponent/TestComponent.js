@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -28,7 +28,7 @@ export default class TestComponent {
         });
       }
 
-      callback.bind(this)();
+      if (typeof callback === 'function') callback.bind(this)();
     });
   };
 }
@@ -41,5 +41,3 @@ TestComponent.propTypes = {
   snapshot: PropTypes.bool,
   args: PropTypes.object,
 };
-
-export { shallow, mount };
