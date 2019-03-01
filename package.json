@@ -11,8 +11,10 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "postbuild": "react-snap",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired build && react-snap",
+    "gh-pages:build": "yarn run gh-pages:prebuild && react-app-rewired build && react-snap && yarn run gh-pages:postbuild",
+    "gh-pages:prebuild": "node gh-pages.build prebuild",
+    "gh-pages:postbuild": "node gh-pages.build postbuild",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
