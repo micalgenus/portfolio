@@ -6,6 +6,9 @@ cache:
   npm: true
   yarn: true
 
+services:
+  - docker
+
 before_install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -23,10 +26,12 @@ script:
   - yarn run test
   - yarn run test --coverage
   - yarn run gh-pages:build
+  - docker build -t $USERNAME/portfolio:develop .
 
 after_script:
   - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
   - ./node_modules/gh-pages/bin/gh-pages.js -d build -e portfolio -b master -u "micalgenus <micalgenus@gmail.com>" -r https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO -m "Updating from $USERNAME/portfolio@$SHA"
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
 # gem install travis
