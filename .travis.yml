@@ -17,7 +17,6 @@ before_script:
   - git config --global user.email "micalgenus@gmail.com"
   - git config --global user.name "GyeongSu Han"
   - SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | head -1)
-  - rm -rf $REPO
   - ./cc-test-reporter before-build
 
 script:
@@ -27,13 +26,7 @@ script:
 
 after_script:
   - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
-  - git clone https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git
-  - rm -rf $REPO/portfolio
-  - cp -R build $REPO/portfolio
-  - cd $REPO
-  - git add --all portfolio
-  - git commit -m "Updating from $USERNAME/portfolio@$SHA"
-  - git push https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO.git --quiet
+  - ./node_modules/gh-pages/bin/gh-pages.js -d build -e portfolio -b master -u "micalgenus <micalgenus@gmail.com>" -r https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO -m "Updating from $USERNAME/portfolio@$SHA"
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
 # gem install travis
