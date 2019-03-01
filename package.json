@@ -33,6 +33,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
     "enzyme-to-json": "^3.3.5",
+    "gh-pages": "^2.0.1",
     "react-app-rewired": "^2.1.0",
     "react-snap": "^1.23.0",
     "sinon": "^7.2.5"
