@@ -1,10 +1,14 @@
 import { lazy } from 'react';
+import { homepage } from 'package.json';
 
 const Main = lazy(() => import('@/Pages/Main'));
 const Introduce = lazy(() => import('@/Pages/Introduce'));
 const Projects = lazy(() => import('@/Pages/Projects'));
 
-const pathPrefix = process.env.CI === true ? '/portfolio' : '';
+const parser = document.createElement('a');
+parser.href = homepage || 'http://localhost:3000';
+
+const pathPrefix = parser.pathname === '/' ? '' : parser.pathname;
 const appendPrefix = path => pathPrefix + path;
 
 export default [

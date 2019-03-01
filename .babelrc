@@ -9,6 +9,7 @@
           "@/Containers": "./src/containers",
           "@/Pages": "./src/pages",
           "@": "./src",
+          "package.json": "./package.json",
           "underscore": "lodash"
         }
       }
