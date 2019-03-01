@@ -42,6 +42,9 @@
       "/",
       "/intro",
       "/projects"
+    ],
+    "puppeteerArgs": [
+      "--no-sandbox"
     ]
   }
 }
