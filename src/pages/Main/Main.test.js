@@ -1,5 +1,4 @@
-import TestComponent from '@/TestComponent';
+import { snapshotTest } from '@/TestComponent';
 import Main from './Main';
 
-const MainTest = new TestComponent({ name: '/Pages/Main', component: Main, snapshot: true });
-MainTest.run(null);
+snapshotTest('/Pages/Main', Main);
