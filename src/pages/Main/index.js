@@ -1,3 +1,11 @@
-import Main from './Main';
+import React, { Component } from 'react';
 
-export default Main;
+export default class Main extends Component {
+  render() {
+    return (
+      <div>
+        <p>Main</p>
+      </div>
+    );
+  }
+}

@@ -1,4 +1,4 @@
 import { snapshotTest } from '@/TestComponent';
-import Projects from './Projects';
+import Projects from './index';
 
 snapshotTest('/Pages/Projects', Projects);

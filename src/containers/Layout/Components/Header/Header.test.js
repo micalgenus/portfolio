@@ -5,7 +5,7 @@ import TestComponent from '@/TestComponent';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import Header from './Header';
+import Header from './index';
 import Routers from '@/Router';
 
 const HeaderTest = new TestComponent({ name: '/Containers/Header', component: Header });

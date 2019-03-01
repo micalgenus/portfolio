@@ -1,4 +1,4 @@
 import { snapshotTest } from '@/TestComponent';
-import Main from './Main';
+import Main from './index';
 
 snapshotTest('/Pages/Main', Main);
