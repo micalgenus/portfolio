@@ -22,7 +22,7 @@ before_script:
 script:
   - yarn run test
   - yarn run test --coverage
-  - PUBLIC_URL=https://micalgenus.github.io/portfolio yarn run build
+  - yarn run gh-pages:build
 
 after_script:
   - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
