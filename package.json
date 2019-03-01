@@ -43,7 +43,6 @@
   "reactSnap": {
     "include": [
       "/",
-      "/intro",
       "/projects"
     ],
     "puppeteerArgs": [
