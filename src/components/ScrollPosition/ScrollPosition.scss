@@ -1,0 +1,13 @@
+.scroll-component.progress-container {
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background-color: #e6e6e6;
+  display: flex;
+
+  .progress-bar {
+    width: 0%;
+    background: #8d7edc;
+    display: block;
+  }
+}
