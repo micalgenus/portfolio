@@ -10,7 +10,7 @@ import App from '@/App';
 import * as serviceWorker from './serviceWorker';
 
 const reducers =
-  process.env.NODE_ENV === 'development' ? [rootReducer] : [rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()];
+  process.env.NODE_ENV !== 'development' ? [rootReducer] : [rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()];
 
 const store = createStore(...reducers);
 
