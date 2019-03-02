@@ -42,9 +42,9 @@ TestComponent.propTypes = {
   args: PropTypes.object,
 };
 
-const snapshotTest = (name, component) => {
+const snapshotTest = (name, component, argv) => {
   if (!name || !component) return null;
-  const snapshotTestComponent = new TestComponent({ name: name, component: component, snapshot: true });
+  const snapshotTestComponent = new TestComponent({ name: name, component: component, snapshot: true, args: argv });
   snapshotTestComponent.run(null);
 };
 
