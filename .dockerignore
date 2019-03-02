@@ -1,0 +1,15 @@
+build/
+coverage/
+
+node_modules/
+.dockerignore
+.editorconfig
+.gitignore
+.prettierrc
+.travis.yml
+Dockerfile
+gh-pages.build.js
+jest.config.js
+README.md
+
+.vscode/
