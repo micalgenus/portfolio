@@ -8,7 +8,7 @@ export default class LayoutHeader extends Component {
       <header>
         <div className="blur" />
         <div>
-          <Link to="/">GyeongSu Han's Portfolio</Link>
+          <Link to="/">Han GyeongSu's Portfolio</Link>
         </div>
 
         <nav>
