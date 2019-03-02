@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import './Header.scss';
+
 export default class LayoutHeader extends Component {
   render() {
     return (

@@ -1,6 +1,8 @@
 import React, { Suspense, Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import './Router.scss';
+
 export default class Router extends Component {
   render() {
     return (

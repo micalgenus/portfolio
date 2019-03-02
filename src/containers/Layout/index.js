@@ -5,9 +5,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { changeScrollY } from '@/Reducers/scroll';
 
+import './Layout.font.scss';
+import './Layout.global.scss';
+
 import { Header, Router as Routing } from './Components';
 
-import './Layout.scss';
 
 class Layout extends Component {
   componentDidMount = () => {

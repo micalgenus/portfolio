@@ -1,0 +1,38 @@
+/**
+  * Global CSS
+  */
+
+::selection {
+  background: #8d7edc;
+  color: #fff;
+  text-shadow: none;
+}
+::-moz-selection {
+  background: #8d7edc;
+  color: #fff;
+  text-shadow: none;
+}
+::-webkit-selection {
+  background: #8d7edc;
+  color: #fff;
+  text-shadow: none;
+}
+
+* {
+  font-family: 'BMJUA', 'Source Sans Pro';
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+li {
+  list-style: none;
+}
