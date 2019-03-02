@@ -1,7 +1,7 @@
-import React, { Suspense, Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Header } from './Components';
+
+import { Header, Router as Routing } from './Components';
 
 import './Layout.scss';
 
@@ -11,15 +11,7 @@ export default class Layout extends Component {
       <Router>
         <div>
           <Header routers={this.props.routers} />
-          <div className="container">
-            <Suspense fallback={<div>Loading...</div>}>
-              <Switch>
-                {this.props.routers.map((route, idx) =>
-                  route.Component ? <Route key={idx} exact={route.exact} path={route.path} component={props => <route.Component {...props} />} /> : null
-                )}
-              </Switch>
-            </Suspense>
-          </div>
+          <Routing routers={this.props.routers} />
         </div>
       </Router>
     );
