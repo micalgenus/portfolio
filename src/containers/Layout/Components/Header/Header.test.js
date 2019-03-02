@@ -8,7 +8,7 @@ import { expect } from 'chai';
 import Header from './index';
 import Routers from '@/Router';
 
-const HeaderTest = new TestComponent({ name: '/Containers/Header', component: Header });
+const HeaderTest = new TestComponent({ name: '/Containers/Layout/Components/Header', component: Header });
 HeaderTest.run(() => {
   it('Link render check', () => {
     const wrapper = shallow(<Header routers={Routers} />);
