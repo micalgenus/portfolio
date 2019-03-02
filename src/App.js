@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from '@/Containers';
+import Layout from '@/Containers/Layout';
 
 import Router from '@/Router';
 
