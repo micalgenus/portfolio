@@ -11,9 +11,9 @@ export default class LayoutHeader extends Component {
     return (
       <header style={{ top: -this.props.header || 0 }}>
         <div className="blur" />
-          <Link to="/">Han GyeongSu's Portfolio</Link>
         <nav>
           <div>
+            <Link to="/" onClick={() => this.props.changePath('/')}>
               Han GyeongSu's Portfolio
             </Link>
           </div>
@@ -22,7 +22,7 @@ export default class LayoutHeader extends Component {
             {this.props.routers.map((router, idx) =>
               router.path && router.path !== '/' ? (
                 <li key={idx}>
-                  <Link to={router.path}>
+                  <Link to={router.path} onClick={() => this.props.changePath(router.path)}>
                     {router.title}
                   </Link>
                 </li>
