@@ -2,26 +2,35 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import ScrollPosition from '@/Components/ScrollPosition';
+
 import './Header.scss';
 
 export default class LayoutHeader extends Component {
   render() {
     return (
-      <header>
+      <header style={{ top: -this.props.header || 0 }}>
         <div className="blur" />
-        <div>
           <Link to="/">Han GyeongSu's Portfolio</Link>
-        </div>
-
         <nav>
-          {this.props.routers.map((router, idx) =>
-            router.path && router.path !== '/' ? (
-              <Link key={idx} to={router.path}>
-                {router.title}
-              </Link>
-            ) : null
-          )}
+          <div>
+              Han GyeongSu's Portfolio
+            </Link>
+          </div>
+
+          <ul>
+            {this.props.routers.map((router, idx) =>
+              router.path && router.path !== '/' ? (
+                <li key={idx}>
+                  <Link to={router.path}>
+                    {router.title}
+                  </Link>
+                </li>
+              ) : null
+            )}
+          </ul>
         </nav>
+        <ScrollPosition top={60} scroll={this.props.scroll} height={this.props.height} />
       </header>
     );
   }
@@ -29,8 +38,12 @@ export default class LayoutHeader extends Component {
 
 LayoutHeader.defaultProps = {
   routers: [],
+  scroll: 0,
+  height: 0,
 };
 
 LayoutHeader.propTypes = {
   routers: PropTypes.array,
+  scroll: PropTypes.number,
+  height: PropTypes.number,
 };
