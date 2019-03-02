@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import Layout from '@/Containers/Layout';
 
-import Router from '@/Router';
+import Routers from '@/Router';
 
 class App extends Component {
   render() {
-    return <Layout {...this.props} routers={Router} />;
+    return (
+      <Router>
+        <Layout {...this.props} routers={Routers} />
+      </Router>
+    );
   }
 }
 
