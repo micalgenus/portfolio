@@ -25,11 +25,13 @@ class Layout extends Component {
 
   // Update by redux and state
   shouldComponentUpdate = (nextProps, nextState) => {
-    if (nextProps.height !== this.props.height) return true;
-    if (nextProps.scrollY !== this.props.scrollY) return true;
-    if (nextProps.path !== this.props.path) return true;
-
-    if (nextState.header !== this.state.header) return true;
+    if (
+      nextProps.height !== this.props.height ||
+      nextProps.scrollY !== this.props.scrollY ||
+      nextProps.path !== this.props.path ||
+      nextState.header !== this.state.header
+    )
+      return true;
 
     return false;
   };
