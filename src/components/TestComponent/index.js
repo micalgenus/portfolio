@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -8,49 +8,37 @@ Enzyme.configure({ adapter: new Adapter() });
 
 /**
  * @param {string} name Test name
- * @param {object} component Test component
+ * @param {object} component Test component as <component /> object
  * @param {bool} snapshot if snapshot is true then call snapshot test in run
- * @param {object} args if snapshot is true then this value use at create component
+ * @param {function} callback run function after default test
  */
-export default class TestComponent {
-  constructor(props) {
-    this.props = {
-      name: props.name,
-      component: props.namcomponente,
-      snapshot: props.snapshot === true ? true : false,
-      args: props.args || {}, //
-    };
-  }
-
-  run = callback => {
-    const component = this.props.component;
-    const args = this.props.args;
-
-    describe(this.props.name, () => {
-      if (this.props.snapshot === true) {
-        it('snapshot test', () => {
-          const wrapper = shallow(<component {...args} />);
-          expect(wrapper).toMatchSnapshot();
-        });
-      }
-
-      if (typeof callback === 'function') callback.bind(this)();
+export const defaultTest = ({ name, component, snapshot = false, callback }) => {
+  describe(name, () => {
+    it('render test', () => {
+      const div = document.createElement('div');
+      ReactDOM.render(component, div);
+      ReactDOM.unmountComponentAtNode(div);
     });
-  };
-}
 
-TestComponent.defaultProps = { snapshot: false, args: {} };
+    if (snapshot === true) {
+      it('snapshot test', () => {
+        const wrapper = shallow(component);
+        expect(wrapper).toMatchSnapshot();
+      });
+    }
 
-TestComponent.propTypes = {
-  name: PropTypes.string,
-  component: PropTypes.object,
-  snapshot: PropTypes.bool,
-  args: PropTypes.object,
+    if (typeof callback === 'function') callback.bind(this)();
+  });
 };
 
-// Snapshot test alias
-export const snapshotTest = (name, component, argv) => {
+/**
+ * @description Snapshot test alias
+ * @param {string} name Test name
+ * @param {object} component Test component as <component /> object
+ * @param {function} callback run function after default test
+ * @returns {undefined}
+ */
+export const snapshotTest = ({ name, component, callback }) => {
   if (!name || !component) return null;
-  const snapshotTestComponent = new TestComponent({ name: name, component: component, snapshot: true, args: argv });
-  snapshotTestComponent.run(null);
+  defaultTest({ name, component, snapshot: true, callback });
 };

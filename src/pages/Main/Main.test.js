@@ -1,4 +1,5 @@
+import React from 'react';
 import { snapshotTest } from '@/TestComponent';
 import Main from './index';
 
-snapshotTest('/Pages/Main', Main);
+snapshotTest({ name: '/Pages/Main', component: <Main /> });

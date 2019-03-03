@@ -1,17 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-import TestComponent from '@/TestComponent';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import Header from './index';
-import Routers from '@/Router';
+import { defaultTest } from '@/TestComponent';
 
-const HeaderTest = new TestComponent({ name: '/Containers/Layout/Components/Header', component: Header });
-HeaderTest.run(() => {
-  it('Link render check', () => {
-    const wrapper = shallow(<Header routers={Routers} />);
-    expect(wrapper.find(Link)).to.have.lengthOf(Routers.length);
-  });
+import Header from './index';
+
+import Routers from '@/Router';
+import rootReducer from '@/Reducers';
+
+const store = createStore(rootReducer);
+
+defaultTest({
+  name: '/Containers/Layout/Components/Header',
+  component: (
+    <Provider store={store}>
+      <Router>
+        <Header />
+      </Router>
+    </Provider>
+  ),
+  callback: () =>
+    it('Link render check', () => {
+      const wrapper = shallow(<Header routers={Routers} />);
+      expect(wrapper.find(Link)).to.have.lengthOf(Routers.length);
+    }),
 });
