@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import ScrollPosition from '@/Containers/ScrollPosition';
+import StatusBar from '@/Containers/StatusBar';
 
 import './Header.scss';
 
@@ -63,7 +63,7 @@ export default class LayoutHeader extends Component {
             )}
           </ul>
         </nav>
-        <ScrollPosition top={60} />
+        <StatusBar top={60} />
       </header>
     );
   }
@@ -71,12 +71,8 @@ export default class LayoutHeader extends Component {
 
 LayoutHeader.defaultProps = {
   routers: [],
-  scroll: 0,
-  height: 0,
 };
 
 LayoutHeader.propTypes = {
   routers: PropTypes.array,
-  scroll: PropTypes.number,
-  height: PropTypes.number,
 };
