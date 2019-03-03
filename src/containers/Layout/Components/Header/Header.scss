@@ -33,16 +33,21 @@ header {
     position: absolute;
     display: flex;
     flex-direction: row;
-    width: calc(100% - #{$header-padding} - #{$header-padding});
+    width: 100%;
     height: 100%;
     padding: 0 $header-padding;
     align-items: center;
     justify-content: space-between;
     text-align: center;
 
-    & > a {
-      padding: 0 5px;
-      font-size: 0.9em;
+    a {
+      color: #333;
+    }
+
+    ul {
+      a {
+        padding: 0 5px;
+      }
     }
 
     div,
