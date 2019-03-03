@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { changeScrollY, changeWindowHeight } from '@/Reducers/scroll';
 import { changePath, showLoading, hideLoading } from '@/Reducers/page';
@@ -70,16 +71,18 @@ class Layout extends Component {
 
   render() {
     return (
-      <div>
-        <Header
-          routers={this.props.routers}
-          changePath={this.props.changePath}
-          scrollY={this.props.scrollY}
-          header={this.state.header}
-          showLoading={this.props.showLoading}
-        />
-        <Routing routers={this.props.routers} hideLoading={this.props.hideLoading} />
-      </div>
+      <Router>
+        <div>
+          <Header
+            routers={this.props.routers}
+            changePath={this.props.changePath}
+            scrollY={this.props.scrollY}
+            header={this.state.header}
+            showLoading={this.props.showLoading}
+          />
+          <Routing routers={this.props.routers} hideLoading={this.props.hideLoading} />
+        </div>
+      </Router>
     );
   }
 }
