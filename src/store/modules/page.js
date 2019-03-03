@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
 
 // Action
 const CHANGE_PATH = 'page/CHANGE_PATH';
@@ -16,19 +17,19 @@ const initialState = { path: '/', timeout: 5000, loading: false };
 // Reducer
 export default handleActions(
   {
-    [CHANGE_PATH]: (state, action) => ({
-      ...state,
-      path: action.payload,
-    }),
-    [SHOW_LOADING]: (state, action) => ({
-      ...state,
-      timeout: action.payload,
-      loading: true,
-    }),
-    [HIDE_LOADING]: (state, action) => ({
-      ...state,
-      loading: false,
-    }),
+    [CHANGE_PATH]: (state, { payload }) =>
+      produce(state, draft => {
+        draft.path = payload;
+      }),
+    [SHOW_LOADING]: (state, { payload }) =>
+      produce(state, draft => {
+        draft.timeout = payload;
+        draft.loading = true;
+      }),
+    [HIDE_LOADING]: state =>
+      produce(state, draft => {
+        draft.loading = false;
+      }),
   },
   initialState
 );

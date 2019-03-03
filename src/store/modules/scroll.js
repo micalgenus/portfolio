@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
 
 // Action
 const CHANGE_SCROLL_Y = 'scroll/CHANGE_SCROLL_Y';
@@ -14,14 +15,14 @@ const initialState = { scrollY: 0, height: 0 };
 // Reducer
 export default handleActions(
   {
-    [CHANGE_SCROLL_Y]: (state, action) => ({
-      ...state,
-      scrollY: action.payload,
-    }),
-    [CHANGE_WINDOW_HEIGHT]: (state, action) => ({
-      ...state,
-      height: action.payload,
-    }),
+    [CHANGE_SCROLL_Y]: (state, { payload }) =>
+      produce(state, draft => {
+        draft.scrollY = payload;
+      }),
+    [CHANGE_WINDOW_HEIGHT]: (state, { payload }) =>
+      produce(state, draft => {
+        draft.height = payload;
+      }),
   },
   initialState
 );
