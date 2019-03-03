@@ -10,7 +10,14 @@ export default class Router extends Component {
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             {this.props.routers.map((route, idx) =>
-              route.Component ? <Route key={idx} exact={route.exact} path={route.path} component={props => <route.Component {...props} />} /> : null
+              route.Component ? (
+                <Route
+                  key={idx}
+                  exact={route.exact}
+                  path={route.path}
+                  component={props => <route.Component {...props} hideLoading={this.props.hideLoading} />}
+                />
+              ) : null
             )}
           </Switch>
         </Suspense>

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ScrollPosition from '@/Components/ScrollPosition';
+import LoadingStatus from '@/Components/LoadingStatus';
+
+import { hideLoading } from '@/Reducers/page';
 
 import './StatusBar.scss';
 
@@ -13,7 +16,8 @@ class StatusBarContainer extends Component {
   render() {
     return (
       <div className="scroll-potition-container" style={{ top: this.props.top }}>
-        {this.props.isLoading ? null : <ScrollPosition top={0} scroll={this.props.scrollY} height={this.props.height} />}
+        <ScrollPosition top={0} scroll={this.props.scrollY} height={this.props.height} />
+        <LoadingStatus isLoading={this.props.isLoading} timeout={this.props.timeout} hideLoading={this.props.hideLoading} />
       </div>
     );
   }
@@ -33,10 +37,12 @@ StatusBarContainer.propTypes = {
 const mapStateToProps = state => ({
   scrollY: state.scroll.scrollY,
   height: state.scroll.height,
+  isLoading: state.page.loading,
+  timeout: state.page.timeout,
 });
 
 // props 로 넣어줄 액션 생성함수
-const mapDispatchToProps = {};
+const mapDispatchToProps = { hideLoading };
 
 export default connect(
   mapStateToProps,

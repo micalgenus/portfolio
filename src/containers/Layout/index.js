@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { changeScrollY, changeWindowHeight } from '@/Reducers/scroll';
-import { changePath } from '@/Reducers/page';
+import { changePath, showLoading, hideLoading } from '@/Reducers/page';
 
 import './Layout.font.scss';
 import './Layout.global.scss';
@@ -49,7 +49,7 @@ class Layout extends Component {
 
   handleScroll = () => {
     const { changeScrollY } = this.props;
-    const currentScrollY = window.scrollY;
+    const currentScrollY = window.scrollY || document.documentElement.scrollTop;
     if (this.props.scrollY !== currentScrollY) changeScrollY(currentScrollY);
   };
 
@@ -62,8 +62,14 @@ class Layout extends Component {
   render() {
     return (
       <div>
-        <Header routers={this.props.routers} changePath={this.props.changePath} scrollY={this.props.scrollY} header={this.state.header} />
-        <Routing routers={this.props.routers} />
+        <Header
+          routers={this.props.routers}
+          changePath={this.props.changePath}
+          scrollY={this.props.scrollY}
+          header={this.state.header}
+          showLoading={this.props.showLoading}
+        />
+        <Routing routers={this.props.routers} hideLoading={this.props.hideLoading} />
       </div>
     );
   }
@@ -85,7 +91,7 @@ const mapStateToProps = state => ({
 });
 
 // props 로 넣어줄 액션 생성함수
-const mapDispatchToProps = { changeScrollY, changePath, changeWindowHeight };
+const mapDispatchToProps = { changeScrollY, changePath, changeWindowHeight, showLoading, hideLoading };
 
 export default connect(
   mapStateToProps,

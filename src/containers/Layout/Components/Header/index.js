@@ -38,6 +38,7 @@ export default class LayoutHeader extends Component {
     const animationIntervalTime = 5; // milliseconds
 
     windowScrollAnimation(animationMilliSecond, animationIntervalTime, 0);
+    this.props.showLoading();
   };
 
   render() {
