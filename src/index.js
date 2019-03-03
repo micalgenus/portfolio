@@ -5,13 +5,15 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import rootReducer from '@/Reducers';
-
-import App from '@/App';
 import * as serviceWorker from './serviceWorker';
+
+import rootReducer from '@/Reducers';
 
 // Load module CSS
 import 'semantic-ui-css/semantic.min.css';
+
+// Load App
+import App from '@/App';
 
 const reducers =
   process.env.NODE_ENV !== 'development' ? [rootReducer] : [rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()];
