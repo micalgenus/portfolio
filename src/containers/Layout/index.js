@@ -50,13 +50,13 @@ class Layout extends Component {
   handleScroll = () => {
     const { changeScrollY } = this.props;
     const currentScrollY = window.scrollY;
-    changeScrollY(currentScrollY);
+    if (this.props.scrollY !== currentScrollY) changeScrollY(currentScrollY);
   };
 
   handleResize = () => {
     const { changeWindowHeight } = this.props;
     const height = document.getElementById('root').scrollHeight - document.documentElement.clientHeight;
-    changeWindowHeight(height);
+    if (this.props.height !== height) changeWindowHeight(height);
   };
 
   render() {
