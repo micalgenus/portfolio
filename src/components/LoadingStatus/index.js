@@ -5,6 +5,10 @@ import { Progress } from 'semantic-ui-react';
 
 import './LoadingStatus.scss';
 
+/**
+ * @param {number} timeout limit timeout millisecond
+ * @param {bool} isLoading if value is true then show component, but false then hide component
+ */
 export default class LoadingStatus extends Component {
   state = { error: false, percent: 0, timeout: 0, isVisible: false };
 
@@ -15,13 +19,16 @@ export default class LoadingStatus extends Component {
     }
   };
 
+  // Initialize value for start
   startLoading = timeout => {
     this.setState({ percent: 0, timeout: timeout, isVisible: true });
   };
 
   endLoading = error => {
+    // 100ms for dispaly at not loading 
     setTimeout(() => this.setState({ percent: 100, error: error, isVisible: false }), 100);
 
+    // 500ms for clear value
     setTimeout(() => {
       this.props.hideLoading();
       this.setState({ percent: 0 });
@@ -36,8 +43,10 @@ export default class LoadingStatus extends Component {
   };
 
   componentDidUpdate = prevState => {
+    // run only loading
     if (this.props.isLoading || this.state.percen === 100) {
-      if (this.state.percent <= 50) setTimeout(() => this.setState({ percent: this.state.percent + 1 }), this.state.timeout / 50);
+      if (this.state.percent <= 80) setTimeout(() => this.setState({ percent: this.state.percent + 1 }), this.state.timeout / 80);
+      // if percent is 100 without hideLoading of redux
       else this.endLoading(true);
     }
   };

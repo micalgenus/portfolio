@@ -6,13 +6,19 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+/**
+ * @param {string} name Test name
+ * @param {object} component Test component
+ * @param {bool} snapshot if snapshot is true then call snapshot test in run
+ * @param {object} args if snapshot is true then this value use at create component
+ */
 export default class TestComponent {
   constructor(props) {
     this.props = {
       name: props.name,
       component: props.namcomponente,
       snapshot: props.snapshot === true ? true : false,
-      args: props.args || {},
+      args: props.args || {}, //
     };
   }
 
@@ -42,10 +48,9 @@ TestComponent.propTypes = {
   args: PropTypes.object,
 };
 
-const snapshotTest = (name, component, argv) => {
+// Snapshot test alias
+export const snapshotTest = (name, component, argv) => {
   if (!name || !component) return null;
   const snapshotTestComponent = new TestComponent({ name: name, component: component, snapshot: true, args: argv });
   snapshotTestComponent.run(null);
 };
-
-export { snapshotTest };

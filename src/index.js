@@ -15,11 +15,12 @@ import 'semantic-ui-css/semantic.min.css';
 // Load App
 import App from '@/App';
 
+// Redux DevTools
 const reducers =
   process.env.NODE_ENV !== 'development' ? [rootReducer] : [rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()];
 
+// Redux Store
 const store = createStore(...reducers);
-
 const storeProvider = (
   <Provider store={store}>
     <App />
@@ -27,6 +28,8 @@ const storeProvider = (
 );
 const rootElement = document.getElementById('root');
 
+// Create Dom
+// hydrate for react-snap
 if (rootElement.hasChildNodes()) {
   ReactDOM.hydrate(storeProvider, rootElement);
 } else {

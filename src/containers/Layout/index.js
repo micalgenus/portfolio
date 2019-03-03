@@ -17,10 +17,12 @@ class Layout extends Component {
   state = { header: 0 };
 
   componentWillReceiveProps = nextProps => {
+    // Get header fixed position from redux scroll
     const header = this.state.header + (nextProps.scrollY - this.props.scrollY) / HEADER_SPEED;
     this.setState({ header: header <= HEADER_HEIGHT ? (header >= 0 ? header : 0) : HEADER_HEIGHT });
   };
 
+  // Update by redux and state
   shouldComponentUpdate = (nextProps, nextState) => {
     if (nextProps.height !== this.props.height) return true;
     if (nextProps.scrollY !== this.props.scrollY) return true;
@@ -32,27 +34,34 @@ class Layout extends Component {
   };
 
   componentDidMount = () => {
+    // Add Window event
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.handleResize);
 
+    // Apply browser path with redux
     this.props.changePath(window.location.pathname);
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    this.handleResize();
-  };
-
   componentWillUnmount = () => {
+    // Remove Window event
     window.removeEventListener('scroll', this.handleScroll);
     window.removeEventListener('resize', this.handleResize);
   };
 
+  // if change data then update browser height
+  componentDidUpdate = (prevProps, prevState) => {
+    this.handleResize();
+  };
+
+  // Update scroll data with redux
   handleScroll = () => {
     const { changeScrollY } = this.props;
+    // document.documentElement.scrollTop for IE
     const currentScrollY = window.scrollY || document.documentElement.scrollTop;
     if (this.props.scrollY !== currentScrollY) changeScrollY(currentScrollY);
   };
 
+  // Update window height with redux
   handleResize = () => {
     const { changeWindowHeight } = this.props;
     const height = document.getElementById('root').scrollHeight - document.documentElement.clientHeight;
@@ -80,7 +89,7 @@ Layout.defaultProps = {
 };
 
 Layout.propTypes = {
-  routers: PropTypes.array,
+  routers: PropTypes.array.isRequired,
 };
 
 // props 로 넣어줄 스토어 상태값
