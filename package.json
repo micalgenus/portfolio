@@ -33,7 +33,7 @@
     "not ie < 10",
     "not op_mini all"
   ],
-  "homepage": "https://portfolio.micalgenus.com/",
+  "homepage": "https://portfolio.micalgenus.com",
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.2.0",
     "chai": "^4.2.0",
