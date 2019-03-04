@@ -29,7 +29,7 @@ export default class LayoutHeader extends Component {
             {this.props.routers.map((router, idx) =>
               router.path && router.path !== '/' ? (
                 <li key={idx}>
-                  <Link to={router.path} onClick={() => this.onChangeRoute(router.path)}>
+                  <Link className={router.path === this.props.path ? 'active' : 'non-active'} to={router.path} onClick={() => this.onChangeRoute(router.path)}>
                     {router.title}
                   </Link>
                 </li>

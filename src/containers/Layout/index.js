@@ -84,6 +84,7 @@ class Layout extends Component {
             scrollY={this.props.scrollY}
             header={this.state.header}
             showLoading={this.props.showLoading}
+            path={this.props.path}
           />
           <Routing routers={this.props.routers} hideLoading={this.props.hideLoading} />
           <Footer />

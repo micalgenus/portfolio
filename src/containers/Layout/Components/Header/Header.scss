@@ -44,6 +44,10 @@ header {
 
     a {
       color: #333;
+
+      &.active {
+        color: #1e70bf;
+      }
     }
 
     ul {
