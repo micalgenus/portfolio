@@ -94,10 +94,16 @@ class Layout extends Component {
 
 Layout.defaultProps = {
   routers: [],
+  scrollY: 0,
+  height: 0,
+  path: '/',
 };
 
 Layout.propTypes = {
   routers: PropTypes.array.isRequired,
+  scrollY: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 // props 로 넣어줄 스토어 상태값
