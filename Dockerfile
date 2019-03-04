@@ -13,6 +13,6 @@ RUN ["yarn", "build"]
 
 EXPOSE 5000
 
-HEALTHCHECK --interval=10s CMD wget -qO- localhost:5000
+HEALTHCHECK --interval=1s CMD wget -qO- localhost:5000
 
 CMD ["serve", "-s", "build"]
