@@ -19,7 +19,10 @@ class Layout extends Component {
 
   componentWillReceiveProps = nextProps => {
     // Get header fixed position from redux scroll
-    const header = this.state.header + (nextProps.scrollY - this.props.scrollY) / HEADER_SPEED;
+    const header =
+      nextProps.scrollY <= HEADER_HEIGHT && nextProps.scrollY < this.state.header
+        ? nextProps.scrollY
+        : this.state.header + (nextProps.scrollY - this.props.scrollY) / HEADER_SPEED;
     this.setState({ header: header <= HEADER_HEIGHT ? (header >= 0 ? header : 0) : HEADER_HEIGHT });
   };
 
