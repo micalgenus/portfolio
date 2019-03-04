@@ -5,7 +5,7 @@ const fs = require('fs');
 const PACKAGE = './package.json';
 
 const GH_PAGES_HOMEPAGE = 'https://micalgenus.github.io/portfolio';
-const ORIGINAL_HOMEPAGE = 'https://portfolio.micalgenus.com/';
+const ORIGINAL_HOMEPAGE = 'https://portfolio.micalgenus.com';
 
 const updatePackageJson = updateJson => fs.writeFileSync(PACKAGE, JSON.stringify(updateJson, null, 2));
 
