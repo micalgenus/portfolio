@@ -11,6 +11,7 @@
           "@/Reducers": "./src/store/modules",
           "@/Containers": "./src/containers",
           "@/Pages": "./src/pages",
+          "@/Projects": "./src/components/Projects",
           "@": "./src",
           "package.json": "./package.json",
           "underscore": "lodash"
