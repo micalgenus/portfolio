@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import Projects from '@/Pages/Projects';
+import Introduce from '@/Components/Introduce';
+import Projects from '@/Components/Projects';
 
 export default class Main extends Component {
   componentDidMount = () => {
@@ -10,6 +11,7 @@ export default class Main extends Component {
   render() {
     return (
       <>
+        <Introduce />
         <Projects />
       </>
     );
