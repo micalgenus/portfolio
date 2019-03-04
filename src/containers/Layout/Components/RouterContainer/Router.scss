@@ -2,17 +2,22 @@
 
 .container {
   margin-top: $header-height;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   & > div {
     padding: 20px 20px 40px;
     margin: 20px;
+    max-width: 1200px;
+    width: 100%;
 
     &:nth-child(1) {
       padding-top: 40px;
     }
 
     &:not(:nth-last-child(1)) {
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #bbb;
     }
 
     &:nth-last-child(1) {
