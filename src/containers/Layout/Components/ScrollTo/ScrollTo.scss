@@ -1,0 +1,50 @@
+.scroll-to-component {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 999;
+  -webkit-transform: translate3d(0, 0, 999px);
+
+  #to-top,
+  #to-bottom {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 1.5em;
+    margin: 5px;
+    background-color: #8d7edc;
+    color: #fff;
+    font-size: 1.5em;
+    opacity: 0.8;
+    transition: 1s;
+    box-shadow: none;
+
+    right: 0em;
+    bottom: 0em;
+    transition: right 1s linear bottom 1s linear;
+  }
+
+  #to-top {
+    bottom: 2.5em;
+  }
+
+  &.scroll-position-top {
+    #to-top {
+      right: -5em;
+    }
+  }
+
+  &.scroll-position-bottom {
+    #to-top {
+      bottom: 0em;
+    }
+
+    #to-bottom {
+      right: -5em;
+    }
+  }
+}
