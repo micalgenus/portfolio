@@ -36,3 +36,9 @@ a {
 li {
   list-style: none;
 }
+
+html,
+body,
+#root {
+  scroll-behavior: smooth;
+}
