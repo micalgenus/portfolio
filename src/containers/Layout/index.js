@@ -64,14 +64,14 @@ class Layout extends Component {
     const { changeScrollY } = this.props;
     // document.documentElement.scrollTop for IE
     const currentScrollY = window.scrollY || document.documentElement.scrollTop;
-    if (this.props.scrollY !== currentScrollY) changeScrollY(currentScrollY);
+    if (this.props.scrollY !== currentScrollY) changeScrollY(currentScrollY >= 0 ? currentScrollY : 0);
   };
 
   // Update window height with redux
   handleResize = () => {
     const { changeWindowHeight } = this.props;
     const height = document.getElementById('root').scrollHeight - document.documentElement.clientHeight;
-    if (this.props.height !== height) changeWindowHeight(height);
+    if (this.props.height !== height) changeWindowHeight(height >= 1 ? height : 1);
   };
 
   render() {
