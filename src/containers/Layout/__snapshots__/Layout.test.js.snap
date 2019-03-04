@@ -35,6 +35,16 @@ ShallowWrapper {
               "_result": null,
               "_status": -1,
             },
+            "path": "/intro",
+            "title": "소개",
+          },
+          Object {
+            "Component": Object {
+              "$$typeof": Symbol(react.lazy),
+              "_ctor": [Function],
+              "_result": null,
+              "_status": -1,
+            },
             "path": "/projects",
             "title": "프로젝트",
           },
@@ -77,6 +87,16 @@ ShallowWrapper {
                 "_result": null,
                 "_status": -1,
               },
+              "path": "/intro",
+              "title": "소개",
+            },
+            Object {
+              "Component": Object {
+                "$$typeof": Symbol(react.lazy),
+                "_ctor": [Function],
+                "_result": null,
+                "_status": -1,
+              },
               "path": "/projects",
               "title": "프로젝트",
             },
@@ -98,7 +118,7 @@ ShallowWrapper {
             "timeout": 5000,
           },
           "scroll": Object {
-            "height": 0,
+            "height": 99999,
             "scrollY": 0,
           },
         },
@@ -121,6 +141,16 @@ ShallowWrapper {
             "exact": true,
             "path": "/",
             "title": "홈",
+          },
+          Object {
+            "Component": Object {
+              "$$typeof": Symbol(react.lazy),
+              "_ctor": [Function],
+              "_result": null,
+              "_status": -1,
+            },
+            "path": "/intro",
+            "title": "소개",
           },
           Object {
             "Component": Object {
@@ -184,6 +214,16 @@ ShallowWrapper {
                   "_result": null,
                   "_status": -1,
                 },
+                "path": "/intro",
+                "title": "소개",
+              },
+              Object {
+                "Component": Object {
+                  "$$typeof": Symbol(react.lazy),
+                  "_ctor": [Function],
+                  "_result": null,
+                  "_status": -1,
+                },
                 "path": "/projects",
                 "title": "프로젝트",
               },
@@ -205,7 +245,7 @@ ShallowWrapper {
               "timeout": 5000,
             },
             "scroll": Object {
-              "height": 0,
+              "height": 99999,
               "scrollY": 0,
             },
           },
@@ -228,6 +268,16 @@ ShallowWrapper {
               "exact": true,
               "path": "/",
               "title": "홈",
+            },
+            Object {
+              "Component": Object {
+                "$$typeof": Symbol(react.lazy),
+                "_ctor": [Function],
+                "_result": null,
+                "_status": -1,
+              },
+              "path": "/intro",
+              "title": "소개",
             },
             Object {
               "Component": Object {

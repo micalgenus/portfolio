@@ -46,7 +46,7 @@ ShallowWrapper {
             "timeout": 5000,
           },
           "scroll": Object {
-            "height": 0,
+            "height": 99999,
             "scrollY": 0,
           },
         },
@@ -103,7 +103,7 @@ ShallowWrapper {
               "timeout": 5000,
             },
             "scroll": Object {
-              "height": 0,
+              "height": 99999,
               "scrollY": 0,
             },
           },
