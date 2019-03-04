@@ -10,7 +10,7 @@ export const changeScrollY = createAction(CHANGE_SCROLL_Y, scrollY => scrollY);
 export const changeWindowHeight = createAction(CHANGE_WINDOW_HEIGHT, height => height);
 
 // Initial status
-const initialState = { scrollY: 0, height: 0 };
+const initialState = { scrollY: 0, height: 99999 };
 
 // Reducer
 export default handleActions(
