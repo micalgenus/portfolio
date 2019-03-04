@@ -9,7 +9,7 @@ import { changePath, showLoading, hideLoading } from '@/Reducers/page';
 import './Layout.font.scss';
 import './Layout.global.scss';
 
-import { Header, Router as Routing, ScrollTo } from './Components';
+import { Header, Footer, Router as Routing, ScrollTo } from './Components';
 
 const HEADER_SPEED = 3;
 const HEADER_HEIGHT = 60;
@@ -86,6 +86,7 @@ class Layout extends Component {
             showLoading={this.props.showLoading}
           />
           <Routing routers={this.props.routers} hideLoading={this.props.hideLoading} />
+          <Footer />
           <ScrollTo height={this.props.height} scrollY={this.props.scrollY} />
         </div>
       </Router>
