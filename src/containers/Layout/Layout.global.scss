@@ -18,11 +18,22 @@
   text-shadow: none;
 }
 
+body {
+  display: flex;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+}
+
 * {
   font-family: 'BMJUA', 'Source Sans Pro';
   color: #333;
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -37,13 +48,6 @@ li {
   list-style: none;
 }
 
-body {
-  display: flex;
-}
-
-html,
-body,
-#root {
-  width: 100%;
-  scroll-behavior: smooth;
+p {
+  font-size: 1.2em;
 }
