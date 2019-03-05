@@ -1,9 +1,30 @@
 .introduce-component {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 
   & > img {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+
+  h1 {
+    vertical-align: bottom;
+    & .link-list {
+      display: inline-block;
+      padding-left: 10px;
+      & > span {
+        text-align: center;
+        padding: 0 0 0 5px;
+        font-weight: normal;
+        font-size: 1.2em;
+        vertical-align: bottom;
+
+        i {
+          margin: 0;
+        }
+      }
+    }
   }
 }
