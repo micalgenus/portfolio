@@ -30,7 +30,7 @@ export default class Introduce extends Component {
       <div className="introduce-component">
         <div>
           <h1>한경수{this.renderLinkList()}</h1>
-          <p>주로 Node.js를 사용하여 개발을 하고있는 신입 백엔드개발자 입니다. 현재 React와 CI/CD를 공부 하고 있습니다.</p>
+          <p>주로 Node.js를 사용하여 개발을 하고있는 신입 백엔드개발자 입니다. 현재 CI/CD와 Testing에 관심이 많습니다.</p>
         </div>
       </div>
     );
