@@ -28,26 +28,6 @@ ShallowWrapper {
             "path": "/",
             "title": "홈",
           },
-          Object {
-            "Component": Object {
-              "$$typeof": Symbol(react.lazy),
-              "_ctor": [Function],
-              "_result": null,
-              "_status": -1,
-            },
-            "path": "/intro",
-            "title": "소개",
-          },
-          Object {
-            "Component": Object {
-              "$$typeof": Symbol(react.lazy),
-              "_ctor": [Function],
-              "_result": null,
-              "_status": -1,
-            },
-            "path": "/projects",
-            "title": "프로젝트",
-          },
         ]
       }
     />
@@ -80,26 +60,6 @@ ShallowWrapper {
               "path": "/",
               "title": "홈",
             },
-            Object {
-              "Component": Object {
-                "$$typeof": Symbol(react.lazy),
-                "_ctor": [Function],
-                "_result": null,
-                "_status": -1,
-              },
-              "path": "/intro",
-              "title": "소개",
-            },
-            Object {
-              "Component": Object {
-                "$$typeof": Symbol(react.lazy),
-                "_ctor": [Function],
-                "_result": null,
-                "_status": -1,
-              },
-              "path": "/projects",
-              "title": "프로젝트",
-            },
           ]
         }
       />,
@@ -113,12 +73,12 @@ ShallowWrapper {
         },
         "storeState": Object {
           "page": Object {
-            "loading": false,
+            "loading": true,
             "path": "/",
             "timeout": 5000,
           },
           "scroll": Object {
-            "height": 99999,
+            "height": 0,
             "scrollY": 0,
           },
         },
@@ -141,26 +101,6 @@ ShallowWrapper {
             "exact": true,
             "path": "/",
             "title": "홈",
-          },
-          Object {
-            "Component": Object {
-              "$$typeof": Symbol(react.lazy),
-              "_ctor": [Function],
-              "_result": null,
-              "_status": -1,
-            },
-            "path": "/intro",
-            "title": "소개",
-          },
-          Object {
-            "Component": Object {
-              "$$typeof": Symbol(react.lazy),
-              "_ctor": [Function],
-              "_result": null,
-              "_status": -1,
-            },
-            "path": "/projects",
-            "title": "프로젝트",
           },
         ],
       },
@@ -207,26 +147,6 @@ ShallowWrapper {
                 "path": "/",
                 "title": "홈",
               },
-              Object {
-                "Component": Object {
-                  "$$typeof": Symbol(react.lazy),
-                  "_ctor": [Function],
-                  "_result": null,
-                  "_status": -1,
-                },
-                "path": "/intro",
-                "title": "소개",
-              },
-              Object {
-                "Component": Object {
-                  "$$typeof": Symbol(react.lazy),
-                  "_ctor": [Function],
-                  "_result": null,
-                  "_status": -1,
-                },
-                "path": "/projects",
-                "title": "프로젝트",
-              },
             ]
           }
         />,
@@ -240,12 +160,12 @@ ShallowWrapper {
           },
           "storeState": Object {
             "page": Object {
-              "loading": false,
+              "loading": true,
               "path": "/",
               "timeout": 5000,
             },
             "scroll": Object {
-              "height": 99999,
+              "height": 0,
               "scrollY": 0,
             },
           },
@@ -268,26 +188,6 @@ ShallowWrapper {
               "exact": true,
               "path": "/",
               "title": "홈",
-            },
-            Object {
-              "Component": Object {
-                "$$typeof": Symbol(react.lazy),
-                "_ctor": [Function],
-                "_result": null,
-                "_status": -1,
-              },
-              "path": "/intro",
-              "title": "소개",
-            },
-            Object {
-              "Component": Object {
-                "$$typeof": Symbol(react.lazy),
-                "_ctor": [Function],
-                "_result": null,
-                "_status": -1,
-              },
-              "path": "/projects",
-              "title": "프로젝트",
             },
           ],
         },

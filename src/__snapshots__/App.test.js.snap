@@ -41,12 +41,12 @@ ShallowWrapper {
         },
         "storeState": Object {
           "page": Object {
-            "loading": false,
+            "loading": true,
             "path": "/",
             "timeout": 5000,
           },
           "scroll": Object {
-            "height": 99999,
+            "height": 0,
             "scrollY": 0,
           },
         },
@@ -98,12 +98,12 @@ ShallowWrapper {
           },
           "storeState": Object {
             "page": Object {
-              "loading": false,
+              "loading": true,
               "path": "/",
               "timeout": 5000,
             },
             "scroll": Object {
-              "height": 99999,
+              "height": 0,
               "scrollY": 0,
             },
           },
