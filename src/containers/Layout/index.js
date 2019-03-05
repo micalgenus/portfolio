@@ -24,6 +24,8 @@ class Layout extends Component {
         ? nextProps.scrollY
         : this.state.header + (nextProps.scrollY - this.props.scrollY) / HEADER_SPEED;
     this.setState({ header: header <= HEADER_HEIGHT ? (header >= 0 ? header : 0) : HEADER_HEIGHT });
+
+    if (this.props.loading !== nextProps.loading && !nextProps.loading) this.handleResize();
   };
 
   // Update by redux and state
@@ -32,6 +34,7 @@ class Layout extends Component {
       nextProps.height !== this.props.height ||
       nextProps.scrollY !== this.props.scrollY ||
       nextProps.path !== this.props.path ||
+      nextProps.loading !== this.props.loading ||
       nextState.header !== this.state.header
     )
       return true;
@@ -54,11 +57,6 @@ class Layout extends Component {
     window.removeEventListener('resize', this.handleResize);
   };
 
-  // if change data then update browser height
-  componentDidUpdate = (prevProps, prevState) => {
-    this.handleResize();
-  };
-
   // Update scroll data with redux
   handleScroll = () => {
     const { changeScrollY } = this.props;
@@ -71,7 +69,7 @@ class Layout extends Component {
   handleResize = () => {
     const { changeWindowHeight } = this.props;
     const height = document.getElementById('root').scrollHeight - document.documentElement.clientHeight;
-    if (this.props.height !== height) changeWindowHeight(height >= 1 ? height : 1);
+    if (this.props.height !== height) changeWindowHeight(height >= 0 ? height : 0);
   };
 
   render() {
@@ -100,6 +98,7 @@ Layout.defaultProps = {
   scrollY: 0,
   height: 0,
   path: '/',
+  loading: false,
 };
 
 Layout.propTypes = {
@@ -107,6 +106,7 @@ Layout.propTypes = {
   scrollY: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   path: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 // props 로 넣어줄 스토어 상태값
@@ -114,6 +114,7 @@ const mapStateToProps = state => ({
   scrollY: state.scroll.scrollY,
   height: state.scroll.height,
   path: state.page.path,
+  loading: state.page.loading,
 });
 
 // props 로 넣어줄 액션 생성함수
