@@ -12,7 +12,7 @@ export const showLoading = createAction(SHOW_LOADING, timeout => (timeout === 0 
 export const hideLoading = createAction(HIDE_LOADING);
 
 // Initial status
-const initialState = { path: '/', timeout: 5000, loading: false };
+const initialState = { path: '/', timeout: 5000, loading: true };
 
 // Reducer
 export default handleActions(
