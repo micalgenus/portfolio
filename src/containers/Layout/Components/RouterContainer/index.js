@@ -4,6 +4,13 @@ import { Route, Switch } from 'react-router-dom';
 import './Router.scss';
 
 export default class Router extends Component {
+  // Update only path change
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (this.props.path !== nextProps.path) return true;
+
+    return false;
+  };
+
   render() {
     return (
       <div className="container">
