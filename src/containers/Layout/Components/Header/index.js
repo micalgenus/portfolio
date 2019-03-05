@@ -10,6 +10,7 @@ import './Header.scss';
 
 export default class LayoutHeader extends Component {
   onChangeRoute = link => {
+    if (link === this.props.path) return false;
     this.props.changePath(link);
 
     window.scroll(0, 0);
