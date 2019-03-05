@@ -1,39 +1,26 @@
 import React, { Component } from 'react';
 
+import ExternalLink from '@/Components/ExternalLink';
+
 import './Footer.scss';
 
 export default class LayoutFooter extends Component {
   getCopyRight = () => (
     <div>
-      The source code is on{' '}
-      <a rel="noopener noreferrer" href="https://github.com/micalgenus/portfolio" target="_blank">
-        Github
-      </a>
-      . &copy;All Rights Reserved, GyeongSu Han.
+      The source code is on <ExternalLink href="https://github.com/micalgenus/portfolio">Github</ExternalLink>. &copy;All Rights Reserved, GyeongSu Han.
     </div>
   );
 
   getBuildAndTestInfo = () => (
     <div>
-      Powered by React. Tests use{' '}
-      <a rel="noopener noreferrer" href="https://travis-ci.org/micalgenus/portfolio" target="_blank">
-        Travis-ci
-      </a>{' '}
-      and{' '}
-      <a rel="noopener noreferrer" href="https://codeclimate.com/github/micalgenus/portfolio" target="_blank">
-        codeclimate
-      </a>
-      .
+      Powered by React. Tests use <ExternalLink href="https://travis-ci.org/micalgenus/portfolio">Travis-ci</ExternalLink> and{' '}
+      <ExternalLink href="https://codeclimate.com/github/micalgenus/portfolio">codeclimate</ExternalLink>.
     </div>
   );
 
   getServerInfo = () => (
     <div>
-      Hosted by Google Cloud Platform using Nginx and{' '}
-      <a rel="noopener noreferrer" href="https://hub.docker.com/r/micalgenus/portfolio" target="_blank">
-        Docker
-      </a>{' '}
-      swarm.
+      Hosted by Google Cloud Platform using Nginx and <ExternalLink href="https://hub.docker.com/r/micalgenus/portfolio">Docker</ExternalLink> swarm.
     </div>
   );
 

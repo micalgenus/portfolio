@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 
 import { Icon } from 'semantic-ui-react';
+import ExternalLink from '@/Components/ExternalLink';
 
 import './Introduce.scss';
 
 export default class Introduce extends Component {
-  renderIcon = (href, icon, color = 'black') => {
-    const linkRegex = /^http?(s):\/\//;
-
-    return (
-      <span>
-        <a href={href} target={linkRegex.test(href) ? '_target' : '_self'}>
-          <Icon name={icon} color={color} size="tiny" />
-        </a>
-      </span>
-    );
-  };
+  renderIcon = (href, icon, color = 'black') => (
+    <span>
+      <ExternalLink href={href}>
+        <Icon name={icon} color={color} size="tiny" />
+      </ExternalLink>
+    </span>
+  );
 
   renderLinkList = () => (
     <div className="link-list">
@@ -25,6 +22,7 @@ export default class Introduce extends Component {
       {this.renderIcon('https://micalgenus.github.io/', 'edit', 'grey')}
     </div>
   );
+
   render() {
     return (
       <div className="introduce-component">
