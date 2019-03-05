@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import StatusBar from '@/Containers/StatusBar';
 
+import { appendPrefix } from '@/Router';
+
 import './Header.scss';
 
 export default class LayoutHeader extends Component {
@@ -15,19 +17,21 @@ export default class LayoutHeader extends Component {
   };
 
   render() {
+    const rootUrl = appendPrefix('/');
+
     return (
       <header style={{ top: -this.props.header || 0 }}>
         <div className="blur" />
         <nav>
           <div>
-            <Link to="/" onClick={() => this.onChangeRoute('/')}>
+            <Link to={rootUrl} onClick={() => this.onChangeRoute(rootUrl)}>
               Han GyeongSu's Portfolio
             </Link>
           </div>
 
           <ul>
             {this.props.routers.map((router, idx) =>
-              router.path && router.path !== '/' ? (
+              router.path && router.path !== rootUrl ? (
                 <li key={idx}>
                   <Link className={router.path === this.props.path ? 'active' : 'non-active'} to={router.path} onClick={() => this.onChangeRoute(router.path)}>
                     {router.title}
