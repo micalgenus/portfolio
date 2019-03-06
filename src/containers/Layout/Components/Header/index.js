@@ -13,7 +13,7 @@ export default class LayoutHeader extends Component {
     if (link === this.props.path) return false;
     this.props.changePath(link);
 
-    window.scroll(0, 0);
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     this.props.showLoading();
   };
 

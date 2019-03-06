@@ -6,12 +6,12 @@ import './ScrollTo.scss';
 export default class ScrollTo extends Component {
   onClickUp = e => {
     e.preventDefault();
-    window.scroll(0, 0);
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   };
 
   onClickDown = e => {
     e.preventDefault();
-    window.scroll(0, this.props.height);
+    window.scroll({ top: this.props.height, left: 0, behavior: 'smooth' });
   };
 
   render() {
