@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Introduce from '@/Components/Introduce';
+import WorkExperience from '@/Components/WorkExperience';
 import Projects from '@/Components/Projects';
 
 export default class Main extends Component {
@@ -12,6 +13,7 @@ export default class Main extends Component {
     return (
       <>
         <Introduce />
+        <WorkExperience />
         <Projects />
       </>
     );
