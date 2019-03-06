@@ -13,7 +13,8 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.4",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.85.0"
+    "semantic-ui-react": "^0.85.0",
+    "smoothscroll-polyfill": "^0.4.3"
   },
   "scripts": {
     "start": "react-app-rewired start",
