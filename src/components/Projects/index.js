@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 
-import SWTalentDonationChallenge2017 from './2017-SW-talent-donation-challenge';
+import SWTalentDonationChallenge from './2017-SW-talent-donation-challenge';
+import MubaBot from './2018-Muba-bot';
 
 export default class Projects extends Component {
   render() {
     return (
-      <>
-        <SWTalentDonationChallenge2017 />
-      </>
+      <div>
+        <h2>Projects</h2>
+        <MubaBot />
+        <SWTalentDonationChallenge />
+      </div>
     );
   }
 }
 
-export { SWTalentDonationChallenge2017 };
+export { SWTalentDonationChallenge, MubaBot };

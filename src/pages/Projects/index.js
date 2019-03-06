@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { SWTalentDonationChallenge2017 } from '@/Projects';
+import { SWTalentDonationChallenge } from '@/Projects';
 
 export default class Projects extends Component {
   componentDidMount = () => {
@@ -10,7 +10,7 @@ export default class Projects extends Component {
   render() {
     return (
       <>
-        <SWTalentDonationChallenge2017 />
+        <SWTalentDonationChallenge />
       </>
     );
   }
