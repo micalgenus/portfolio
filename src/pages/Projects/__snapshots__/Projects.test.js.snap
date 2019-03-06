@@ -18,7 +18,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "children": <SWTalentDonationChallenge2017 />,
+      "children": <SWTalentDonationChallenge />,
     },
     "ref": null,
     "rendered": Object {
@@ -38,7 +38,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "children": <SWTalentDonationChallenge2017 />,
+        "children": <SWTalentDonationChallenge />,
       },
       "ref": null,
       "rendered": Object {
