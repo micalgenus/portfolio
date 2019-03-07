@@ -7,7 +7,7 @@
   align-items: center;
 
   & > div {
-    padding: 20px 20px 40px;
+    padding: 20px 20px 60px;
     margin: 20px;
     max-width: $max-width;
     width: 100%;
@@ -23,5 +23,16 @@
     &:nth-last-child(1) {
       margin-bottom: 0;
     }
+
+    & > div {
+      &:not(:nth-child(1)) {
+        margin-top: 40px;
+      }
+    }
+  }
+
+  i {
+    // padding-left: 10px;
+    margin: 0;
   }
 }
