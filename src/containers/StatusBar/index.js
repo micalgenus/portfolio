@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ScrollPosition from '@/Components/ScrollPosition';
 import LoadingStatus from '@/Components/LoadingStatus';
 
-import { mapStateToProps } from '@/Reducers';
+import { mapStateToProps, defaultProps, propTypes } from '@/Reducers';
 
 import { hideLoading } from '@/Reducers/page';
 
@@ -26,13 +26,13 @@ class StatusBarContainer extends Component {
 }
 
 StatusBarContainer.defaultProps = {
+  ...defaultProps,
   top: 0,
-  loading: false,
 };
 
 StatusBarContainer.propTypes = {
+  ...propTypes,
   top: PropTypes.number.isRequired,
-  loading: PropTypes.bool.isRequired,
 };
 
 // props 로 넣어줄 액션 생성함수

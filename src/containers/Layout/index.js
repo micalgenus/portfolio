@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { mapStateToProps } from '@/Reducers';
+import { mapStateToProps, defaultProps, propTypes } from '@/Reducers';
 
 import { changeScrollY, changeWindowHeight } from '@/Reducers/scroll';
 import { changePath, showLoading, hideLoading } from '@/Reducers/page';
@@ -89,19 +89,13 @@ class Layout extends Component {
 }
 
 Layout.defaultProps = {
+  ...defaultProps,
   routers: [],
-  scrollY: 0,
-  height: 0,
-  path: '/',
-  loading: false,
 };
 
 Layout.propTypes = {
+  ...propTypes,
   routers: PropTypes.array.isRequired,
-  scrollY: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  path: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
 };
 
 // props 로 넣어줄 액션 생성함수

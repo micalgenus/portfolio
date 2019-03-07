@@ -10,4 +10,20 @@ export const mapStateToProps = state => ({
   height: state.scroll.height,
 });
 
+export const defaultProps = {
+  path: '/',
+  timeout: 0,
+  loading: false,
+  scrollY: 0,
+  height: 0,
+};
+
+export const propTypes = {
+  path: PropTypes.string.isRequired,
+  timeout: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
+  scrollY: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+};
+
 export default combineReducers({ scroll, page });
