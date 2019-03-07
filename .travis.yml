@@ -1,7 +1,10 @@
 sudo: true
 language: node_js
 node_js:
-  - "11"
+  - "11.10"
+cache:
+  npm: true
+  yarn: true
 
 services:
   - docker
