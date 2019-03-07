@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import { mapStateToProps } from '@/Reducers';
+
 import { changeScrollY, changeWindowHeight } from '@/Reducers/scroll';
 import { changePath, showLoading, hideLoading } from '@/Reducers/page';
 
@@ -76,15 +78,8 @@ class Layout extends Component {
     return (
       <Router>
         <div>
-          <Header
-            routers={this.props.routers}
-            changePath={this.props.changePath}
-            scrollY={this.props.scrollY}
-            header={this.state.header}
-            showLoading={this.props.showLoading}
-            path={this.props.path}
-          />
-          <Routing routers={this.props.routers} hideLoading={this.props.hideLoading} path={this.props.path} />
+          <Header {...this.props} />
+          <Routing {...this.props} />
           <Footer />
           <ScrollTo height={this.props.height} scrollY={this.props.scrollY} />
         </div>
@@ -108,14 +103,6 @@ Layout.propTypes = {
   path: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
 };
-
-// props 로 넣어줄 스토어 상태값
-const mapStateToProps = state => ({
-  scrollY: state.scroll.scrollY,
-  height: state.scroll.height,
-  path: state.page.path,
-  loading: state.page.loading,
-});
 
 // props 로 넣어줄 액션 생성함수
 const mapDispatchToProps = { changeScrollY, changePath, changeWindowHeight, showLoading, hideLoading };
