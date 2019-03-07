@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
+
 import { combineReducers } from 'redux';
+
 import scroll from './scroll';
 import page from './page';
 
