@@ -78,7 +78,7 @@ class Layout extends Component {
     return (
       <Router>
         <div>
-          <Header {...this.props} />
+          <Header {...this.props} header={this.state.header} />
           <Routing {...this.props} />
           <Footer />
           <ScrollTo height={this.props.height} scrollY={this.props.scrollY} />
