@@ -27,12 +27,12 @@ script:
   - yarn run test
   - yarn run test --coverage
   - yarn run gh-pages:build
-  - docker build -t $USERNAME/portfolio:develop .
+  - if [ $BRANCH = "develop" ]; then docker build -t $USERNAME/portfolio:develop . ; fi
 
 after_script:
-  - 'if [ $BRANCH = "develop" ]; then ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT; fi'
-  - 'if [ $BRANCH = "develop" ]; then ./node_modules/gh-pages/bin/gh-pages.js -d build -e portfolio -b master -u "micalgenus <micalgenus@gmail.com>" -r https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO -m "Updating from $USERNAME/portfolio@$SHA"; fi'
-  - 'if [ $BRANCH = "develop" ]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout; fi'
+  - if [ $BRANCH = "develop" ]; then ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT; fi
+  - if [ $BRANCH = "develop" ]; then ./node_modules/gh-pages/bin/gh-pages.js -d build -e portfolio -b master -u "micalgenus <micalgenus@gmail.com>" -r https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO -m "Updating from $USERNAME/portfolio@$SHA"; fi
+  - if [ $BRANCH = "develop" ]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout; fi
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
 # gem install travis
