@@ -6,6 +6,10 @@ cache:
   npm: true
   yarn: true
 
+branches:
+  only:
+    - develop
+
 services:
   - docker
 
