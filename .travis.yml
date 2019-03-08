@@ -20,6 +20,7 @@ before_script:
   - git config --global user.email "micalgenus@gmail.com"
   - git config --global user.name "GyeongSu Han"
   - SHA=$(git log | grep -E [a-z0-9]{40} | cut -d " " -f2 | head -1)
+  - BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
   - ./cc-test-reporter before-build
 
 script:
@@ -29,9 +30,9 @@ script:
   - docker build -t $USERNAME/portfolio:develop .
 
 after_script:
-  - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
-  - ./node_modules/gh-pages/bin/gh-pages.js -d build -e portfolio -b master -u "micalgenus <micalgenus@gmail.com>" -r https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO -m "Updating from $USERNAME/portfolio@$SHA"
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout
+  - 'if [ $BRANCH = "develop" ]; then ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT; fi'
+  - 'if [ $BRANCH = "develop" ]; then ./node_modules/gh-pages/bin/gh-pages.js -d build -e portfolio -b master -u "micalgenus <micalgenus@gmail.com>" -r https://$GITHUB_TOKEN@github.com/$USERNAME/$REPO -m "Updating from $USERNAME/portfolio@$SHA"; fi'
+  - 'if [ $BRANCH = "develop" ]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout; fi'
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
 # gem install travis
