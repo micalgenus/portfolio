@@ -12,18 +12,16 @@ import { Header, Footer, Router as Routing, ScrollTo } from './Components';
 @inject('scroll')
 @observer
 class Layout extends Component {
+  events = [{ event: 'scroll', method: this.handleScroll }, { event: 'scroll', method: this.handleResize }, { event: 'resize', method: this.handleResize }];
+
   // Add Window event
   componentDidMount = () => {
-    window.addEventListener('scroll', this.handleScroll);
-    window.addEventListener('scroll', this.handleResize);
-    window.addEventListener('resize', this.handleResize);
+    for (const e of this.events) window.addEventListener(e.event, e.method);
   };
 
   // Remove Window event
   componentWillUnmount = () => {
-    window.removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('scroll', this.handleResize);
-    window.removeEventListener('resize', this.handleResize);
+    for (const e of this.events) window.removeEventListener(e.event, e.method);
   };
 
   // Update scroll data with mobx
