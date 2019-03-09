@@ -3,15 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "immer": "^2.1.0",
+    "lodash": "^4.17.11",
+    "mobx": "^5.9.0",
+    "mobx-react": "^5.4.3",
     "node-sass": "^4.11.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8",
-    "redux": "^4.0.1",
-    "redux-actions": "^2.6.4",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0",
     "smoothscroll-polyfill": "^0.4.3"
@@ -36,6 +35,8 @@
   ],
   "homepage": "https://portfolio.micalgenus.com",
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-decorators": "^7.3.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "chai": "^4.2.0",
     "customize-cra": "^0.2.12",
