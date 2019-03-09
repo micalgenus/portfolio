@@ -3,15 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 
 import './Router.scss';
 
-export default class Router extends Component {
-  // Update only path change
-  shouldComponentUpdate = (nextProps, nextState) => {
-    if (this.props.path !== nextProps.path) return true;
-
-    return false;
-  };
-
+class Router extends Component {
   render() {
+    const { endLoadPage } = this.props;
+
     return (
       <div className="container">
         <Suspense fallback={<div>Loading...</div>}>
@@ -22,7 +17,7 @@ export default class Router extends Component {
                   key={idx}
                   exact={route.exact}
                   path={route.path}
-                  component={props => <route.Component {...props} hideLoading={this.props.hideLoading} />}
+                  component={props => <route.Component {...props} link={route.path} endLoadPage={endLoadPage} />}
                 />
               ) : null
             )}
@@ -32,3 +27,5 @@ export default class Router extends Component {
     );
   }
 }
+
+export default Router;

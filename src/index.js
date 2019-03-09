@@ -3,12 +3,10 @@ import './polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+
+import Stores from '@/Stores';
 
 import * as serviceWorker from './serviceWorker';
-
-import rootReducer from '@/Reducers';
 
 // Load module CSS
 import 'semantic-ui-css/semantic.min.css';
@@ -16,16 +14,11 @@ import 'semantic-ui-css/semantic.min.css';
 // Load App
 import App from '@/App';
 
-// Redux DevTools
-const reducers =
-  process.env.NODE_ENV !== 'development' ? [rootReducer] : [rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()];
-
-// Redux Store
-const store = createStore(...reducers);
+// Mobx Stores
 const storeProvider = (
-  <Provider store={store}>
+  <Stores>
     <App />
-  </Provider>
+  </Stores>
 );
 const rootElement = document.getElementById('root');
 

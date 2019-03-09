@@ -1,87 +1,59 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { observer, inject } from 'mobx-react';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-import { mapStateToProps, defaultProps, propTypes } from '@/Reducers';
-
-import { changeScrollY, changeWindowHeight } from '@/Reducers/scroll';
-import { changePath, showLoading, hideLoading } from '@/Reducers/page';
 
 import './Layout.font.scss';
 import './Layout.global.scss';
 
 import { Header, Footer, Router as Routing, ScrollTo } from './Components';
 
-const HEADER_SPEED = 3;
-const HEADER_HEIGHT = 60;
-
+@inject('page')
+@inject('scroll')
+@observer
 class Layout extends Component {
-  state = { header: 0 };
-
-  componentWillReceiveProps = nextProps => {
-    // Get header fixed position from redux scroll
-    const header =
-      nextProps.scrollY <= HEADER_HEIGHT && nextProps.scrollY < this.state.header
-        ? nextProps.scrollY
-        : this.state.header + (nextProps.scrollY - this.props.scrollY) / HEADER_SPEED;
-    this.setState({ header: header <= HEADER_HEIGHT ? (header >= 0 ? header : 0) : HEADER_HEIGHT });
-
-    if (this.props.loading !== nextProps.loading && !nextProps.loading) this.handleResize();
-  };
-
-  // Update by redux and state
-  shouldComponentUpdate = (nextProps, nextState) => {
-    if (
-      nextProps.height !== this.props.height ||
-      nextProps.scrollY !== this.props.scrollY ||
-      nextProps.path !== this.props.path ||
-      nextProps.loading !== this.props.loading ||
-      nextState.header !== this.state.header
-    )
-      return true;
-
-    return false;
-  };
-
+  // Add Window event
   componentDidMount = () => {
-    // Add Window event
     window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleResize);
     window.addEventListener('resize', this.handleResize);
-
-    // Apply browser path with redux
-    this.props.changePath(window.location.pathname);
   };
 
+  // Remove Window event
   componentWillUnmount = () => {
-    // Remove Window event
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleResize);
     window.removeEventListener('resize', this.handleResize);
   };
 
-  // Update scroll data with redux
+  // Update scroll data with mobx
   handleScroll = () => {
-    const { changeScrollY } = this.props;
-    // document.documentElement.scrollTop for IE
-    const currentScrollY = window.scrollY || document.documentElement.scrollTop;
-    if (this.props.scrollY !== currentScrollY) changeScrollY(currentScrollY >= 0 ? currentScrollY : 0);
+    const { changeScrollY } = this.props.scroll;
+    changeScrollY(window.scrollY || document.documentElement.scrollTop);
   };
 
   // Update window height with redux
   handleResize = () => {
-    const { changeWindowHeight } = this.props;
-    const height = document.getElementById('root').scrollHeight - document.documentElement.clientHeight;
-    if (this.props.height !== height) changeWindowHeight(height >= 0 ? height : 0);
+    const { changeWindowHeight } = this.props.scroll;
+    changeWindowHeight(document.getElementById('root').scrollHeight - document.documentElement.clientHeight);
   };
 
   render() {
+    const { page, scroll } = this.props;
+
     return (
       <Router>
         <div>
-          <Header {...this.props} header={this.state.header} />
-          <Routing {...this.props} />
+          <Header
+            routers={this.props.routers}
+            currentPath={page.currentPath}
+            changePath={page.changePath}
+            startLoadPage={page.startLoadPage}
+            movedScrollY={scroll.movedScrollY}
+          />
+          <Routing routers={this.props.routers} endLoadPage={page.endLoadPage} />
           <Footer />
-          <ScrollTo height={this.props.height} scrollY={this.props.scrollY} />
+          <ScrollTo scrollY={scroll.scrollY} height={scroll.height} />
         </div>
       </Router>
     );
@@ -89,19 +61,11 @@ class Layout extends Component {
 }
 
 Layout.defaultProps = {
-  ...defaultProps,
   routers: [],
 };
 
 Layout.propTypes = {
-  ...propTypes,
   routers: PropTypes.array.isRequired,
 };
 
-// props 로 넣어줄 액션 생성함수
-const mapDispatchToProps = { changeScrollY, changePath, changeWindowHeight, showLoading, hideLoading };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Layout);
+export default Layout;

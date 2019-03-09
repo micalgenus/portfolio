@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PageTemplate from '@/Pages';
 
 import Introduce from '@/Components/Introduce';
 import WorkExperience from '@/Components/WorkExperience';
@@ -8,11 +9,7 @@ import Educations from '@/Components/Educations';
 import Contributes from '@/Components/Contributes';
 import Others from '@/Components/Others';
 
-export default class Main extends Component {
-  componentDidMount = () => {
-    if (this.props.hideLoading && typeof this.props.hideLoading === 'function') this.props.hideLoading();
-  };
-
+export default class Main extends PageTemplate {
   render() {
     return (
       <>

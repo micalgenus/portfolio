@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PageTemplate from '@/Pages';
 
-export default class Introduce extends Component {
-  componentDidMount = () => {
-    if (this.props.hideLoading && typeof this.props.hideLoading === 'function') this.props.hideLoading();
-  };
-
+export default class Introduce extends PageTemplate {
   render() {
     return (
       <div>

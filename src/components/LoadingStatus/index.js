@@ -10,11 +10,11 @@ import './LoadingStatus.scss';
  * @param {bool} isLoading if value is true then show component, but false then hide component
  */
 export default class LoadingStatus extends Component {
-  state = { error: false, percent: 0, timeout: 0, isVisible: false };
+  state = { error: false, percent: 0, timeout: 5000, isVisible: false };
 
   componentWillReceiveProps = nextProps => {
     if (nextProps.isLoading !== this.props.isLoading) {
-      if (nextProps.isLoading === true) this.startLoading(nextProps.timeout);
+      if (nextProps.isLoading === true) this.startLoading(5000);
       if (nextProps.isLoading === false) this.endLoading(false);
     }
   };
@@ -25,12 +25,11 @@ export default class LoadingStatus extends Component {
   };
 
   endLoading = error => {
-    // 100ms for dispaly at not loading 
+    // 100ms for dispaly at not loading
     setTimeout(() => this.setState({ percent: 100, error: error, isVisible: false }), 100);
 
     // 500ms for clear value
     setTimeout(() => {
-      this.props.hideLoading();
       this.setState({ percent: 0 });
     }, 500);
   };
@@ -61,11 +60,9 @@ export default class LoadingStatus extends Component {
 }
 
 LoadingStatus.defaultProps = {
-  timeout: 5000,
   isLoading: false,
 };
 
 LoadingStatus.propTypes = {
-  timeout: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
