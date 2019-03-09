@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ExternalLink = ({ href, children }) => {
-  const linkRegex = /^http?(s):\/\//;
+  const linkRegex = /^https?:\/\//;
 
   return (
     <a href={href} target={linkRegex.test(href) ? '_target' : '_self'}>
