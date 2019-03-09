@@ -13,4 +13,8 @@
     visibility: hidden;
     opacity: 0;
   }
+
+  .bar {
+    transition: width 0.1s;
+  }
 }
