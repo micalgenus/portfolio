@@ -3,18 +3,8 @@
 exports[`/Containers/Layout snapshot test 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Provider
-    store={
-      Object {
-        "dispatch": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-        Symbol(observable): [Function],
-      }
-    }
-  >
-    <Connect(Layout)
+  Symbol(enzyme.__unrendered__): <_default>
+    <inject-inject-Layout-with-scroll-with-page
       routers={
         Array [
           Object {
@@ -31,7 +21,7 @@ ShallowWrapper {
         ]
       }
     />
-  </Provider>,
+  </_default>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -44,9 +34,9 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "function",
+    "nodeType": "class",
     "props": Object {
-      "children": <Connect(Layout)
+      "children": <inject-inject-Layout-with-scroll-with-page
         routers={
           Array [
             Object {
@@ -63,23 +53,51 @@ ShallowWrapper {
           ]
         }
       />,
-      "value": Object {
-        "store": Object {
-          "dispatch": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-          Symbol(observable): [Function],
-        },
-        "storeState": Object {
-          "page": Object {
-            "loading": true,
-            "path": "/",
-            "timeout": 5000,
+      "page": PageStore {
+        "currentPath": "/",
+        "loadingPages": Array [],
+        Symbol(mobx did run lazy initializers): true,
+        Symbol(mobx administration): ObservableObjectAdministration$$1 {
+          "defaultEnhancer": [Function],
+          "keysAtom": Atom$$1 {
+            "diffValue": 0,
+            "isBeingObserved": false,
+            "isPendingUnobservation": false,
+            "lastAccessedBy": 0,
+            "lowestObserverState": 2,
+            "name": "PageStore@2.keys",
+            "observers": Set {},
           },
-          "scroll": Object {
-            "height": 0,
-            "scrollY": 0,
+          "name": "PageStore@2",
+          "target": [Circular],
+          "values": Map {
+            "currentPath" => "/",
+            "loadingPages" => Array [],
+          },
+        },
+      },
+      "scroll": ScrollStore {
+        "height": 0,
+        "movedScrollY": 0,
+        "scrollY": 0,
+        Symbol(mobx did run lazy initializers): true,
+        Symbol(mobx administration): ObservableObjectAdministration$$1 {
+          "defaultEnhancer": [Function],
+          "keysAtom": Atom$$1 {
+            "diffValue": 0,
+            "isBeingObserved": false,
+            "isPendingUnobservation": false,
+            "lastAccessedBy": 0,
+            "lowestObserverState": 2,
+            "name": "ScrollStore@3.keys",
+            "observers": Set {},
+          },
+          "name": "ScrollStore@3",
+          "target": [Circular],
+          "values": Map {
+            "scrollY" => 0,
+            "movedScrollY" => 0,
+            "height" => 0,
           },
         },
       },
@@ -108,32 +126,15 @@ ShallowWrapper {
       "rendered": null,
       "type": [Function],
     },
-    "type": Object {
-      "$$typeof": Symbol(react.provider),
-      "_context": Object {
-        "$$typeof": Symbol(react.context),
-        "Consumer": Object {
-          "$$typeof": Symbol(react.context),
-          "_calculateChangedBits": null,
-          "_context": [Circular],
-        },
-        "Provider": [Circular],
-        "_calculateChangedBits": null,
-        "_currentRenderer": Object {},
-        "_currentRenderer2": null,
-        "_currentValue": null,
-        "_currentValue2": null,
-        "_threadCount": 0,
-      },
-    },
+    "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "function",
+      "nodeType": "class",
       "props": Object {
-        "children": <Connect(Layout)
+        "children": <inject-inject-Layout-with-scroll-with-page
           routers={
             Array [
               Object {
@@ -150,23 +151,51 @@ ShallowWrapper {
             ]
           }
         />,
-        "value": Object {
-          "store": Object {
-            "dispatch": [Function],
-            "getState": [Function],
-            "replaceReducer": [Function],
-            "subscribe": [Function],
-            Symbol(observable): [Function],
-          },
-          "storeState": Object {
-            "page": Object {
-              "loading": true,
-              "path": "/",
-              "timeout": 5000,
+        "page": PageStore {
+          "currentPath": "/",
+          "loadingPages": Array [],
+          Symbol(mobx did run lazy initializers): true,
+          Symbol(mobx administration): ObservableObjectAdministration$$1 {
+            "defaultEnhancer": [Function],
+            "keysAtom": Atom$$1 {
+              "diffValue": 0,
+              "isBeingObserved": false,
+              "isPendingUnobservation": false,
+              "lastAccessedBy": 0,
+              "lowestObserverState": 2,
+              "name": "PageStore@2.keys",
+              "observers": Set {},
             },
-            "scroll": Object {
-              "height": 0,
-              "scrollY": 0,
+            "name": "PageStore@2",
+            "target": [Circular],
+            "values": Map {
+              "currentPath" => "/",
+              "loadingPages" => Array [],
+            },
+          },
+        },
+        "scroll": ScrollStore {
+          "height": 0,
+          "movedScrollY": 0,
+          "scrollY": 0,
+          Symbol(mobx did run lazy initializers): true,
+          Symbol(mobx administration): ObservableObjectAdministration$$1 {
+            "defaultEnhancer": [Function],
+            "keysAtom": Atom$$1 {
+              "diffValue": 0,
+              "isBeingObserved": false,
+              "isPendingUnobservation": false,
+              "lastAccessedBy": 0,
+              "lowestObserverState": 2,
+              "name": "ScrollStore@3.keys",
+              "observers": Set {},
+            },
+            "name": "ScrollStore@3",
+            "target": [Circular],
+            "values": Map {
+              "scrollY" => 0,
+              "movedScrollY" => 0,
+              "height" => 0,
             },
           },
         },
@@ -195,24 +224,7 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
-      "type": Object {
-        "$$typeof": Symbol(react.provider),
-        "_context": Object {
-          "$$typeof": Symbol(react.context),
-          "Consumer": Object {
-            "$$typeof": Symbol(react.context),
-            "_calculateChangedBits": null,
-            "_context": [Circular],
-          },
-          "Provider": [Circular],
-          "_calculateChangedBits": null,
-          "_currentRenderer": Object {},
-          "_currentRenderer2": null,
-          "_currentValue": null,
-          "_currentValue2": null,
-          "_threadCount": 0,
-        },
-      },
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -236,6 +248,5 @@ ShallowWrapper {
       },
     },
   },
-  Symbol(enzyme.__childContext__): null,
 }
 `;
