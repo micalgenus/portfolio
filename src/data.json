@@ -1,0 +1,84 @@
+[
+  {
+    "category": "한경수",
+    "links": [
+      { "icon": "mail", "color": "black", "href": "mailto:micalgenus@gmail.com" },
+      { "icon": "github", "color": "black", "href": "https://github.com/micalgenus/" },
+      { "icon": "linkedin", "color": "blue", "href": "https://linkedin.com/in/gyeong-su-han/" },
+      { "icon": "edit", "color": "grey", "href": "https://micalgenus.github.io/" }
+    ],
+    "description": "주로 Node.js를 사용하여 개발을 하고있는 신입 백엔드개발자 입니다. 현재 DevOps에 관심이 많습니다."
+  },
+  {
+    "category": "Work Experience",
+    "items": [
+      {
+        "title": "모빌리티랩",
+        "links": [
+          { "icon": "github", "color": "black", "href": "https://github.com/micalgenus/vgram-web" },
+          { "icon": "github", "color": "black", "href": "https://github.com/micalgenus/vgram-app" },
+          { "icon": "github", "color": "black", "href": "https://github.com/micalgenus/vgram-image-server" }
+        ],
+        "date": "2016.12. ~ 2017.12.",
+        "description": "VR 미디어를 사용하여 인테리어 업자와 건물주를 연결시켜 주는 웹/어플리케이션 개발"
+      }
+    ]
+  },
+  {
+    "category": "Projects",
+    "items": [
+      {
+        "title": "푸드세일 O2O 주문 챗봇 - 무바",
+        "links": [{ "icon": "github", "color": "black", "href": "https://github.com/MubaBot/" }],
+        "description": "잉여 음식을 효율적으로 처리하고 소비자들에게 신선한 음식을 제공하는 푸드세일 플랫폼."
+      },
+      {
+        "title": "심리상담센터",
+        "links": [{ "icon": "home", "color": "black", "href": "https://jjrodem.org/" }],
+        "description": "2017 SW 재능기부 챌린지 지원으로 진행된 프로젝트로 심리상담센터를 운영하시는 소상공인을 위한 홈페이지 및 상담 환경 구축."
+      }
+    ]
+  },
+  {
+    "category": "Educations",
+    "items": [
+      {
+        "title": "Software Maestro 9th.",
+        "links": [{ "icon": "home", "color": "black", "href": "http://swmaestro.kr/" }],
+        "date": "2018. 06. ~ 2018. 12."
+      }
+    ]
+  },
+  {
+    "category": "Toy Projects",
+    "items": [
+      {
+        "title": "Portfolio",
+        "links": [
+          { "icon": "home", "color": "black", "href": "https://portfolio.micalgenus.com/" },
+          { "icon": "github", "color": "black", "href": "https://github.com/micalgenus/portfolio" },
+          { "icon": "docker", "color": "blue", "href": "https://hub.docker.com/r/micalgenus/portfolio" }
+        ],
+        "description": "GCP + Travis-ci + Docker 환경에서 React + DevOps개발 공부"
+      }
+    ]
+  },
+  {
+    "category": "Contributes",
+    "items": [
+      {
+        "title": "XpressEngine",
+        "links": [{ "icon": "linkify", "color": "black", "href": "https://github.com/xpressengine/xe-core/commits?author=micalgenus" }]
+      }
+    ]
+  },
+  {
+    "category": "Others",
+    "items": [
+      {
+        "title": "Github Page Blog",
+        "links": [{ "icon": "home", "color": "black", "href": "https://micalgenus.github.io/" }]
+      }
+    ]
+  }
+]
