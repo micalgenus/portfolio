@@ -23,10 +23,7 @@ class Layout extends Component {
 
   // Add Window event
   componentDidMount = () => {
-    for (const e of this.events) {
-      console.log(e);
-      window.addEventListener(e.event, e.method);
-    }
+    for (const e of this.events) window.addEventListener(e.event, e.method);
   };
 
   // Remove Window event
