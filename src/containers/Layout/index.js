@@ -12,11 +12,21 @@ import { Header, Footer, Router as Routing, ScrollTo } from './Components';
 @inject('scroll')
 @observer
 class Layout extends Component {
-  events = [{ event: 'scroll', method: this.handleScroll }, { event: 'scroll', method: this.handleResize }, { event: 'resize', method: this.handleResize }];
+  constructor(props) {
+    super(props);
+    this.events = [
+      { event: 'scroll', method: this.handleScroll },
+      { event: 'scroll', method: this.handleResize },
+      { event: 'resize', method: this.handleResize },
+    ];
+  }
 
   // Add Window event
   componentDidMount = () => {
-    for (const e of this.events) window.addEventListener(e.event, e.method);
+    for (const e of this.events) {
+      console.log(e);
+      window.addEventListener(e.event, e.method);
+    }
   };
 
   // Remove Window event
