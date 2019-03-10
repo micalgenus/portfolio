@@ -21,7 +21,7 @@ export default class LoadingStatus extends Component {
 
   // Initialize value for start
   startLoading = timeout => {
-    this.setState({ percent: 0, timeout: timeout, isVisible: true });
+    this.setState({ percent: 0, error: false, timeout: timeout || 5000, isVisible: true });
   };
 
   endLoading = error => {
@@ -29,9 +29,7 @@ export default class LoadingStatus extends Component {
     setTimeout(() => this.setState({ percent: 100, error: error, isVisible: false }), 100);
 
     // 500ms for clear value
-    setTimeout(() => {
-      this.setState({ percent: 0 });
-    }, 500);
+    setTimeout(() => this.setState({ percent: 0 }), 500);
   };
 
   shouldComponentUpdate = (nextProps, nextState) => {
