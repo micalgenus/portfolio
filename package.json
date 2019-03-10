@@ -50,9 +50,7 @@
   },
   "reactSnap": {
     "include": [
-      "/",
-      "/intro",
-      "/projects"
+      "/"
     ],
     "puppeteerArgs": [
       "--no-sandbox"
