@@ -1,4 +1,4 @@
-import App, { Container } from 'next/app';
+import App, { Container, NextAppContext } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 
@@ -7,7 +7,7 @@ import Layout from '@/containers/Layout';
 import Store from '@/stores';
 
 export default class NextAppLayout extends App {
-  static async getInitialProps({ Component, router, ctx }) {
+  static async getInitialProps({ Component, ctx }: NextAppContext) {
     let pageProps = {};
 
     if (Component.getInitialProps) {

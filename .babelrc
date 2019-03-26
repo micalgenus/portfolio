@@ -1,5 +1,5 @@
 {
-  "presets": [["next/babel", { "preset-env": { "useBuiltIns": "entry" } }]],
+  "presets": [["next/babel", { "preset-env": { "useBuiltIns": "entry" } }], "@zeit/next-typescript/babel"],
   "plugins": [
     ["module-resolver", { "root": ["./"], "alias": { "@": "./" } }],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],

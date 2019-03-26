@@ -1,11 +1,11 @@
 import { observable, action } from 'mobx';
 
-class ScrollStore {
-  @observable scrollY = 0;
-  @observable movedScrollY = 0;
-  @observable height = 0;
+export class ScrollStore {
+  @observable scrollY: number = 0;
+  @observable movedScrollY: number = 0;
+  @observable height: number = 0;
 
-  @action changeScrollY = scrollY => {
+  @action changeScrollY = (scrollY: number) => {
     const nextScrollY = scrollY >= 0 ? (scrollY <= this.height ? scrollY : this.height) : 0;
     const movedValue = nextScrollY - this.scrollY; // current - pre
 
@@ -13,7 +13,7 @@ class ScrollStore {
     this.scrollY = nextScrollY;
   };
 
-  @action changeWindowHeight = height => {
+  @action changeWindowHeight = (height: number) => {
     this.height = height >= 0 ? height : 0;
   };
 }

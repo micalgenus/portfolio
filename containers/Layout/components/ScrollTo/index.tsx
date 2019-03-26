@@ -3,23 +3,25 @@ import { observer, inject } from 'mobx-react';
 
 import { Icon } from 'semantic-ui-react';
 
+import { StoreProps } from '@/stores';
+
 import './styles/scroll.scss';
 
 @inject('scroll')
 @observer
-export default class ScrollTo extends Component {
-  onClickUp = e => {
+export default class ScrollTo extends Component<StoreProps> {
+  onClickUp = (e: React.MouseEvent) => {
     e.preventDefault();
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   };
 
-  onClickDown = e => {
+  onClickDown = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.scroll({ top: this.props.scroll.height, left: 0, behavior: 'smooth' });
+    window.scroll({ top: this.props.scroll && this.props.scroll.height, left: 0, behavior: 'smooth' });
   };
 
   render() {
-    const { height, scrollY } = this.props.scroll;
+    const { height, scrollY } = this.props.scroll || { height: 0, scrollY: 0 };
     const percent = (scrollY / height) * 100;
     const arrow = percent > 5 ? (percent > 95 ? 'scroll-position-bottom' : 'none') : 'scroll-position-top';
     return (

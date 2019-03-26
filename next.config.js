@@ -1,6 +1,7 @@
 const modules = [
   require('@zeit/next-css'),
-  require('@zeit/next-sass')
+  require('@zeit/next-sass'),
+  require('@zeit/next-typescript'),
 ];
 
 const applyModules = configs => modules.reduce((r, v) => v(r), configs);

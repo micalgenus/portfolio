@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class ExternalLink extends React.Component {
+interface Props {
+  href: string;
+}
+
+export default class ExternalLink extends Component<Props> {
   render() {
     const linkRegex = /^https?:\/\//;
     const { href, children } = this.props;

@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 import './ScrollBar.scss';
 
-/**
- * @param {number} top absolute position with parent element
- * @param {number} scroll now windows scroll
- * @param {number} height now browser height
- */
-class ScrollBar extends React.Component {
+interface Props {
+  top: number;
+  scroll: number;
+  height: number;
+}
+
+export default class ScrollBar extends Component<Props> {
   render() {
     const { top, scroll, height } = this.props;
     const H = height >= 1 ? height : 1;
@@ -21,13 +21,3 @@ class ScrollBar extends React.Component {
     );
   }
 }
-
-ScrollBar.defaultProps = {
-  top: 0,
-};
-
-ScrollBar.propTypes = {
-  top: PropTypes.number.isRequired,
-};
-
-export default ScrollBar;

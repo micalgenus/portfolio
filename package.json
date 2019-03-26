@@ -5,6 +5,7 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "@zeit/next-typescript": "^1.1.1",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
     "next": "^8.0.3",
@@ -20,7 +21,8 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "start:dev": "node server.js",
-    "test": "next test"
+    "test": "next test",
+    "type-check": "tsc"
   },
   "browserslist": [
     "defaults"
@@ -28,6 +30,10 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-decorators": "^7.4.0",
-    "babel-plugin-module-resolver": "^3.2.0"
+    "@types/next": "^8.0.3",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.3",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "typescript": "^3.3.4000"
   }
 }

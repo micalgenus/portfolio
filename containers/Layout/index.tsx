@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
+import { Header, Footer, ScrollTo } from './components';
+import { StoreProps } from '@/stores';
+
 import './styles/layout.font.scss';
 import './styles/layout.global.scss';
 import './styles/layout.scss';
 
-import { Header, Footer, ScrollTo } from './components';
+interface EventListener {
+  event: string;
+  method: () => void;
+}
 
 @inject('scroll')
 @observer
-class Layout extends Component {
-  constructor(props) {
+class Layout extends Component<StoreProps> {
+  events: EventListener[];
+
+  constructor(props: StoreProps) {
     super(props);
     this.events = [
       { event: 'scroll', method: this.handleScroll },
@@ -31,14 +39,15 @@ class Layout extends Component {
 
   // Update scroll data with mobx
   handleScroll = () => {
-    const { changeScrollY } = this.props.scroll;
+    const { changeScrollY } = this.props.scroll || { changeScrollY: (n: number) => n };
     changeScrollY(window.scrollY || document.documentElement.scrollTop);
   };
 
   // Update window height with redux
   handleResize = () => {
-    const { changeWindowHeight } = this.props.scroll;
-    changeWindowHeight(document.getElementById('__next').scrollHeight - document.documentElement.clientHeight);
+    const { changeWindowHeight } = this.props.scroll || { changeWindowHeight: (n: number) => n };
+    const element = document.getElementById('__next') || { scrollHeight: 0 };
+    changeWindowHeight(element.scrollHeight - document.documentElement.clientHeight);
   };
 
   render() {
