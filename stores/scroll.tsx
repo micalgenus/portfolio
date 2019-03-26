@@ -9,7 +9,12 @@ export class ScrollStore {
     const nextScrollY = scrollY >= 0 ? (scrollY <= this.height ? scrollY : this.height) : 0;
     const movedValue = nextScrollY - this.scrollY; // current - pre
 
-    this.movedScrollY = (movedValue > 0 && this.movedScrollY > 0) || (movedValue < 0 && this.movedScrollY < 0) ? this.movedScrollY + movedValue : movedValue;
+    this.movedScrollY =
+      movedValue === 0
+        ? this.movedScrollY
+        : (movedValue > 0 && this.movedScrollY > 0) || (movedValue < 0 && this.movedScrollY < 0)
+        ? this.movedScrollY + movedValue
+        : movedValue;
     this.scrollY = nextScrollY;
   };
 

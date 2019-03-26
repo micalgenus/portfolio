@@ -4,6 +4,7 @@ header {
   display: flex;
   position: fixed;
   width: 100%;
+  left: 0;
   height: $header-height;
   align-items: center;
   box-shadow: 0px 1px rgba(0, 0, 0, 0.1);
@@ -19,7 +20,6 @@ header {
   background-color: rgba(255, 255, 255, 0.9);
 
   nav {
-    position: absolute;
     display: flex;
     flex-direction: row;
     width: 100%;
