@@ -27,6 +27,7 @@ script:
   # - yarn run test
   # - yarn run test --coverage
   - yarn build
+  - docker build -t $USERNAME/portfolio:develop .
 
 after_script:
   # - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
