@@ -22,7 +22,7 @@ export default class NextAppLayout extends App {
     return (
       <Container>
         <Head>
-          <title>{pageProps.title || 'Hello Next !'}</title>
+          <title>{pageProps.title || 'Portfolio'}</title>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
         </Head>
         <Store>
