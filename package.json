@@ -3,57 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "lodash": "^4.17.11",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
+    "next": "^8.0.3",
+    "next-routes": "^1.4.2",
     "node-sass": "^4.11.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.8",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.85.0",
+    "react": "^16.8.5",
+    "react-app-polyfill": "^0.2.2",
+    "react-dom": "^16.8.5",
+    "semantic-ui-react": "^0.86.0",
     "smoothscroll-polyfill": "^0.4.3"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build && react-snap",
-    "gh-pages:build": "yarn run gh-pages:prebuild && react-app-rewired build && react-snap && yarn run gh-pages:postbuild",
-    "gh-pages:prebuild": "node gh-pages.build prebuild",
-    "gh-pages:postbuild": "node gh-pages.build postbuild",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "start:dev": "node server.js",
+    "test": "next test"
   },
   "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie < 10",
-    "not op_mini all"
+    "defaults"
   ],
-  "homepage": "https://portfolio.micalgenus.com",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
-    "@babel/plugin-proposal-decorators": "^7.3.0",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "chai": "^4.2.0",
-    "customize-cra": "^0.2.12",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.10.0",
-    "enzyme-to-json": "^3.3.5",
-    "gh-pages": "^2.0.1",
-    "react-app-rewired": "^2.1.0",
-    "react-snap": "^1.23.0",
-    "sinon": "^7.2.5"
-  },
-  "reactSnap": {
-    "include": [
-      "/"
-    ],
-    "puppeteerArgs": [
-      "--no-sandbox"
-    ]
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-decorators": "^7.4.0",
+    "babel-plugin-module-resolver": "^3.2.0"
   }
 }

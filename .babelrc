@@ -1,23 +1,7 @@
 {
-  "presets": [["@babel/preset-env", { "useBuiltIns": "entry" }], "@babel/preset-react"],
+  "presets": [["next/babel", { "preset-env": { "useBuiltIns": "entry" } }]],
   "plugins": [
-    [
-      "module-resolver",
-      {
-        "root": ["./src"],
-        "alias": {
-          "@/TestComponent": "./src/components/TestComponent",
-          "@/Components": "./src/components",
-          "@/Stores": "./src/stores",
-          "@/Containers": "./src/containers",
-          "@/Pages": "./src/pages",
-          "@/Projects": "./src/components/Projects",
-          "@": "./src",
-          "package.json": "./package.json",
-          "underscore": "lodash"
-        }
-      }
-    ],
+    ["module-resolver", { "root": ["./"], "alias": { "@": "./" } }],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     ["@babel/plugin-proposal-class-properties", { "loose": true }]
   ]

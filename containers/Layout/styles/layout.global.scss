@@ -1,0 +1,39 @@
+/**
+  * Global CSS
+  */
+::selection {
+  background: #8d7edc;
+  color: #fff;
+  text-shadow: none;
+}
+::-moz-selection {
+  background: #8d7edc;
+  color: #fff;
+  text-shadow: none;
+}
+::-webkit-selection {
+  background: #8d7edc;
+  color: #fff;
+  text-shadow: none;
+}
+
+body {
+  display: flex;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+}
+
+* {
+  color: #333;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+li {
+  list-style: none;
+}
