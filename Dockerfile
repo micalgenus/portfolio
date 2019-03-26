@@ -10,8 +10,8 @@ WORKDIR /portfolio
 RUN ["yarn"]
 RUN ["yarn", "build"]
 
-EXPOSE 3000
+EXPOSE 5000
 
-HEALTHCHECK --interval=1s CMD wget -qO- localhost:3000
+HEALTHCHECK --interval=1s CMD wget -qO- localhost:5000
 
-CMD ["yarn", "start"]
+CMD ["bash", "-c", "PORT=5000 yarn start"]
