@@ -1,0 +1,36 @@
+.swiper-container {
+  overflow-x: hidden;
+  width: 100%;
+
+  .swiper-content {
+    position: relative;
+    transition: all 0.3s ease-in;
+    flex-direction: row;
+    display: flex;
+    overflow-y: hidden;
+
+    & > div {
+      display: block;
+      height: auto;
+      -webkit-transition: max-height 0.3s ease-in;
+      -moz-transition: max-height 0.3s ease-in;
+      -ms-transition: max-height 0.3s ease-in;
+      -o-transition: max-height 0.3s ease-in;
+      transition: max-height 0.3s ease-in;
+
+      &.show-component {
+        max-height: auto;
+        opacity: 1;
+      }
+
+      &.hide-component {
+        max-height: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+  .column {
+    padding: 0;
+  }
+}
