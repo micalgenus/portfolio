@@ -172,15 +172,20 @@ div.modal.active {
 .swiper-pre-icon-box {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 1rem;
 
   a {
-    position: fixed;
-    margin-left: -35%;
+    float: left;
+    width: 25px;
   }
 
   h3 {
     margin-top: 0;
+  }
+
+  &::after {
+    content: ' ';
+    width: 25px;
   }
 }
