@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { Header, Footer, ScrollTo } from './components';
 import { StoreProps } from '@/stores';
+import { LoginPopup } from '@/components';
+
+import { Header, Footer, ScrollTo } from './components';
 
 import './styles/layout.font.scss';
 import './styles/layout.global.scss';
@@ -57,6 +59,8 @@ class Layout extends Component<StoreProps> {
         <main>{this.props.children}</main>
         <Footer />
         <ScrollTo />
+
+        <LoginPopup />
       </>
     );
   }
