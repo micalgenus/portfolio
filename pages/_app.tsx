@@ -19,7 +19,10 @@ export default class NextAppLayout extends App {
 
   render() {
     const { Component, pageProps } = this.props;
-    return (
+
+    return pageProps.statusCode === 404 ? (
+      <Component {...pageProps} />
+    ) : (
       <Container>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
