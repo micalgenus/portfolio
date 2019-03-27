@@ -1,6 +1,7 @@
 @import './layout.config.scss';
 
 main {
+  padding: 0 $content-padding;
   margin-top: $header-height;
   width: 100%;
   max-width: $max-width;
@@ -39,9 +40,9 @@ main {
   }
 
   h3 {
-    border-left: 5px solid #8d7edc;
-    padding-left: 10px;
-    margin-left: -15px;
+    border-left: $heading-box-width solid #8d7edc;
+    padding-left: $content-padding - $heading-box-width;
+    margin-left: -$content-padding;
   }
 }
 
