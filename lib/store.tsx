@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'mobx-react';
 
-import scroll, { ScrollStore } from './scroll';
-import login, { LoginStore } from './login';
+import scroll, { ScrollStore } from './mobx/scroll';
+import login, { LoginStore } from './mobx/login';
 
 export interface StoreProps {
   scroll?: ScrollStore;

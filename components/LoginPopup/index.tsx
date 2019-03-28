@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { Button, Modal, Icon, Divider } from 'semantic-ui-react';
 
 import { Swiper } from '@/components';
-import { StoreProps } from '@/stores';
+import { StoreProps } from '@/lib/store';
 
 import SignupPopup from './SignupPopup';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import { StoreProps } from '@/stores';
+import { StoreProps } from '@/lib/store';
 import { LoginPopup } from '@/components';
 
 import { Header, Footer, ScrollTo } from './components';

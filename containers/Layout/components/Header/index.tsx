@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
 import { ScrollBar, Link } from '@/components';
-import { StoreProps } from '@/stores';
+import { StoreProps } from '@/lib/store';
 
 import './styles/header.scss';
 

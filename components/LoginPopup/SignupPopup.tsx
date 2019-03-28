@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { Button, Divider } from 'semantic-ui-react';
 
 import { Link } from '@/components';
-import { StoreProps } from '@/stores';
+import { StoreProps } from '@/lib/store';
 
 interface State {
   id: string;

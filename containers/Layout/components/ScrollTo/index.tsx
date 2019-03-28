@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 
 import { Icon } from 'semantic-ui-react';
 
-import { StoreProps } from '@/stores';
+import { StoreProps } from '@/lib/store';
 
 import './styles/scroll.scss';
 

@@ -4,7 +4,7 @@ import React from 'react';
 
 import Layout from '@/containers/Layout';
 
-import Store from '@/stores';
+import { Store } from '@/lib';
 
 export default class NextAppLayout extends App {
   static async getInitialProps({ Component, ctx }: NextAppContext) {
