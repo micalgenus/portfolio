@@ -1,8 +1,13 @@
+const dotenvLoad = require('dotenv-load');
+
 const modules = [
+  require('next-env')(),
   require('@zeit/next-css'),
   require('@zeit/next-sass'),
   require('@zeit/next-typescript'),
 ];
+
+dotenvLoad();
 
 const applyModules = configs => modules.reduce((r, v) => v(r), configs);
 
