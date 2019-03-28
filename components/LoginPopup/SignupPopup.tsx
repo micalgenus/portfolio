@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
 import { Button, Divider } from 'semantic-ui-react';
+
+import { Link } from '@/components';
+import { StoreProps } from '@/stores';
 
 interface State {
   id: string;
@@ -8,7 +12,9 @@ interface State {
   repassword: string;
 }
 
-export default class SignupPopup extends Component<{}, State> {
+@inject('login')
+@observer
+export default class SignupPopup extends Component<StoreProps, State> {
   state = {
     id: '',
     username: '',
@@ -43,6 +49,7 @@ export default class SignupPopup extends Component<{}, State> {
   };
 
   render() {
+    const { hideLoginPopup } = this.props.login || { hideLoginPopup: () => {} };
     return (
       <>
         <div className="local-register input-form">
@@ -63,7 +70,11 @@ export default class SignupPopup extends Component<{}, State> {
             <span>Re-Password</span>
           </label>
 
-          <a className="policy-link">Terms of use and Privacy policy</a>
+          <Link route="/policy">
+            <a className="policy-link" onClick={hideLoginPopup}>
+              Terms of use and Privacy policy
+            </a>
+          </Link>
 
           <Divider horizontal>Agree</Divider>
 
