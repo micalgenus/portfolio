@@ -27,7 +27,6 @@ export default class Swiper extends Component<{}, State> {
   };
 
   next = () => {
-    console.log('next');
     let position = this.state.position + 1;
     if (position >= this.state.components.length) position = this.state.components.length - 1;
     this.setState({ position });
