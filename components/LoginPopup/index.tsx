@@ -57,6 +57,10 @@ export default class LoginPopup extends Component<StoreProps> {
     );
   };
 
+  changeSwiperPageToPrev = () => {
+    this.swiper && this.swiper.pre();
+  };
+
   renderSwiperPreButton = () => {
     return (
       <a className="swiper-pre-icon" onClick={() => this.swiper && this.swiper.pre()}>
@@ -82,7 +86,7 @@ export default class LoginPopup extends Component<StoreProps> {
                 {this.renderSwiperPreButton()}
                 <h3>Signup</h3>
               </div>
-              <SignupPopup />
+              <SignupPopup goToLogin={this.changeSwiperPageToPrev} />
             </div>
           </Swiper>
         </Modal.Content>
