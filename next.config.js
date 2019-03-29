@@ -1,13 +1,16 @@
-const dotenvLoad = require('dotenv-load');
+require('dotenv-load')();
+
+const withConfig = require('next-runtime-dotenv')({
+  public: ['PORTFOLIO_GRAPHQL_URL']
+})
 
 const modules = [
-  require('next-env')(),
   require('@zeit/next-css'),
   require('@zeit/next-sass'),
   require('@zeit/next-typescript'),
+  require('next-env')(),
+  withConfig,
 ];
-
-dotenvLoad();
 
 const applyModules = configs => modules.reduce((r, v) => v(r), configs);
 
