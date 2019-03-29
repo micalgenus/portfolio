@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'mobx-react';
 
-import ApolloClientProvider from './apollo';
+import { ApolloClientProvider } from './graphql';
 
 import scroll, { ScrollStore } from './mobx/scroll';
 import login, { LoginStore } from './mobx/login';
