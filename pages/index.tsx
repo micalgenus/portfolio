@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 
 import { CategoryTemplate, ItemTemplate } from '@/components';
-import { LinkItem } from '@/interfaces';
+import { DataItem } from '@/interfaces';
 
 import data from '@/data.json';
-
-interface DataItem {
-  title: string;
-  links: LinkItem[];
-  date?: string;
-  description?: string;
-}
 
 export default class IndexPage extends Component {
   render() {

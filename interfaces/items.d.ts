@@ -5,3 +5,10 @@ export interface LinkItem {
   color?: SemanticCOLORS;
   href: string;
 }
+
+export interface DataItem {
+  title: string;
+  links: LinkItem[];
+  date?: string;
+  description?: string;
+}
