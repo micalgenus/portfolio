@@ -11,3 +11,25 @@ export const signup = async (id: string, username: string, email: string, passwo
     }`
   );
 };
+
+export const login = async (id: string, password: string) => {
+  id = id.replace(/"/g, '\\"');
+  password = password.replace(/"/g, '\\"');
+  return requestGraphqlWithAxios(
+    `mutation {
+      login(id:"${id}", password:"${password}")
+    }`
+  );
+};
+
+export const getUserInfo = async () => {
+  return requestGraphqlWithAxios(
+    `query {
+      me {
+        id
+        username
+        email
+      }
+    }`
+  );
+};

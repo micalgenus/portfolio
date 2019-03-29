@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
 import { StoreProps } from '@/lib/store';
+import { getLoginToken } from '@/lib/utils/cookie';
 import { LoginPopup } from '@/components';
 
 import { Header, Footer, ScrollTo } from './components';
@@ -15,6 +16,7 @@ interface EventListener {
   method: () => void;
 }
 
+@inject('login')
 @inject('scroll')
 @observer
 class Layout extends Component<StoreProps> {
@@ -31,6 +33,12 @@ class Layout extends Component<StoreProps> {
 
   // Add Window event
   componentDidMount = () => {
+    // Only run code in browser
+    if (typeof window !== 'undefined') {
+      const token = getLoginToken();
+      if (token && this.props.login) this.props.login.login(token);
+    }
+
     for (const e of this.events) window.addEventListener(e.event, e.method);
   };
 
