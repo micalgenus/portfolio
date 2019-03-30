@@ -8,4 +8,4 @@ export { default as LoginPopup } from './LoginPopup';
 export { default as Swiper } from './Swiper';
 export { default as InputText } from './InputText';
 
-export { Link } from './Link';
+export { Link, Router } from './Router';
