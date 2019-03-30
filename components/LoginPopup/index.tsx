@@ -131,6 +131,7 @@ export default class LoginPopup extends Component<StoreProps, State> {
         error={!this.checkPassword()}
         errorMessage="Please check password.\nPassword must be at least 8 characters long."
         onChange={e => this.onChangeText(e, 'password')}
+        onKeyPress={this.onKeyPress}
       />
 
       <div className="account-helper">
