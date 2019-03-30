@@ -62,3 +62,16 @@ $error-item-color: #e7736c;
     font-weight: bold;
   }
 }
+
+.input-text-error-box {
+  -webkit-filter: none !important;
+  filter: none !important;
+
+  &.disabled {
+    display: none !important;
+  }
+
+  pre {
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+}

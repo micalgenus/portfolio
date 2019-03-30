@@ -11,31 +11,60 @@ import SignupPopup from './SignupPopup';
 
 import './LoginPopup.scss';
 
-interface State {
+type AllowError = 'No user with that id' | 'Incorrect password';
+const ErrorMessages = new Map<keyof InputState, AllowError[]>([['id', ['No user with that id']], ['password', ['Incorrect password']]]);
+
+interface InputState {
   id: string;
   password: string;
+}
+
+interface State extends InputState {
+  error: AllowError[];
 }
 
 @inject('login')
 @observer
 export default class LoginPopup extends Component<StoreProps, State> {
   swiper?: Swiper;
-  state = { id: '', password: '' };
+  constructor(props: StoreProps) {
+    super(props);
+
+    this.state = {
+      id: '',
+      password: '',
+      error: [],
+    };
+  }
+
+  checkId = () => {
+    const { error } = this.state;
+    const errors = ErrorMessages.get('id') || [];
+    for (const e of errors) if (error.includes(e)) return false;
+
+    return true;
+  };
 
   checkPassword = () => {
-    const { password } = this.state;
-    if (password && !checkValidPassword(password)) return true;
-    return false;
+    const { password, error } = this.state;
+    const errors = ErrorMessages.get('password') || [];
+    for (const e of errors) if (error.includes(e)) return false;
+    if (password && !checkValidPassword(password)) return false;
+
+    return true;
   };
 
   checkValidAllInputs = () => {
-    const { id, password } = this.state;
+    const { id, password, error } = this.state;
     if (!id || !password) return false;
     if (!checkValidPassword(password)) return false;
+    if (error.length) return false;
     return true;
   };
 
   doLogin = () => {
+    if (!this.checkValidAllInputs()) return;
+
     // do login
     login(this.state.id, this.state.password)
       .then(data => {
@@ -46,13 +75,27 @@ export default class LoginPopup extends Component<StoreProps, State> {
           // TODO: Error exception
         }
       })
+      .catch(err => {
+        let error: AllowError[] = [...this.state.error];
 
-      // TODO: Error exception
-      .catch(err => console.error(err));
+        for (const e of err) {
+          error.push(e.message);
+        }
+
+        this.setState({ error: [...new Set<AllowError>(error)] });
+      });
   };
 
-  onChangeText = (event: React.ChangeEvent<HTMLInputElement>, target: keyof State) => {
-    this.setState({ [target]: event.target.value } as Pick<State, keyof State>);
+  onChangeText = (event: React.ChangeEvent<HTMLInputElement>, target: keyof InputState) => {
+    this.setState({ [target]: event.target.value } as Pick<InputState, keyof InputState>);
+    const errors = ErrorMessages.get(target) || [];
+    this.setState({ error: this.state.error.filter(v => !errors.includes(v)) });
+  };
+
+  onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      this.doLogin();
+    }
   };
 
   changeSwiperPageToPrev = () => {
@@ -81,8 +124,14 @@ export default class LoginPopup extends Component<StoreProps, State> {
 
   renderLocalLogin = () => (
     <div className="local-login">
-      <InputText label="ID" onChange={e => this.onChangeText(e, 'id')} />
-      <InputText label="Password" type="password" error={this.checkPassword()} onChange={e => this.onChangeText(e, 'password')} />
+      <InputText label="ID" error={!this.checkId()} errorMessage="Please check ID." onChange={e => this.onChangeText(e, 'id')} onKeyPress={this.onKeyPress} />
+      <InputText
+        label="Password"
+        type="password"
+        error={!this.checkPassword()}
+        errorMessage="Please check password.\nPassword must be at least 8 characters long."
+        onChange={e => this.onChangeText(e, 'password')}
+      />
 
       <div className="account-helper">
         <div className="checkbox-form">
