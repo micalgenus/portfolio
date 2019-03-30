@@ -22,7 +22,18 @@ class LayoutHeader extends Component<StoreProps> {
 
     return userInformation && userInformation.username ? (
       <li className="user-menu-items">
-        <Popup trigger={<span>{userInformation.username}</span>} flowing hoverable hideOnScroll>
+        <Popup
+          trigger={
+            <div>
+              <Link route="/profile">
+                <a>{userInformation.username}</a>
+              </Link>
+            </div>
+          }
+          flowing
+          hoverable
+          hideOnScroll
+        >
           <Popup.Content>
             <ul>
               <li>
