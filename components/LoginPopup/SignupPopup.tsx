@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Button, Divider } from 'semantic-ui-react';
 
-import { Link } from '@/components';
+import { Link, InputText } from '@/components';
 import { StoreProps } from '@/lib/store';
 
 import { signup } from '@/lib/graphql/user';
@@ -65,13 +65,15 @@ export default class SignupPopup extends Component<Props, State> {
   doRegister = () => {
     if (!this.checkValidAllInputs()) alert('error');
 
-    return signup(this.state.id, this.state.username, this.state.email, this.state.password)
-      .then(() => {
-        this.setState({ id: '', username: '', email: '', password: '', repassword: '' });
-        this.props.goToLogin();
-      })
-      // TODO: Error exception
-      .catch(err => console.error(err));
+    return (
+      signup(this.state.id, this.state.username, this.state.email, this.state.password)
+        .then(() => {
+          this.setState({ id: '', username: '', email: '', password: '', repassword: '' });
+          this.props.goToLogin();
+        })
+        // TODO: Error exception
+        .catch(err => console.error(err))
+    );
   };
 
   render() {
@@ -79,26 +81,11 @@ export default class SignupPopup extends Component<Props, State> {
     return (
       <>
         <div className="local-register input-form">
-          <label>
-            <input placeholder=" " onChange={e => this.onChangeText(e, 'id')} />
-            <span>ID</span>
-          </label>
-          <label>
-            <input placeholder=" " className={this.checkEmail() ? 'error' : ''} onChange={e => this.onChangeText(e, 'email')} />
-            <span>Email</span>
-          </label>
-          <label>
-            <input placeholder=" " onChange={e => this.onChangeText(e, 'username')} />
-            <span>Username</span>
-          </label>
-          <label>
-            <input placeholder=" " type="password" className={this.checkPassword() ? 'error' : ''} onChange={e => this.onChangeText(e, 'password')} />
-            <span>Password</span>
-          </label>
-          <label>
-            <input placeholder=" " type="password" className={this.checkRepassword() ? 'error' : ''} onChange={e => this.onChangeText(e, 'repassword')} />
-            <span>Re-Password</span>
-          </label>
+          <InputText label="ID" onChange={e => this.onChangeText(e, 'id')} />
+          <InputText label="Email" error={this.checkEmail()} onChange={e => this.onChangeText(e, 'email')} />
+          <InputText label="Username" onChange={e => this.onChangeText(e, 'username')} />
+          <InputText label="Password" type="password" error={this.checkPassword()} onChange={e => this.onChangeText(e, 'password')} />
+          <InputText label="Re-Password" type="password" error={this.checkRepassword()} onChange={e => this.onChangeText(e, 'repassword')} />
 
           <Link route="/policy">
             <a className="policy-link" onClick={hideLoginPopup}>

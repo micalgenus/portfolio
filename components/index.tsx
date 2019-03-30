@@ -6,5 +6,6 @@ export { default as ItemTemplate } from './ItemTemplate';
 export { default as CategoryTemplate } from './CategoryTemplate';
 export { default as LoginPopup } from './LoginPopup';
 export { default as Swiper } from './Swiper';
+export { default as InputText } from './InputText';
 
 export { Link } from './Link';

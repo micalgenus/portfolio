@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Button, Modal, Icon, Divider } from 'semantic-ui-react';
 
-import { Swiper } from '@/components';
+import { Swiper, InputText } from '@/components';
 import { StoreProps } from '@/lib/store';
 import { login } from '@/lib/graphql/user';
 import { checkValidPassword } from '@/lib/utils/user';
@@ -80,15 +80,9 @@ export default class LoginPopup extends Component<StoreProps, State> {
   };
 
   renderLocalLogin = () => (
-    <div className="local-login input-form">
-      <label>
-        <input placeholder=" " onChange={e => this.onChangeText(e, 'id')} />
-        <span>ID</span>
-      </label>
-      <label>
-        <input placeholder=" " type="password" className={this.checkPassword() ? 'error' : ''} onChange={e => this.onChangeText(e, 'password')} />
-        <span>Password</span>
-      </label>
+    <div className="local-login">
+      <InputText label="ID" onChange={e => this.onChangeText(e, 'id')} />
+      <InputText label="Password" type="password" error={this.checkPassword()} onChange={e => this.onChangeText(e, 'password')} />
 
       <div className="account-helper">
         <div className="checkbox-form">
