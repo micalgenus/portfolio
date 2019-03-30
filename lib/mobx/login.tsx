@@ -21,10 +21,7 @@ export class LoginStore {
     this.authentication = token;
     getUserInfo()
       .then((userinfo: { me: User }) => (this.userInformation = userinfo.me))
-      .catch(err => {
-        console.error(err);
-        this.logout();
-      });
+      .catch(() => this.logout());
   };
 
   @action logout = () => {
