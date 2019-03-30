@@ -36,13 +36,12 @@ export default class LoginPopup extends Component<StoreProps, State> {
   };
 
   doLogin = () => {
-    const { hideLoginPopup } = this.props.login || { hideLoginPopup: () => {} };
     // do login
     login(this.state.id, this.state.password)
       .then(data => {
         if (this.props.login) {
           this.props.login.login(data.login);
-          hideLoginPopup();
+          this.closePopup();
         } else {
           // TODO: Error exception
         }
@@ -54,6 +53,30 @@ export default class LoginPopup extends Component<StoreProps, State> {
 
   onChangeText = (event: React.ChangeEvent<HTMLInputElement>, target: keyof State) => {
     this.setState({ [target]: event.target.value } as Pick<State, keyof State>);
+  };
+
+  changeSwiperPageToPrev = () => {
+    this.swiper && this.swiper.pre();
+  };
+
+  closePopup = () => {
+    const { hideLoginPopup } = this.props.login || { hideLoginPopup: () => {} };
+    this.setState({ id: '', password: '' });
+    hideLoginPopup();
+  };
+
+  renderSocialLogin = () => {
+    return (
+      <div className="social-login">
+        <Button fluid color="blue" onClick={() => this.swiper && this.swiper.next()}>
+          Signup
+        </Button>
+        <Button icon labelPosition="left" fluid color="black">
+          <Icon size="large" inverted name="github" />
+          Github
+        </Button>
+      </div>
+    );
   };
 
   renderLocalLogin = () => (
@@ -81,24 +104,6 @@ export default class LoginPopup extends Component<StoreProps, State> {
     </div>
   );
 
-  renderSocialLogin = () => {
-    return (
-      <div className="social-login">
-        <Button fluid color="blue" onClick={() => this.swiper && this.swiper.next()}>
-          Signup
-        </Button>
-        <Button icon labelPosition="left" fluid color="black">
-          <Icon size="large" inverted name="github" />
-          Github
-        </Button>
-      </div>
-    );
-  };
-
-  changeSwiperPageToPrev = () => {
-    this.swiper && this.swiper.pre();
-  };
-
   renderSwiperPreButton = () => {
     return (
       <a className="swiper-pre-icon" onClick={() => this.swiper && this.swiper.pre()}>
@@ -108,9 +113,9 @@ export default class LoginPopup extends Component<StoreProps, State> {
   };
 
   render() {
-    const { loginPopup, hideLoginPopup } = this.props.login || { loginPopup: false, hideLoginPopup: () => {} };
+    const { loginPopup } = this.props.login || { loginPopup: false };
     return (
-      <Modal closeIcon dimmer="blurring" size="mini" open={loginPopup} closeOnEscape={true} closeOnDimmerClick={false} onClose={hideLoginPopup}>
+      <Modal closeIcon dimmer="blurring" size="mini" open={loginPopup} closeOnEscape={true} closeOnDimmerClick={false} onClose={this.closePopup}>
         <Modal.Content>
           <Swiper ref={ref => (this.swiper = ref || undefined)}>
             <div className="login-container">
