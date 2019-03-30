@@ -1,14 +1,13 @@
-import { requestGraphqlWithAxios } from './index';
+import { requestGraphqlWithAxios, gql } from './index';
 
 export const signup = async (id: string, username: string, email: string, password: string) => {
-  id = id.replace(/"/g, '\\"');
-  username = username.replace(/"/g, '\\"');
-  email = email.replace(/"/g, '\\"');
-  password = password.replace(/"/g, '\\"');
   return requestGraphqlWithAxios(
-    `mutation {
-      signup(id:"${id}", username:"${username}", email:"${email}", password:"${password}")
-    }`
+    gql`
+      mutation signup($id: String!, $username: String!, $email: String!, $password: String!) {
+        signup(id: $id, username: $username, email: $email, password: $password)
+      }
+    `,
+    { id, username, email, password }
   );
 };
 
@@ -16,20 +15,25 @@ export const login = async (id: string, password: string) => {
   id = id.replace(/"/g, '\\"');
   password = password.replace(/"/g, '\\"');
   return requestGraphqlWithAxios(
-    `mutation {
-      login(id:"${id}", password:"${password}")
-    }`
+    gql`
+      mutation login($id: String!, $password: String!) {
+        login(id: $id, password: $password)
+      }
+    `,
+    { id, password }
   );
 };
 
 export const getUserInfo = async () => {
   return requestGraphqlWithAxios(
-    `query {
-      me {
-        id
-        username
-        email
+    gql`
+      query {
+        me {
+          id
+          username
+          email
+        }
       }
-    }`
+    `
   );
 };
