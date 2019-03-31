@@ -1,0 +1,80 @@
+$select-item-color: #2185d0;
+$error-item-color: #e7736c;
+
+.text-area-component {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0;
+  margin: 5px 0;
+  cursor: text;
+
+  textarea {
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    margin-top: 15px;
+    outline: none;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+    resize: none;
+    height: auto;
+
+    &:focus,
+    &:active {
+      border-bottom-color: $select-item-color;
+
+      & + span {
+        color: $select-item-color;
+      }
+    }
+
+    &.error {
+      border-bottom-color: $error-item-color;
+
+      & + span {
+        color: $error-item-color;
+      }
+    }
+
+    &::placeholder {
+      opacity: 1;
+      transition: all 0.2s;
+    }
+
+    &:placeholder-shown:not(:focus)::placeholder {
+      opacity: 0;
+    }
+
+    &:placeholder-shown:not(:focus) + * {
+      font-size: 120%;
+      opacity: 0.7;
+      top: 15px;
+    }
+  }
+
+  span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 75%;
+    opacity: 1;
+    transition: all 0.2s;
+    line-height: 25px;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+  }
+}
+
+.text-area-error-box {
+  -webkit-filter: none !important;
+  filter: none !important;
+
+  &.disabled {
+    display: none !important;
+  }
+
+  pre {
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+}
