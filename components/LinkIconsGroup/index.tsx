@@ -14,17 +14,7 @@ export default class LinkIconsGroup extends Component<Props> {
   render() {
     const { links } = this.props;
     return (
-      <span className={'link-icons-component'}>
-        {links &&
-          links.map((v, i) => (
-            <ExternalLinkIcon
-              key={i}
-              icon={v.icon}
-              color={v.color}
-              href={v.href}
-            />
-          ))}
-      </span>
+      <span className="link-icons-component">{links && links.map((v, i) => <ExternalLinkIcon key={i} icon={v.icon} color={v.color} href={v.href} />)}</span>
     );
   }
 }
