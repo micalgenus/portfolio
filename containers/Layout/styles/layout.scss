@@ -33,6 +33,11 @@ main {
 
   i {
     margin: 0;
+    transition: all 0.2s linear;
+
+    &.icon:hover {
+      color: #999 !important;
+    }
   }
 
   p {

@@ -40,3 +40,13 @@ header {
     }
   }
 }
+
+.user-menu-items-popup {
+  padding: 5px 3px;
+  li {
+    text-align: center;
+    &:not(:nth-child(1)) {
+      margin-top: 5px;
+    }
+  }
+}
