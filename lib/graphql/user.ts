@@ -32,6 +32,9 @@ export const getUserInfo = async () => {
           id
           username
           email
+          github
+          linkedin
+          description
         }
       }
     `
