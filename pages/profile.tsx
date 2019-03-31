@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
 import { Query } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import gql from 'graphql-tag';
 
 import { Button } from 'semantic-ui-react';
-import { isEqual } from 'lodash';
 
+import { StoreProps } from '@/lib/store';
+import { getLoginToken } from '@/lib/utils/cookie';
 import { Router, InputText, TextArea } from '@/components';
-import { getUserInfo } from '@/lib/graphql/user';
 
 const graqhqlQuery = gql`
   query {
@@ -22,53 +23,54 @@ const graqhqlQuery = gql`
 `;
 
 interface InputState {
-  username?: String;
-  email?: String;
-  github?: String;
-  linkedin?: String;
-  description?: String;
+  username?: string;
+  email?: string;
+  github?: string;
+  linkedin?: string;
+  description?: string;
 }
 
-export default class ProfilePage extends Component<{}, InputState> {
-  constructor(props: any) {
+@inject('login')
+@observer
+export default class ProfilePage extends Component<StoreProps, InputState> {
+  constructor(props: StoreProps) {
     super(props);
-    this.state = { username: '', email: '', github: '', linkedin: '', description: '' };
+    this.state = { username: undefined, email: undefined, github: undefined, linkedin: undefined, description: undefined };
   }
 
-  componentDidMount = async () => {
-    return getUserInfo()
-      .then(({ me }) => this.setState({ username: me.username, email: me.email, github: me.github, linkedin: me.linkedin, description: me.description }))
-      .catch(err => console.log(err));
-  };
-
   onChangeText = (event: React.ChangeEvent<any>, target: keyof InputState) => {
-    console.log(this.state);
     this.setState({ [target]: event.target.value } as Pick<InputState, keyof InputState>);
   };
 
   updateUserProfile = (client: ApolloClient<any>, serverData: InputState) => {
     const { username, email, github, linkedin, description } = this.state;
-    const compare = {
-      username: serverData.username || '',
-      email: serverData.email || '',
-      github: serverData.github || '',
-      linkedin: serverData.linkedin || '',
-      description: serverData.description || '',
-    };
 
-    if (!isEqual(compare, { username, email, github, linkedin, description })) updateUserInfo(client, username, email, github, linkedin, description);
+    if (
+      (username && username !== serverData.username) ||
+      (email && email !== serverData.email) ||
+      (github && github !== serverData.github) ||
+      (linkedin && linkedin !== serverData.linkedin) ||
+      (description && description !== serverData.description)
+    )
+      updateUserInfo(client, username, email, github, linkedin, description).then(user => {
+        console.log(user);
+        if (username && username !== serverData.username) {
+          const token = getLoginToken();
+          if (token && this.props.login) this.props.login.login(token);
+        }
+      });
   };
 
   renderProfile = (username: string, email?: string, github?: string, linkedin?: string, description?: string) => {
     return (
       <div>
         <h3>User Information</h3>
-        <InputText label="Username" value={username} onChange={e => this.onChangeText(e, 'username')} />
-        <InputText label="Email" value={email} onChange={e => this.onChangeText(e, 'email')} />
-        <InputText label="Github ID" value={github} onChange={e => this.onChangeText(e, 'github')} />
-        <InputText label="LinkedIn ID" value={linkedin} onChange={e => this.onChangeText(e, 'linkedin')} />
+        <InputText label="Username" value={this.state.username || username} onChange={e => this.onChangeText(e, 'username')} />
+        <InputText label="Email" value={this.state.email || email} onChange={e => this.onChangeText(e, 'email')} />
+        <InputText label="Github ID" value={this.state.github || github} onChange={e => this.onChangeText(e, 'github')} />
+        <InputText label="LinkedIn ID" value={this.state.linkedin || linkedin} onChange={e => this.onChangeText(e, 'linkedin')} />
 
-        <TextArea label="Description" value={description} onChange={e => this.onChangeText(e, 'description')} />
+        <TextArea label="Description" value={this.state.description || description} onChange={e => this.onChangeText(e, 'description')} />
       </div>
     );
   };
@@ -106,27 +108,23 @@ export default class ProfilePage extends Component<{}, InputState> {
   }
 }
 
-function updateUserInfo(client: ApolloClient<any>, username?: String, email?: String, github?: String, linkedin?: String, description?: String) {
-  client
-    .mutate({
-      mutation: gql`
-        mutation updateUserInfo($username: String, $email: String, $github: String, $linkedin: String, $description: String) {
-          updateUserInfo(username: $username, email: $email, github: $github, linkedin: $linkedin, description: $description) {
-            username
-            email
-            github
-            linkedin
+function updateUserInfo(client: ApolloClient<any>, username?: string, email?: string, github?: string, linkedin?: string, description?: string) {
+  return (
+    client
+      .mutate({
+        mutation: gql`
+          mutation updateUserInfo($username: String, $email: String, $github: String, $linkedin: String, $description: String) {
+            updateUserInfo(username: $username, email: $email, github: $github, linkedin: $linkedin, description: $description) {
+              username
+              email
+              github
+              linkedin
+            }
           }
-        }
-      `,
-      variables: {
-        username: username || '',
-        email: email || '',
-        github: github || '',
-        linkedin: linkedin || '',
-        description: description || '',
-      },
-    })
-    // TODO: Exception error and success alert
-    .catch(err => console.log(err));
+        `,
+        variables: { username, email, github, linkedin, description },
+      })
+      // TODO: Exception error and success alert
+      .catch(err => console.log(err))
+  );
 }
