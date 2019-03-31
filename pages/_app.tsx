@@ -18,7 +18,7 @@ export default class NextAppLayout extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, router } = this.props;
 
     return pageProps.statusCode === 404 ? (
       <Component {...pageProps} />
@@ -31,7 +31,7 @@ export default class NextAppLayout extends App {
         </Head>
         <Store>
           <Layout>
-            <Component {...pageProps} />
+            <Component router={router} {...pageProps} />
           </Layout>
         </Store>
       </Container>
