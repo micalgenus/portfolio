@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import { Router, LinkIconsGroup, CategoryTemplate } from '@/components';
+import { Router, LinkIconsGroup } from '@/components';
 import { PageProps, LinkItem } from '@/interfaces';
 
 const graqhqlQuery = gql`
