@@ -1,7 +1,7 @@
 sudo: true
 language: node_js
 node_js:
-  - "11.10"
+  - '11.10'
 cache:
   npm: true
   yarn: true
@@ -30,9 +30,14 @@ script:
   - yarn build
   - docker build -t $USERNAME/portfolio:develop .
 
-after_script:
-  # - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout
+deploy:
+  provider: script
+  script: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout
+  skip_cleanup: true
+  on:
+    branch: develop
+# after_script:
+#   - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
 # Generate your secure token with the travis gem:
 # get Github token from your Travis CI profile page
 # gem install travis
