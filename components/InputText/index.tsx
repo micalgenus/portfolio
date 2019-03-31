@@ -10,16 +10,20 @@ interface Props {
   label?: string;
   error?: boolean;
   errorMessage?: string;
+  value?: string;
 }
 
 export default class InputText extends Component<Props> {
   render() {
-    const { label, type, error, errorMessage, onChange, onKeyPress } = this.props;
+    const { label, type, error, value, errorMessage, onChange, onKeyPress } = this.props;
+
     return (
       <label className="input-text-component">
         <Popup
           className={`input-text-error-box ${!error ? 'disabled' : ''}`}
-          trigger={<input placeholder=" " type={type || 'text'} className={error ? 'error' : ''} onChange={onChange} onKeyPress={onKeyPress} />}
+          trigger={
+            <input placeholder=" " defaultValue={value} type={type || 'text'} className={error ? 'error' : ''} onChange={onChange} onKeyPress={onKeyPress} />
+          }
           position="bottom left"
           on="hover"
         >
