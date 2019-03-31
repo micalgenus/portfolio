@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, FormEvent } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Button, Divider } from 'semantic-ui-react';
 
@@ -105,7 +105,9 @@ export default class SignupPopup extends Component<Props, State> {
     }
   };
 
-  doRegister = () => {
+  doRegister = (e?: FormEvent<HTMLFormElement>) => {
+    if (e) e.preventDefault();
+
     if (!this.checkValidAllInputs()) return;
 
     signup(this.state.id, this.state.username, this.state.email, this.state.password)
@@ -128,53 +130,51 @@ export default class SignupPopup extends Component<Props, State> {
     const { error } = this.state;
     const { hideLoginPopup } = this.props.login || { hideLoginPopup: () => {} };
     return (
-      <>
-        <div className="local-register input-form">
-          <InputText
-            label="ID"
-            error={!this.checkId()}
-            errorMessage={error.includes('Invalid id') ? 'Invalid id' : 'Exist id'}
-            onChange={e => this.onChangeText(e, 'id')}
-            onKeyPress={this.onKeyPress}
-          />
-          <InputText
-            label="Email"
-            error={!this.checkEmail()}
-            errorMessage={this.existEmail() ? 'Invalid email' : 'Exist email'}
-            onChange={e => this.onChangeText(e, 'email')}
-            onKeyPress={this.onKeyPress}
-          />
-          <InputText label="Username" onChange={e => this.onChangeText(e, 'username')} onKeyPress={this.onKeyPress} />
-          <InputText
-            label="Password"
-            type="password"
-            error={!this.checkPassword()}
-            errorMessage="Please check password.\nPassword must be at least 8 characters long."
-            onChange={e => this.onChangeText(e, 'password')}
-            onKeyPress={this.onKeyPress}
-          />
-          <InputText
-            label="Re-Password"
-            type="password"
-            error={!this.checkRepassword()}
-            errorMessage="Password does not match."
-            onChange={e => this.onChangeText(e, 'repassword')}
-            onKeyPress={this.onKeyPress}
-          />
+      <form className="local-register input-form" onSubmit={this.doRegister}>
+        <InputText
+          label="ID"
+          error={!this.checkId()}
+          errorMessage={error.includes('Invalid id') ? 'Invalid id' : 'Exist id'}
+          onChange={e => this.onChangeText(e, 'id')}
+          onKeyPress={this.onKeyPress}
+        />
+        <InputText
+          label="Email"
+          error={!this.checkEmail()}
+          errorMessage={this.existEmail() ? 'Invalid email' : 'Exist email'}
+          onChange={e => this.onChangeText(e, 'email')}
+          onKeyPress={this.onKeyPress}
+        />
+        <InputText label="Username" onChange={e => this.onChangeText(e, 'username')} onKeyPress={this.onKeyPress} />
+        <InputText
+          label="Password"
+          type="password"
+          error={!this.checkPassword()}
+          errorMessage="Please check password.\nPassword must be at least 8 characters long."
+          onChange={e => this.onChangeText(e, 'password')}
+          onKeyPress={this.onKeyPress}
+        />
+        <InputText
+          label="Re-Password"
+          type="password"
+          error={!this.checkRepassword()}
+          errorMessage="Password does not match."
+          onChange={e => this.onChangeText(e, 'repassword')}
+          onKeyPress={this.onKeyPress}
+        />
 
-          <Link route="/policy">
-            <a className="policy-link" onClick={hideLoginPopup}>
-              Terms of use and Privacy policy
-            </a>
-          </Link>
+        <Link route="/policy">
+          <a className="policy-link" onClick={hideLoginPopup}>
+            Terms of use and Privacy policy
+          </a>
+        </Link>
 
-          <Divider horizontal>Agree</Divider>
+        <Divider horizontal>Agree</Divider>
 
-          <Button disabled={!this.checkValidAllInputs()} fluid color="blue" className="login-button" onClick={this.doRegister}>
-            REGISTER
-          </Button>
-        </div>
-      </>
+        <Button disabled={!this.checkValidAllInputs()} fluid color="blue" className="login-button">
+          REGISTER
+        </Button>
+      </form>
     );
   }
 }

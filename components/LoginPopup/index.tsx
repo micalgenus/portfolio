@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, FormEvent } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Button, Modal, Icon, Divider } from 'semantic-ui-react';
 
@@ -62,7 +62,9 @@ export default class LoginPopup extends Component<StoreProps, State> {
     return true;
   };
 
-  doLogin = () => {
+  doLogin = (e?: FormEvent<HTMLFormElement>) => {
+    if (e) e.preventDefault();
+
     if (!this.checkValidAllInputs()) return;
 
     // do login
@@ -123,7 +125,7 @@ export default class LoginPopup extends Component<StoreProps, State> {
   };
 
   renderLocalLogin = () => (
-    <div className="local-login">
+    <form className="local-login" onSubmit={this.doLogin}>
       <InputText label="ID" error={!this.checkId()} errorMessage="Please check ID." onChange={e => this.onChangeText(e, 'id')} onKeyPress={this.onKeyPress} />
       <InputText
         label="Password"
@@ -142,10 +144,10 @@ export default class LoginPopup extends Component<StoreProps, State> {
         {/* <a>Forgot your password?</a> */}
       </div>
 
-      <Button disabled={!this.checkValidAllInputs()} fluid color="blue" className="login-button" onClick={this.doLogin}>
+      <Button disabled={!this.checkValidAllInputs()} fluid color="blue" className="login-button">
         LOGIN
       </Button>
-    </div>
+    </form>
   );
 
   renderSwiperPreButton = () => {
