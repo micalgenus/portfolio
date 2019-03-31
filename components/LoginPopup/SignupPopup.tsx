@@ -8,8 +8,12 @@ import { StoreProps } from '@/lib/store';
 import { signup } from '@/lib/graphql/user';
 import { checkValidEmail, checkValidPassword } from '@/lib/utils/user';
 
-type AllowError = 'Exist user id' | 'Exist user email' | 'Invalid id';
-const ErrorMessages = new Map<keyof InputState, AllowError[]>([['id', ['Exist user id', 'Invalid id']], ['email', ['Exist user email']]]);
+type AllowError = 'Exist user id' | 'Exist user email' | 'Invalid id' | 'Invalid password';
+const ErrorMessages = new Map<keyof InputState, AllowError[]>([
+  ['id', ['Exist user id', 'Invalid id']],
+  ['email', ['Exist user email']],
+  ['password', ['Invalid password']],
+]);
 
 interface Props extends StoreProps {
   goToLogin: () => void;
@@ -65,13 +69,17 @@ export default class SignupPopup extends Component<Props, State> {
   };
 
   checkPassword = () => {
-    const { password } = this.state;
+    const { password, error } = this.state;
+    const errors = ErrorMessages.get('password') || [];
+    for (const e of errors) if (error.includes(e)) return false;
     if (password && !checkValidPassword(password)) return false;
     return true;
   };
 
   checkRepassword = () => {
-    const { password, repassword } = this.state;
+    const { password, repassword, error } = this.state;
+    const errors = ErrorMessages.get('password') || [];
+    for (const e of errors) if (error.includes(e)) return false;
     if (repassword && !checkValidPassword(repassword)) return false;
     if (repassword !== password) return false;
     return true;
