@@ -25,7 +25,7 @@ class LayoutHeader extends Component<StoreProps> {
         <Popup
           trigger={
             <div>
-              <Link route="/profile">
+              <Link route={`/@${userInformation.id}`}>
                 <a>{userInformation.username}</a>
               </Link>
             </div>
@@ -35,7 +35,12 @@ class LayoutHeader extends Component<StoreProps> {
           hideOnScroll
         >
           <Popup.Content>
-            <ul>
+            <ul className="user-menu-items-popup">
+              <li>
+                <Link route="/profile">
+                  <a>Setting</a>
+                </Link>
+              </li>
               <li>
                 <a onClick={logout}>Logout</a>
               </li>
@@ -58,7 +63,7 @@ class LayoutHeader extends Component<StoreProps> {
         <nav>
           <div>
             <Link route="/">
-              <a>Han GyeongSu's Portfolio</a>
+              <a>Portfolio</a>
             </Link>
           </div>
           <ul>{this.renderUserMenus()}</ul>
