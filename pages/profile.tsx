@@ -25,7 +25,7 @@ export default class ProfilePage extends Component {
   render() {
     return (
       <Query query={graqhqlQuery}>
-        {({ loading, error, data, fetchMore }) => {
+        {({ loading, error, data }) => {
           if (error) return <div>{Router.push('/') && null}</div>;
           if (loading) return <div>Loading</div>;
 
