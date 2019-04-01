@@ -126,42 +126,33 @@ export default class SignupPopup extends Component<Props, State> {
       });
   };
 
+  renderInputText = (label: string, type: string, error: boolean, errorMessage: string, onChange: keyof InputState) => (
+    <InputText
+      label={label}
+      type={type}
+      error={error}
+      errorMessage={errorMessage}
+      onChange={e => this.onChangeText(e, onChange)}
+      onKeyPress={this.onKeyPress}
+    />
+  );
+
   render() {
     const { error } = this.state;
     const { hideLoginPopup } = this.props.login || { hideLoginPopup: () => {} };
     return (
       <form className="local-register input-form" onSubmit={this.doRegister}>
-        <InputText
-          label="ID"
-          error={!this.checkId()}
-          errorMessage={error.includes('Invalid id') ? 'Invalid id' : 'Exist id'}
-          onChange={e => this.onChangeText(e, 'id')}
-          onKeyPress={this.onKeyPress}
-        />
-        <InputText
-          label="Email"
-          error={!this.checkEmail()}
-          errorMessage={this.existEmail() ? 'Invalid email' : 'Exist email'}
-          onChange={e => this.onChangeText(e, 'email')}
-          onKeyPress={this.onKeyPress}
-        />
-        <InputText label="Username" onChange={e => this.onChangeText(e, 'username')} onKeyPress={this.onKeyPress} />
-        <InputText
-          label="Password"
-          type="password"
-          error={!this.checkPassword()}
-          errorMessage="Please check password.\nPassword must be at least 8 characters long."
-          onChange={e => this.onChangeText(e, 'password')}
-          onKeyPress={this.onKeyPress}
-        />
-        <InputText
-          label="Re-Password"
-          type="password"
-          error={!this.checkRepassword()}
-          errorMessage="Password does not match."
-          onChange={e => this.onChangeText(e, 'repassword')}
-          onKeyPress={this.onKeyPress}
-        />
+        {this.renderInputText('ID', 'text', !this.checkId(), error.includes('Invalid id') ? 'Invalid id' : 'Exist id', 'id')}
+        {this.renderInputText('Email', 'text', !this.checkEmail(), this.existEmail() ? 'Invalid email' : 'Exist email', 'email')}
+        {this.renderInputText('Username', 'text', false, '', 'username')}
+        {this.renderInputText(
+          'Password',
+          'password',
+          !this.checkPassword(),
+          'Please check password.\nPassword must be at least 8 characters long.',
+          'password'
+        )}
+        {this.renderInputText('Re-Password', 'password', !this.checkRepassword(), 'Password does not match.', 'repassword')}
 
         <Link route="/policy">
           <a className="policy-link" onClick={hideLoginPopup}>

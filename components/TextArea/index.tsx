@@ -60,27 +60,27 @@ export default class TextArea extends Component<Props, State> {
     if (onChange) onChange(e);
   };
 
+  renderTextArea = () => {
+    const { error, value, onKeyPress } = this.props;
+    return (
+      <textarea
+        ref={ref => (this.ref = ref)}
+        placeholder=" "
+        defaultValue={value}
+        className={error ? 'error' : ''}
+        onChange={this.onChange}
+        onKeyPress={onKeyPress}
+        style={{ height: this.state.height }}
+      />
+    );
+  };
+
   render() {
-    const { label, error, value, errorMessage, onKeyPress } = this.props;
+    const { label, error, errorMessage } = this.props;
 
     return (
       <label className="text-area-component">
-        <Popup
-          className={`text-area-error-box ${!error ? 'disabled' : ''}`}
-          trigger={
-            <textarea
-              ref={ref => (this.ref = ref)}
-              placeholder=" "
-              defaultValue={value}
-              className={error ? 'error' : ''}
-              onChange={this.onChange}
-              onKeyPress={onKeyPress}
-              style={{ height: this.state.height }}
-            />
-          }
-          position="bottom left"
-          on="hover"
-        >
+        <Popup className={`text-area-error-box ${!error ? 'disabled' : ''}`} trigger={this.renderTextArea()} position="bottom left" on="hover">
           <Popup.Content>
             <pre>{errorMessage && errorMessage.replace('\\n', '\n')}</pre>
           </Popup.Content>

@@ -108,21 +108,23 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
   }
 }
 
+const updateUserInfoQuery = gql`
+  mutation updateUserInfo($username: String, $email: String, $github: String, $linkedin: String, $description: String) {
+    updateUserInfo(username: $username, email: $email, github: $github, linkedin: $linkedin, description: $description) {
+      username
+      email
+      github
+      linkedin
+      description
+    }
+  }
+`;
+
 function updateUserInfo(client: ApolloClient<any>, { username, email, github, linkedin, description }: User) {
   return (
     client
       .mutate({
-        mutation: gql`
-          mutation updateUserInfo($username: String, $email: String, $github: String, $linkedin: String, $description: String) {
-            updateUserInfo(username: $username, email: $email, github: $github, linkedin: $linkedin, description: $description) {
-              username
-              email
-              github
-              linkedin
-              description
-            }
-          }
-        `,
+        mutation: updateUserInfoQuery,
         variables: { username, email, github, linkedin, description },
         update: (proxy, { data: { updateUserInfo } }) => {
           const { me } = proxy.readQuery<{ me: {} }, any>({ query: graqhqlQuery }) || { me: {} };
