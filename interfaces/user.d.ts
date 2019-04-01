@@ -6,4 +6,11 @@ export interface User {
   github?: string;
   linkedin?: string;
   description?: string;
+  categories?: Category[];
+}
+
+export interface Category {
+  _id?: string;
+  user?: string;
+  name?: string;
 }

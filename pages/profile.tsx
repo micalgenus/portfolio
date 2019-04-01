@@ -7,8 +7,8 @@ import { Button } from 'semantic-ui-react';
 
 import { StoreProps } from '@/lib/store';
 import { getLoginToken } from '@/lib/utils/cookie';
-import { Router, InputText, TextArea } from '@/components';
 import { getUserQuery, updateUserInfoQuery, addCategoryQuery } from '@/lib/graphql/query';
+import { Router, InputText, TextArea, CategoryManage } from '@/components';
 import { User } from '@/interfaces';
 
 interface InputState {
@@ -64,10 +64,12 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
     );
   };
 
-  renderCategory = (category: string, items: object[]) => {
+  renderCategory = (id?: string, category?: string, items?: object[]) => {
     return (
-      <div>
-        <h3>{category}</h3>
+      <div key={id}>
+        <h3 />
+        <InputText label="Category" value={category} />
+
         <div>{JSON.stringify(items)}</div>
       </div>
     );
@@ -81,14 +83,22 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
           if (loading) return <div>Loading</div>;
 
           let me: User = data.me;
+          let categories = me.categories || [];
 
           return (
+            <>
               <div>
                 {this.renderProfile(me.username, me.email, me.github, me.linkedin, me.description)}
                 <Button color="blue" onClick={() => this.updateUserInfo(client, me)}>
                   SAVE
                 </Button>
               </div>
+
+              {categories.map(v => (
+                <CategoryManage key={v._id} _id={v._id} category={v.name || ''} items={[]} client={client} />
+              ))}
+
+            </>
           );
         }}
       </Query>

@@ -12,3 +12,5 @@ export { Link, Router } from './Link/Router';
 
 export { default as ItemTemplate } from './Template/ItemTemplate';
 export { default as CategoryTemplate } from './Template/CategoryTemplate';
+
+export { default as CategoryManage } from './PortfolioManage/Category';
