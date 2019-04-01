@@ -3,4 +3,7 @@ export interface User {
   id?: string;
   email?: string;
   username?: string;
+  github?: string;
+  linkedin?: string;
+  description?: string;
 }
