@@ -98,6 +98,11 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
                 <CategoryManage key={v._id} _id={v._id} category={v.name || ''} items={[]} client={client} />
               ))}
 
+              <div>
+                <Button color="teal" onClick={() => addCategory(client)}>
+                  Add Category
+                </Button>
+              </div>
             </>
           );
         }}
@@ -121,6 +126,21 @@ function updateUserInfo(client: ApolloClient<any>, { username, email, github, li
       .catch(err => console.log(err))
   );
 }
+
+function addCategory(client: ApolloClient<any>) {
+  return (
+    client
+      .mutate({
+        mutation: addCategoryQuery,
+        update: (proxy, { data: { createCategory } }) => {
+          if (createCategory) {
+            const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
+            proxy.writeQuery({
+              query: getUserQuery,
+              data: { me: { ...me, categories: [...me.categories, { _id: createCategory, name: null, __typename: 'Category' }] } },
+            });
+          }
+        },
       })
       // TODO: Exception error and success alert
       .catch(err => console.log(err))
