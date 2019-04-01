@@ -2,26 +2,14 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Query, QueryResult, OperationVariables } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
-import gql from 'graphql-tag';
 
 import { Button } from 'semantic-ui-react';
 
 import { StoreProps } from '@/lib/store';
 import { getLoginToken } from '@/lib/utils/cookie';
 import { Router, InputText, TextArea } from '@/components';
+import { getUserQuery, updateUserInfoQuery, addCategoryQuery } from '@/lib/graphql/query';
 import { User } from '@/interfaces';
-
-const graqhqlQuery = gql`
-  query {
-    me {
-      username
-      email
-      github
-      linkedin
-      description
-    }
-  }
-`;
 
 interface InputState {
   username?: string;
@@ -87,7 +75,7 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
 
   render() {
     return (
-      <Query query={graqhqlQuery}>
+      <Query query={getUserQuery}>
         {({ client, loading, error, data, fetchMore }: QueryResult<any, OperationVariables>) => {
           if (error) return <div>{Router.push('/') && null}</div>;
           if (loading) return <div>Loading</div>;
@@ -108,18 +96,6 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
   }
 }
 
-const updateUserInfoQuery = gql`
-  mutation updateUserInfo($username: String, $email: String, $github: String, $linkedin: String, $description: String) {
-    updateUserInfo(username: $username, email: $email, github: $github, linkedin: $linkedin, description: $description) {
-      username
-      email
-      github
-      linkedin
-      description
-    }
-  }
-`;
-
 function updateUserInfo(client: ApolloClient<any>, { username, email, github, linkedin, description }: User) {
   return (
     client
@@ -127,8 +103,8 @@ function updateUserInfo(client: ApolloClient<any>, { username, email, github, li
         mutation: updateUserInfoQuery,
         variables: { username, email, github, linkedin, description },
         update: (proxy, { data: { updateUserInfo } }) => {
-          const { me } = proxy.readQuery<{ me: {} }, any>({ query: graqhqlQuery }) || { me: {} };
-          proxy.writeQuery({ query: graqhqlQuery, data: { me: { ...me, ...updateUserInfo } } });
+          const { me } = proxy.readQuery<{ me: {} }, any>({ query: getUserQuery }) || { me: {} };
+          proxy.writeQuery({ query: getUserQuery, data: { me: { ...me, ...updateUserInfo } } });
         },
       })
       // TODO: Exception error and success alert
