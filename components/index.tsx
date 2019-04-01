@@ -1,12 +1,14 @@
 export { default as ScrollBar } from './ScrollBar';
-export { default as LinkIconsGroup } from './LinkIconsGroup';
-export { default as ExternalLink } from './ExternalLink';
-export { default as ExternalLinkIcon } from './ExternalLinkIcon';
-export { default as ItemTemplate } from './ItemTemplate';
-export { default as CategoryTemplate } from './CategoryTemplate';
-export { default as LoginPopup } from './LoginPopup';
 export { default as Swiper } from './Swiper';
-export { default as InputText } from './InputText';
-export { default as TextArea } from './TextArea';
+export { default as LoginPopup } from './LoginPopup';
 
-export { Link, Router } from './Router';
+export { default as InputText } from './InputBox/InputText';
+export { default as TextArea } from './InputBox/TextArea';
+
+export { default as LinkIconsGroup } from './Link/LinkIconsGroup';
+export { default as ExternalLink } from './Link/ExternalLink';
+export { default as ExternalLinkIcon } from './Link/ExternalLinkIcon';
+export { Link, Router } from './Link/Router';
+
+export { default as ItemTemplate } from './Template/ItemTemplate';
+export { default as CategoryTemplate } from './Template/CategoryTemplate';
