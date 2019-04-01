@@ -47,4 +47,22 @@ export default class CategoryComponent extends Component<Props> {
 }
 
 function removeCategory(client: ApolloClient<any>, { _id }: Category) {
+  return (
+    client
+      .mutate({
+        mutation: removeCategoryQuery,
+        variables: { id: _id },
+        update: (proxy, { data: { removeCategory } }) => {
+          if (removeCategory) {
+            const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
+            proxy.writeQuery({
+              query: getUserQuery,
+              data: { me: { ...me, categories: me.categories.filter((v: Category) => v._id !== _id) } },
+            });
+          }
+        },
+      })
+      // TODO: Exception error and success alert
+      .catch(err => console.log(err))
+  );
 }
