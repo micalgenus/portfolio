@@ -13,3 +13,4 @@ jest.config.js
 README.md
 
 .vscode/
+.next
