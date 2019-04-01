@@ -78,7 +78,7 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
   render() {
     return (
       <Query query={getUserQuery}>
-        {({ client, loading, error, data, fetchMore }: QueryResult<any, OperationVariables>) => {
+        {({ client, loading, error, data }: QueryResult<any, OperationVariables>) => {
           if (error) return <div>{Router.push('/') && null}</div>;
           if (loading) return <div>Loading</div>;
 
