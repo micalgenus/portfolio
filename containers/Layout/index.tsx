@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 
 import { StoreProps } from '@/lib/store';
 import { getLoginToken } from '@/lib/utils/cookie';
-import { LoginPopup } from '@/components';
+import { default as LoginPopup } from '@/containers/LoginPopup';
 
 import { Header, Footer, ScrollTo } from './components';
 

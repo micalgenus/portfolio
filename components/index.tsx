@@ -1,6 +1,5 @@
 export { default as ScrollBar } from './ScrollBar';
 export { default as Swiper } from './Swiper';
-export { default as LoginPopup } from './LoginPopup';
 
 export { default as InputText } from './InputBox/InputText';
 export { default as TextArea } from './InputBox/TextArea';
