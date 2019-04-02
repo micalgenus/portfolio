@@ -1,9 +1,14 @@
 .category-manage-component {
-  .category-title {
-    width: 100%;
-    display: flex;
-    align-items: center;
+  & > .input-text-component {
+    span {
+      border-left: 5px solid #8d7edc;
+      margin-left: -20px;
+      padding-left: 15px;
+    }
+  }
 
+  .button-group {
+    display: flex;
     button {
       .content {
         font-weight: normal;

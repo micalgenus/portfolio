@@ -40,3 +40,12 @@ export const removeCategoryQuery = gql`
     removeCategory(id: $id)
   }
 `;
+
+export const updateCategoryQuery = gql`
+  mutation updateCategory($id: String!, $category: CategoryInput!) {
+    updateCategory(id: $id, category: $category) {
+      _id
+      name
+    }
+  }
+`;
