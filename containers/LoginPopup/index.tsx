@@ -116,10 +116,10 @@ export default class LoginPopup extends Component<StoreProps, State> {
         <Button fluid color="blue" onClick={() => this.swiper && this.swiper.next()}>
           Signup
         </Button>
-        <Button icon labelPosition="left" fluid color="black">
+        {/* <Button icon labelPosition="left" fluid color="black">
           <Icon size="large" inverted name="github" />
           Github
-        </Button>
+        </Button> */}
       </div>
     );
   };
@@ -136,13 +136,12 @@ export default class LoginPopup extends Component<StoreProps, State> {
         onKeyPress={this.onKeyPress}
       />
 
-      <div className="account-helper">
+      {/* <div className="account-helper">
         <div className="checkbox-form">
           <input type="checkbox" name="checkbox" value="value" />
           <label>Remember Me</label>
         </div>
-        {/* <a>Forgot your password?</a> */}
-      </div>
+      </div> */}
 
       <Button disabled={!this.checkValidAllInputs()} fluid color="blue" className="login-button">
         LOGIN
