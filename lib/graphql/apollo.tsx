@@ -10,13 +10,15 @@ import fetch from 'isomorphic-fetch';
 
 import { getLoginToken } from '@/lib/utils/cookie';
 
+import { RETRY_MAX } from './index';
+
 import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 
 const httpLink = createHttpLink({ uri: publicRuntimeConfig.PORTFOLIO_GRAPHQL_URL, fetch });
 const retryLink = new RetryLink({
   delay: { initial: 300, max: Infinity, jitter: true },
-  attempts: { max: 5, retryIf: (error, _operation) => !!error },
+  attempts: { max: RETRY_MAX, retryIf: (error, _operation) => !!error },
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {

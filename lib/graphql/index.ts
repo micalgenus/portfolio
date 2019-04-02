@@ -4,8 +4,10 @@ import { getLoginToken } from '@/lib/utils/cookie';
 
 const { publicRuntimeConfig } = getConfig();
 
+export const RETRY_MAX = 3;
+
 export const requestGraphqlWithAxiosRetry = async (body: string, variables?: object, retry?: number): Promise<any> => {
-  const count: number = retry || 5;
+  const count: number = retry || RETRY_MAX;
   if (count <= 1) return requestGraphqlWithAxios(body, variables);
 
   return requestGraphqlWithAxios(body, variables).catch(() => requestGraphqlWithAxiosRetry(body, variables, count - 1));
