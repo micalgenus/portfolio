@@ -17,6 +17,22 @@ export const getUserQuery = gql`
   }
 `;
 
+export const getUserInfoQuery = gql`
+  query getUserInfo($id: String!) {
+    getUserInfo(id: $id) {
+      username
+      email
+      github
+      linkedin
+      description
+      categories {
+        _id
+        name
+      }
+    }
+  }
+`;
+
 export const updateUserInfoQuery = gql`
   mutation updateUserInfo($username: String, $email: String, $github: String, $linkedin: String, $description: String) {
     updateUserInfo(username: $username, email: $email, github: $github, linkedin: $linkedin, description: $description) {
