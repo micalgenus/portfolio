@@ -36,7 +36,7 @@ export default class CategoryComponent extends Component<Props, State> {
     if (!_id || !client) return <div />;
 
     return (
-      <div className="category-manage-component">
+      <div className="category-manage-component" data-id={_id}>
         <InputText label="Category" value={name} onChange={e => this.onChangeText(e, 'name')} />
 
         <div>{JSON.stringify(items)}</div>

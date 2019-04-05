@@ -66,7 +66,7 @@ class Layout extends Component<StoreProps> {
     return (
       <>
         <Header />
-        <main>{this.props.children}</main>
+        <main id="main">{this.props.children}</main>
         <Footer />
         <ScrollTo />
 

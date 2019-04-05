@@ -4,10 +4,12 @@ import { Query, QueryResult, OperationVariables } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 
 import { Button } from 'semantic-ui-react';
+import Sortable, { SortableEvent } from 'sortablejs';
+import { debounce } from 'lodash';
 
 import { StoreProps } from '@/lib/store';
 import { getLoginToken } from '@/lib/utils/cookie';
-import { getUserQuery, updateUserInfoQuery, addCategoryQuery } from '@/lib/graphql/query';
+import { getUserQuery, updateUserInfoQuery, addCategoryQuery, updateCategorySequenceQuery } from '@/lib/graphql/query';
 import { Router, InputText, TextArea, CategoryManage } from '@/components';
 import { User } from '@/interfaces';
 
@@ -19,9 +21,14 @@ interface InputState {
   description?: string;
 }
 
+interface State extends InputState {
+  sortable?: Sortable;
+  client?: ApolloClient<any>;
+}
+
 @inject('login')
 @observer
-export default class ProfilePage extends Component<StoreProps, InputState> {
+export default class ProfilePage extends Component<StoreProps, State> {
   constructor(props: StoreProps) {
     super(props);
     this.state = { username: undefined, email: undefined, github: undefined, linkedin: undefined, description: undefined };
@@ -50,6 +57,37 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
       });
   };
 
+  getSortableElement = () => document.getElementById('main');
+
+  getCategoryComponents = (e: SortableEvent) => {
+    const { newIndex, oldIndex } = e;
+    const startFilter = Math.min(newIndex || 0, oldIndex || 0);
+    const endFilter = Math.max(newIndex || 0, oldIndex || 0);
+
+    const el = this.getSortableElement();
+    HTMLCollection;
+    if (el) {
+      const children: Element[] = Array.prototype.filter.call(el.children, (v: Element) => v.className === 'category-manage-component');
+      return children
+        .map((v, i) => ({ _id: v.getAttribute('data-id') || '', sequence: children.length - i }))
+        .filter((_, i) => startFilter <= i + 1 && i + 1 <= endFilter);
+    }
+
+    return [];
+  };
+
+  createSortable = (client: ApolloClient<any>) => {
+    let el = this.getSortableElement();
+    if (el) {
+      new Sortable(el, {
+        filter: '.profile,.add-category-button',
+        draggable: '.category-manage-component',
+        animation: 150,
+        onSort: debounce(e => updateCategoriesSequence(client, this.getCategoryComponents(e)), 500),
+      });
+    }
+  };
+
   renderProfile = (username?: string, email?: string, github?: string, linkedin?: string, description?: string) => {
     return (
       <div>
@@ -64,17 +102,6 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
     );
   };
 
-  renderCategory = (id?: string, category?: string, items?: object[]) => {
-    return (
-      <div key={id}>
-        <h3 />
-        <InputText label="Category" value={category} />
-
-        <div>{JSON.stringify(items)}</div>
-      </div>
-    );
-  };
-
   render() {
     return (
       <Query query={getUserQuery}>
@@ -85,9 +112,11 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
           let me: User = data.me;
           let categories = me.categories || [];
 
+          this.createSortable(client);
+
           return (
             <>
-              <div>
+              <div className="profile">
                 {this.renderProfile(me.username, me.email, me.github, me.linkedin, me.description)}
                 <Button color="blue" onClick={() => this.updateUserInfo(client, me)}>
                   SAVE
@@ -98,7 +127,7 @@ export default class ProfilePage extends Component<StoreProps, InputState> {
                 <CategoryManage key={v._id} _id={v._id} category={v.name || ''} items={[]} client={client} />
               ))}
 
-              <div>
+              <div className="add-category-button">
                 <Button color="teal" onClick={() => addCategory(client)}>
                   Add Category
                 </Button>
@@ -120,6 +149,28 @@ function updateUserInfo(client: ApolloClient<any>, { username, email, github, li
         update: (proxy, { data: { updateUserInfo } }) => {
           const { me } = proxy.readQuery<{ me: {} }, any>({ query: getUserQuery }) || { me: {} };
           proxy.writeQuery({ query: getUserQuery, data: { me: { ...me, ...updateUserInfo } } });
+        },
+      })
+      // TODO: Exception error and success alert
+      .catch(err => console.log(err))
+  );
+}
+
+function updateCategoriesSequence(client: ApolloClient<any>, sequences: { _id: string; sequence: number }[]) {
+  return (
+    client
+      .mutate({
+        mutation: updateCategorySequenceQuery,
+        variables: { sequences },
+        update: (proxy, { data: { updateCategorySequence } }) => {
+          if (updateCategorySequence) {
+            const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
+            console.log(me);
+            // proxy.writeQuery({
+            //   query: getUserQuery,
+            //   data: { me: { ...me, categories: [...me.categories, { _id: createCategory, name: null, __typename: 'Category' }] } },
+            // });
+          }
         },
       })
       // TODO: Exception error and success alert

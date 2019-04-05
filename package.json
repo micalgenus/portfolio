@@ -19,7 +19,8 @@
     "react-app-polyfill": "^0.2.2",
     "react-dom": "^16.8.5",
     "semantic-ui-react": "^0.86.0",
-    "smoothscroll-polyfill": "^0.4.3"
+    "smoothscroll-polyfill": "^0.4.3",
+    "sortablejs": "^1.8.4"
   },
   "scripts": {
     "build": "next build",
@@ -39,6 +40,7 @@
     "@types/next": "^8.0.3",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
+    "@types/sortablejs": "^1.7.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",

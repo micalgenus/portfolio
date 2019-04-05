@@ -49,3 +49,9 @@ export const updateCategoryQuery = gql`
     }
   }
 `;
+
+export const updateCategorySequenceQuery = gql`
+  mutation updateCategorySequence($sequences: [CategorySequenceInput]!) {
+    updateCategorySequence(sequences: $sequences)
+  }
+`;
