@@ -4,10 +4,11 @@
   width: 100%;
   background-color: #e6e6e6;
   display: flex;
-  left:0;
+  left: 0;
 
   .progress-bar {
     width: 0%;
+    transition: all 0.1s linear;
     background: #8d7edc;
     display: block;
   }

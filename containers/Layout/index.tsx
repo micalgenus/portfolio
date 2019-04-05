@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
+import { throttle } from "lodash";
+
 import { StoreProps } from '@/lib/store';
 import { getLoginToken } from '@/lib/utils/cookie';
 import { default as LoginPopup } from '@/containers/LoginPopup';
@@ -25,9 +27,9 @@ class Layout extends Component<StoreProps> {
   constructor(props: StoreProps) {
     super(props);
     this.events = [
-      { event: 'scroll', method: this.handleScroll },
-      { event: 'scroll', method: this.handleResize },
-      { event: 'resize', method: this.handleResize },
+      { event: 'scroll', method: throttle(this.handleScroll, 100) },
+      { event: 'scroll', method: throttle(this.handleResize, 100) },
+      { event: 'resize', method: throttle(this.handleResize, 100) },
     ];
   }
 
