@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ApolloClient } from 'apollo-client';
 
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 import { removeCategoryItemQuery, getUserQuery } from '@/lib/graphql/query';
 
@@ -21,6 +21,9 @@ export default class CategoryItemComponent extends Component<Props> {
 
     return (
       <div className="category-item-manage-component" data-id={_id}>
+        <div className="category-item-handle">
+          <Icon name="arrows alternate" />
+        </div>
         <h3>{name}</h3>
 
         <Button color="red" onClick={() => removeCategoryItem(client, _id, category)}>

@@ -65,7 +65,6 @@ export default class ProfilePage extends Component<StoreProps, State> {
     const endFilter = Math.max(newIndex || 0, oldIndex || 0);
 
     const el = this.getSortableElement();
-    HTMLCollection;
     if (el) {
       const children: Element[] = Array.prototype.filter.call(el.children, (v: Element) => v.className === 'category-manage-component');
       return children
@@ -77,9 +76,10 @@ export default class ProfilePage extends Component<StoreProps, State> {
   };
 
   createSortable = (client: ApolloClient<any>) => {
-    let el = this.getSortableElement();
+    const el = this.getSortableElement();
     if (el) {
       new Sortable(el, {
+        handle: '.category-handle',
         filter: '.profile,.add-category-button',
         draggable: '.category-manage-component',
         animation: 150,

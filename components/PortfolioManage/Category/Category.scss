@@ -1,13 +1,9 @@
 .category-manage-component {
-  & > .input-text-component {
-    span {
-      &::before {
-        content: '::';
-        margin-left: -35px;
-        padding: 30px 15px 30px 10px;
-        font-size: 2em;
-      }
-    }
+  .category-handle {
+    position: absolute;
+    margin-left: -80px;
+    padding: 30px 40px;
+    font-size: 2em;
   }
 
   .button-group {
