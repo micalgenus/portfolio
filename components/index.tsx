@@ -13,3 +13,4 @@ export { default as ItemTemplate } from './Template/ItemTemplate';
 export { default as CategoryTemplate } from './Template/CategoryTemplate';
 
 export { default as CategoryManage } from './PortfolioManage/Category';
+export { default as CategoryItemManage } from './PortfolioManage/CategoryItem';

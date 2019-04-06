@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import { ApolloClient } from 'apollo-client';
 
-import { InputText } from '@/components';
+
+import { InputText, CategoryItemManage } from '@/components';
 import { getUserQuery, removeCategoryQuery, updateCategoryQuery, createCategoryItemQuery } from '@/lib/graphql/query';
 import { Category } from '@/interfaces';
 
 import './Category.scss';
 
 interface Props {
-  items: any[];
+  _id: string;
+  client: ApolloClient<any>;
   category: string;
-  _id?: string;
-  client?: ApolloClient<any>;
+  items: any[];
 }
 
 interface State {
@@ -33,13 +34,19 @@ export default class CategoryComponent extends Component<Props, State> {
   render() {
     const { items, client, _id } = this.props;
     const { name } = this.state;
-    if (!_id || !client) return <div />;
 
     return (
-      <div className="category-manage-component" data-id={_id}>
+      <div className="category-manage-component" id={`category-${_id}`} data-id={_id}>
         <InputText label="Category" value={name} onChange={e => this.onChangeText(e, 'name')} />
 
-        <div>{JSON.stringify(items)}</div>
+        {items.map((v: Category) =>
+          v._id ? (
+            <CategoryItemManage key={v._id} client={client} _id={v._id} category={_id} name={v.name || ''}>
+              <div />
+            </CategoryItemManage>
+          ) : null
+        )}
+
         <div className="button-group">
           <Button color="red" animated="vertical" onClick={() => removeCategory(client, { _id })}>
             <Button.Content hidden>Remove</Button.Content>
@@ -89,8 +96,11 @@ function addCategoryItem(client: ApolloClient<any>, category: string) {
         update: (proxy, { data: { createCategoryItem } }) => {
           if (createCategoryItem) {
             const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
-            const [targetCategory] = me.categories.filter((v: any) => v._id === category);
-            targetCategory.items = [...targetCategory.items, { _id: createCategoryItem, name: '', description: '', __typename: 'Categoryitem' }];
+            const categories: Category[] = me.categories;
+            const [targetCategory] = categories.filter((c: Category) => c._id === category);
+            if (targetCategory && targetCategory.items)
+              targetCategory.items = [...targetCategory.items, { _id: createCategoryItem, name: '', description: '', __typename: 'Categoryitem' }];
+
             proxy.writeQuery({ query: getUserQuery, data: { me } });
           }
         },

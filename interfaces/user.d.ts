@@ -1,4 +1,8 @@
-export interface User {
+interface GraphQLResult {
+  __typename?: string;
+}
+
+export interface User extends GraphQLResult {
   _id?: string;
   id?: string;
   email?: string;
@@ -9,9 +13,15 @@ export interface User {
   categories?: Category[];
 }
 
-export interface Category {
+export interface Category extends GraphQLResult {
   _id?: string;
   user?: string;
   name?: string;
-  items?: any;
+  items?: CategoryItem[];
+}
+
+export interface CategoryItem extends GraphQLResult {
+  _id?: string;
+  name?: string;
+  description?: string;
 }
