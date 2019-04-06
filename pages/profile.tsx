@@ -193,7 +193,7 @@ function addCategory(client: ApolloClient<any>) {
             const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
             proxy.writeQuery({
               query: getUserQuery,
-              data: { me: { ...me, categories: [...me.categories, { _id: createCategory, name: null, __typename: 'Category' }] } },
+              data: { me: { ...me, categories: [...me.categories, { _id: createCategory, name: null, items: [], __typename: 'Category' }] } },
             });
           }
         },
