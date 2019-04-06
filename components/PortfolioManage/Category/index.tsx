@@ -3,7 +3,7 @@ import { Button, Icon } from 'semantic-ui-react';
 import { ApolloClient } from 'apollo-client';
 
 import { InputText } from '@/components';
-import { getUserQuery, removeCategoryQuery, updateCategoryQuery } from '@/lib/graphql/query';
+import { getUserQuery, removeCategoryQuery, updateCategoryQuery, createCategoryItemQuery } from '@/lib/graphql/query';
 import { Category } from '@/interfaces';
 
 import './Category.scss';
@@ -47,7 +47,9 @@ export default class CategoryComponent extends Component<Props, State> {
               <Icon name="trash" size="small" />
             </Button.Content>
           </Button>
-          <Button color="teal">Add Items</Button>
+          <Button color="teal" onClick={() => addCategoryItem(client, _id)}>
+            Add Items
+          </Button>
           <Button color="blue" onClick={() => updateCategory(client, { _id, name: name })}>
             Save Category
           </Button>
@@ -70,6 +72,26 @@ function removeCategory(client: ApolloClient<any>, { _id }: Category) {
               query: getUserQuery,
               data: { me: { ...me, categories: me.categories.filter((v: Category) => v._id !== _id) } },
             });
+          }
+        },
+      })
+      // TODO: Exception error and success alert
+      .catch(err => console.log(err))
+  );
+}
+
+function addCategoryItem(client: ApolloClient<any>, category: string) {
+  return (
+    client
+      .mutate({
+        mutation: createCategoryItemQuery,
+        variables: { category },
+        update: (proxy, { data: { createCategoryItem } }) => {
+          if (createCategoryItem) {
+            const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
+            const [targetCategory] = me.categories.filter((v: any) => v._id === category);
+            targetCategory.items = [...targetCategory.items, { _id: createCategoryItem, name: '', description: '', __typename: 'Categoryitem' }];
+            proxy.writeQuery({ query: getUserQuery, data: { me } });
           }
         },
       })

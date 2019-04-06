@@ -124,7 +124,7 @@ export default class ProfilePage extends Component<StoreProps, State> {
               </div>
 
               {categories.map(v => (
-                <CategoryManage key={v._id} _id={v._id} category={v.name || ''} items={[]} client={client} />
+                <CategoryManage key={v._id} _id={v._id} category={v.name || ''} items={v.items} client={client} />
               ))}
 
               <div className="add-category-button">
@@ -165,11 +165,18 @@ function updateCategoriesSequence(client: ApolloClient<any>, sequences: { _id: s
         update: (proxy, { data: { updateCategorySequence } }) => {
           if (updateCategorySequence) {
             const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
-            console.log(me);
-            // proxy.writeQuery({
-            //   query: getUserQuery,
-            //   data: { me: { ...me, categories: [...me.categories, { _id: createCategory, name: null, __typename: 'Category' }] } },
-            // });
+            for (let i = 0; i < me.categories.length; i++) {
+              const category = me.categories[i];
+              const [find] = sequences.filter(v => v._id === category._id);
+              const { sequence } = find || { sequence: me.categories.length - i };
+              category.sequence = sequence;
+            }
+            me.categories.sort((a: any, b: any) => b.sequence - a.sequence);
+
+            proxy.writeQuery({
+              query: getUserQuery,
+              data: { me: { ...me, categories: me.categories.map(({ sequence, ...v }: any) => ({ ...v })) } },
+            });
           }
         },
       })

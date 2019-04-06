@@ -12,6 +12,11 @@ export const getUserQuery = gql`
       categories {
         _id
         name
+        items {
+          _id
+          name
+          description
+        }
       }
     }
   }
@@ -28,8 +33,19 @@ export const getUserInfoQuery = gql`
       categories {
         _id
         name
+        items {
+          _id
+          name
+          description
+        }
       }
     }
+  }
+`;
+
+export const createCategoryItemQuery = gql`
+  mutation createCategoryItem($category: String!) {
+    createCategoryItem(category: $category)
   }
 `;
 

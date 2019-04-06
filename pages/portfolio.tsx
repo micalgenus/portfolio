@@ -14,7 +14,7 @@ export default class PortfolioPage extends Component<Props> {
 
     if (email) links.push({ icon: 'mail', href: `mailto:${email}`, color: 'black' });
     if (github) links.push({ icon: 'github', href: `https://github.com/${github}/`, color: 'black' });
-    if (linkedin) links.push({ icon: 'linkedin', href: `"https://linkedin.com/in/${linkedin}/`, color: 'blue' });
+    if (linkedin) links.push({ icon: 'linkedin', href: `https://linkedin.com/in/${linkedin}/`, color: 'blue' });
 
     return (
       <div>
