@@ -87,3 +87,9 @@ export const updateCategorySequenceQuery = gql`
     updateCategorySequence(sequences: $sequences)
   }
 `;
+
+export const removeCategoryItemQuery = gql`
+  mutation removeCategoryItem($id: String!, $category: String!) {
+    removeCategoryItem(id: $id, category: $category)
+  }
+`;
