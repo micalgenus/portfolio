@@ -123,7 +123,7 @@ export default class ProfilePage extends Component<StoreProps, State> {
                 </Button>
               </div>
 
-              {categories.map(v => (v._id ? <CategoryManage key={v._id} _id={v._id} category={v.name || ''} items={v.items} client={client} /> : null))}
+              {categories.map(v => (v._id ? <CategoryManage key={v._id} _id={v._id} category={v.name || ''} items={v.items || []} client={client} /> : null))}
 
               <div className="add-category-button">
                 <Button color="teal" onClick={() => addCategory(client)}>
