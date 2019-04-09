@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Icon } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import { ApolloClient } from 'apollo-client';
 
 import Sortable, { SortableEvent } from 'sortablejs';
@@ -74,8 +74,7 @@ export default class CategoryComponent extends Component<Props, State> {
         handle: '.category-item-handle',
         draggable: '.category-item-manage-component',
         animation: 150,
-        // onSort: e => updateCategoryItemSequence(client, _id, this.getCategoryComponents(e)),
-        onSort: console.log,
+        onSort: e => updateCategoryItemSequence(client, _id, this.getCategoryComponents(e)),
       });
     }
   };
