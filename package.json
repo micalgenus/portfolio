@@ -18,6 +18,7 @@
     "react-apollo": "^2.5.3",
     "react-app-polyfill": "^0.2.2",
     "react-dom": "^16.8.5",
+    "react-toastify": "^5.0.0-rc.6",
     "semantic-ui-react": "^0.86.0",
     "smoothscroll-polyfill": "^0.4.3",
     "sortablejs": "^1.8.4"
