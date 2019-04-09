@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
+import { ToastContainer } from 'react-toastify';
 
-import { throttle } from "lodash";
+import { throttle } from 'lodash';
 
 import { StoreProps } from '@/lib/store';
 import { getLoginToken } from '@/lib/utils/cookie';
@@ -12,6 +13,7 @@ import { Header, Footer, ScrollTo } from './components';
 import './styles/layout.font.scss';
 import './styles/layout.global.scss';
 import './styles/layout.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface EventListener {
   event: string;
@@ -71,6 +73,8 @@ class Layout extends Component<StoreProps> {
         <ScrollTo />
 
         <LoginPopup />
+
+        <ToastContainer autoClose={2000} />
       </>
     );
   }

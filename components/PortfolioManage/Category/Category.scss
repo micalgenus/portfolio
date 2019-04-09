@@ -1,20 +1,32 @@
 .category-manage-component {
+  padding-left: 40px;
+  padding-bottom: 0;
+
   .category-handle {
     position: absolute;
-    margin-left: -80px;
-    padding: 30px 40px;
-    font-size: 2em;
+    margin-left: -55px;
+    padding: 30px 27.5px;
+    font-size: 1.2em;
   }
 
-  .button-group {
-    display: flex;
-    button {
-      .content {
-        font-weight: normal;
-        color: #fff;
-        i {
-          color: #fff;
-        }
+  .remove-category-button {
+    position: absolute;
+    margin-left: -50px;
+    margin-top: 32px;
+    i {
+      font-size: 1.2em;
+    }
+  }
+
+  .add-item-container {
+    padding-bottom: 60px;
+
+    .add-item-button {
+      position: absolute;
+      margin-left: -50px;
+      margin-top: 2.5px;
+      i {
+        font-size: 1.2em;
       }
     }
   }

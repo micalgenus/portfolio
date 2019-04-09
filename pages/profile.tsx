@@ -3,8 +3,9 @@ import { observer, inject } from 'mobx-react';
 import { Query, QueryResult, OperationVariables } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 
-import { Button } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import Sortable, { SortableEvent } from 'sortablejs';
+import { toast } from 'react-toastify';
 import { debounce } from 'lodash';
 
 import { StoreProps } from '@/lib/store';
@@ -12,6 +13,8 @@ import { getLoginToken } from '@/lib/utils/cookie';
 import { getUserQuery, updateUserInfoQuery, addCategoryQuery, updateCategorySequenceQuery } from '@/lib/graphql/query';
 import { Router, InputText, TextArea, CategoryManage } from '@/components';
 import { User } from '@/interfaces';
+
+import '@/scss/profile.scss';
 
 interface InputState {
   username?: string;
@@ -34,11 +37,12 @@ export default class ProfilePage extends Component<StoreProps, State> {
     this.state = { username: undefined, email: undefined, github: undefined, linkedin: undefined, description: undefined };
   }
 
-  onChangeText = (event: React.ChangeEvent<any>, target: keyof InputState) => {
+  onChangeText = (event: React.ChangeEvent<any>, target: keyof InputState, callback: any) => {
     this.setState({ [target]: event.target.value } as Pick<InputState, keyof InputState>);
+    callback();
   };
 
-  updateUserInfo = async (client: ApolloClient<any>, serverData: User) => {
+  updateUserInfo = debounce(async (client: ApolloClient<any>, serverData: User) => {
     const { username, email, github, linkedin, description } = this.state;
 
     // Update only when something change.
@@ -49,13 +53,15 @@ export default class ProfilePage extends Component<StoreProps, State> {
       (linkedin && linkedin !== serverData.linkedin) ||
       (description && description !== serverData.description)
     )
-      updateUserInfo(client, { username, email, github, linkedin, description }).then(() => {
-        if (username && username !== serverData.username) {
-          const token = getLoginToken();
-          if (token && this.props.login) this.props.login.login(token);
+      updateUserInfo(client, { username, email, github, linkedin, description }).then(result => {
+        if (result) {
+          if (username && username !== serverData.username) {
+            const token = getLoginToken();
+            if (token && this.props.login) this.props.login.login(token);
+          }
         }
       });
-  };
+  }, 1000);
 
   getSortableElement = () => document.getElementById('main');
 
@@ -80,24 +86,24 @@ export default class ProfilePage extends Component<StoreProps, State> {
     if (el) {
       new Sortable(el, {
         handle: '.category-handle',
-        filter: '.profile,.add-category-button',
+        filter: '.profile,.add-category-container',
         draggable: '.category-manage-component',
         animation: 150,
-        onSort: debounce(e => updateCategoriesSequence(client, this.getCategoryComponents(e)), 500),
+        onSort: e => updateCategoriesSequence(client, this.getCategoryComponents(e)),
       });
     }
   };
 
-  renderProfile = (username?: string, email?: string, github?: string, linkedin?: string, description?: string) => {
+  renderProfile = (serverData: User, callback: any) => {
     return (
       <div>
         <h3>User Information</h3>
-        <InputText label="Username" value={this.state.username || username} onChange={e => this.onChangeText(e, 'username')} />
-        <InputText label="Email" value={this.state.email || email} onChange={e => this.onChangeText(e, 'email')} />
-        <InputText label="Github ID" value={this.state.github || github} onChange={e => this.onChangeText(e, 'github')} />
-        <InputText label="LinkedIn ID" value={this.state.linkedin || linkedin} onChange={e => this.onChangeText(e, 'linkedin')} />
+        <InputText label="Username" value={this.state.username || serverData.username} onChange={e => this.onChangeText(e, 'username', callback)} />
+        <InputText label="Email" value={this.state.email || serverData.email} onChange={e => this.onChangeText(e, 'email', callback)} />
+        <InputText label="Github ID" value={this.state.github || serverData.github} onChange={e => this.onChangeText(e, 'github', callback)} />
+        <InputText label="LinkedIn ID" value={this.state.linkedin || serverData.linkedin} onChange={e => this.onChangeText(e, 'linkedin', callback)} />
 
-        <TextArea label="Description" value={this.state.description || description} onChange={e => this.onChangeText(e, 'description')} />
+        <TextArea label="Description" value={this.state.description || serverData.description} onChange={e => this.onChangeText(e, 'description', callback)} />
       </div>
     );
   };
@@ -116,19 +122,15 @@ export default class ProfilePage extends Component<StoreProps, State> {
 
           return (
             <>
-              <div className="profile">
-                {this.renderProfile(me.username, me.email, me.github, me.linkedin, me.description)}
-                <Button color="blue" onClick={() => this.updateUserInfo(client, me)}>
-                  SAVE
-                </Button>
-              </div>
+              <div className="profile">{this.renderProfile(me, () => this.updateUserInfo(client, me))}</div>
 
               {categories.map(v => (v._id ? <CategoryManage key={v._id} _id={v._id} category={v.name || ''} items={v.items || []} client={client} /> : null))}
 
-              <div className="add-category-button">
-                <Button color="teal" onClick={() => addCategory(client)}>
-                  Add Category
-                </Button>
+              <div className="add-category-container">
+                <div className="add-category-button" onClick={() => addCategory(client)}>
+                  <Icon name="plus" color="green" />
+                </div>
+                <InputText label="Category" disabled={true} />
               </div>
             </>
           );
@@ -139,66 +141,63 @@ export default class ProfilePage extends Component<StoreProps, State> {
 }
 
 function updateUserInfo(client: ApolloClient<any>, { username, email, github, linkedin, description }: User) {
-  return (
-    client
-      .mutate({
-        mutation: updateUserInfoQuery,
-        variables: { username, email, github, linkedin, description },
-        update: (proxy, { data: { updateUserInfo } }) => {
-          const { me } = proxy.readQuery<{ me: {} }, any>({ query: getUserQuery }) || { me: {} };
-          proxy.writeQuery({ query: getUserQuery, data: { me: { ...me, ...updateUserInfo } } });
-        },
-      })
-      // TODO: Exception error and success alert
-      .catch(err => console.log(err))
-  );
+  return client
+    .mutate({
+      mutation: updateUserInfoQuery,
+      variables: { username, email, github, linkedin, description },
+      update: (proxy, { data: { updateUserInfo } }) => {
+        const { me } = proxy.readQuery<{ me: {} }, any>({ query: getUserQuery }) || { me: {} };
+        proxy.writeQuery({ query: getUserQuery, data: { me: { ...me, ...updateUserInfo } } });
+      },
+    })
+    .then(() => toast.success('Completed update user information.'))
+    .catch(err => {
+      toast.error(err.message);
+      Promise.resolve(false);
+    });
 }
 
-function updateCategoriesSequence(client: ApolloClient<any>, sequences: { _id: string; sequence: number }[]) {
-  return (
-    client
-      .mutate({
-        mutation: updateCategorySequenceQuery,
-        variables: { sequences },
-        update: (proxy, { data: { updateCategorySequence } }) => {
-          if (updateCategorySequence) {
-            const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
-            for (let i = 0; i < me.categories.length; i++) {
-              const category = me.categories[i];
-              const [find] = sequences.filter(v => v._id === category._id);
-              const { sequence } = find || { sequence: me.categories.length - i };
-              category.sequence = sequence;
-            }
-            me.categories.sort((a: any, b: any) => b.sequence - a.sequence);
-
-            proxy.writeQuery({
-              query: getUserQuery,
-              data: { me: { ...me, categories: me.categories.map(({ sequence, ...v }: any) => ({ ...v })) } },
-            });
+const updateCategoriesSequence = debounce(async (client: ApolloClient<any>, sequences: { _id: string; sequence: number }[]) => {
+  return client
+    .mutate({
+      mutation: updateCategorySequenceQuery,
+      variables: { sequences },
+      update: (proxy, { data: { updateCategorySequence } }) => {
+        if (updateCategorySequence) {
+          const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
+          for (let i = 0; i < me.categories.length; i++) {
+            const category = me.categories[i];
+            const [find] = sequences.filter(v => v._id === category._id);
+            const { sequence } = find || { sequence: me.categories.length - i };
+            category.sequence = sequence;
           }
-        },
-      })
-      // TODO: Exception error and success alert
-      .catch(err => console.log(err))
-  );
-}
+          me.categories.sort((a: any, b: any) => b.sequence - a.sequence);
+
+          proxy.writeQuery({
+            query: getUserQuery,
+            data: { me: { ...me, categories: me.categories.map(({ sequence, ...v }: any) => ({ ...v })) } },
+          });
+        }
+      },
+    })
+    .then(() => toast.success('Completed update user information.'))
+    .catch(err => toast.error(err.message));
+}, 500);
 
 function addCategory(client: ApolloClient<any>) {
-  return (
-    client
-      .mutate({
-        mutation: addCategoryQuery,
-        update: (proxy, { data: { createCategory } }) => {
-          if (createCategory) {
-            const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
-            proxy.writeQuery({
-              query: getUserQuery,
-              data: { me: { ...me, categories: [...me.categories, { _id: createCategory, name: null, items: [], __typename: 'Category' }] } },
-            });
-          }
-        },
-      })
-      // TODO: Exception error and success alert
-      .catch(err => console.log(err))
-  );
+  return client
+    .mutate({
+      mutation: addCategoryQuery,
+      update: (proxy, { data: { createCategory } }) => {
+        if (createCategory) {
+          const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
+          proxy.writeQuery({
+            query: getUserQuery,
+            data: { me: { ...me, categories: [...me.categories, { _id: createCategory, name: null, items: [], __typename: 'Category' }] } },
+          });
+        }
+      },
+    })
+    .then(() => toast.success('Completed add category of profile in user.'))
+    .catch(err => toast.error(err.message));
 }

@@ -4,6 +4,7 @@ import { ApolloClient } from 'apollo-client';
 
 import Sortable, { SortableEvent } from 'sortablejs';
 import { debounce } from 'lodash';
+import { toast } from 'react-toastify';
 
 import { InputText, CategoryItemManage } from '@/components';
 import { getUserQuery, removeCategoryQuery, updateCategoryQuery, createCategoryItemQuery, updateCategoryItemSequenceQuery } from '@/lib/graphql/query';
@@ -33,9 +34,16 @@ export default class CategoryComponent extends Component<Props, State> {
     this.createSortable();
   };
 
-  onChangeText = (event: React.ChangeEvent<HTMLInputElement>, target: keyof State) => {
+  onChangeText = (event: React.ChangeEvent<HTMLInputElement>, target: keyof State, callback: any) => {
     this.setState({ [target]: event.target.value } as Pick<State, keyof State>);
+    callback();
   };
+
+  updateCategory = debounce(async () => {
+    const { client, _id } = this.props;
+    const { name } = this.state;
+    updateCategory(client, { _id, name });
+  }, 1000);
 
   getSortableElement = () => {
     const { _id } = this.props;
@@ -64,11 +72,10 @@ export default class CategoryComponent extends Component<Props, State> {
     if (el) {
       new Sortable(el, {
         handle: '.category-item-handle',
-        filter: '.category-handle,.input-text-component,.button-group',
         draggable: '.category-item-manage-component',
         animation: 150,
-        onSort: debounce(e => updateCategoryItemSequence(client, _id, this.getCategoryComponents(e)), 500),
-        // onSort: console.log,
+        // onSort: e => updateCategoryItemSequence(client, _id, this.getCategoryComponents(e)),
+        onSort: console.log,
       });
     }
   };
@@ -82,7 +89,10 @@ export default class CategoryComponent extends Component<Props, State> {
         <div className="category-handle">
           <Icon name="arrows alternate" />
         </div>
-        <InputText label="Category" value={name} onChange={e => this.onChangeText(e, 'name')} />
+        <div className="remove-category-button" onClick={() => (confirm('Are you sure you want to delete?') ? removeCategory(client, { _id }) : null)}>
+          <Icon name="trash" size="small" color="red" />
+        </div>
+        <InputText label="Category" value={name} onChange={e => this.onChangeText(e, 'name', this.updateCategory)} />
 
         {items.map((v: Category) =>
           v._id ? (
@@ -92,19 +102,11 @@ export default class CategoryComponent extends Component<Props, State> {
           ) : null
         )}
 
-        <div className="button-group">
-          <Button color="red" animated="vertical" onClick={() => removeCategory(client, { _id })}>
-            <Button.Content hidden>Remove</Button.Content>
-            <Button.Content visible>
-              <Icon name="trash" size="small" />
-            </Button.Content>
-          </Button>
-          <Button color="teal" onClick={() => addCategoryItem(client, _id)}>
-            Add Items
-          </Button>
-          <Button color="blue" onClick={() => updateCategory(client, { _id, name: name })}>
-            Save Category
-          </Button>
+        <div className="add-item-container">
+          <div className="add-item-button" onClick={() => addCategoryItem(client, _id)}>
+            <Icon name="plus" size="small" color="green" />
+          </div>
+          <div>Add Item</div>
         </div>
       </div>
     );
@@ -112,94 +114,86 @@ export default class CategoryComponent extends Component<Props, State> {
 }
 
 function removeCategory(client: ApolloClient<any>, { _id }: Category) {
-  return (
-    client
-      .mutate({
-        mutation: removeCategoryQuery,
-        variables: { id: _id },
-        update: (proxy, { data: { removeCategory } }) => {
-          if (removeCategory) {
-            const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
-            proxy.writeQuery({
-              query: getUserQuery,
-              data: { me: { ...me, categories: me.categories.filter((v: Category) => v._id !== _id) } },
-            });
-          }
-        },
-      })
-      // TODO: Exception error and success alert
-      .catch(err => console.log(err))
-  );
+  return client
+    .mutate({
+      mutation: removeCategoryQuery,
+      variables: { id: _id },
+      update: (proxy, { data: { removeCategory } }) => {
+        if (removeCategory) {
+          const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
+          proxy.writeQuery({
+            query: getUserQuery,
+            data: { me: { ...me, categories: me.categories.filter((v: Category) => v._id !== _id) } },
+          });
+        }
+      },
+    })
+    .then(() => toast.success('Completed remove category in user information.'))
+    .catch(err => toast.error(err.message));
 }
 
 function addCategoryItem(client: ApolloClient<any>, category: string) {
-  return (
-    client
-      .mutate({
-        mutation: createCategoryItemQuery,
-        variables: { category },
-        update: (proxy, { data: { createCategoryItem } }) => {
-          if (createCategoryItem) {
-            const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
-            const categories: Category[] = me.categories;
-            const [targetCategory] = categories.filter((c: Category) => c._id === category);
-            if (targetCategory && targetCategory.items)
-              targetCategory.items = [...targetCategory.items, { _id: createCategoryItem, name: '', description: '', __typename: 'Categoryitem' }];
+  return client
+    .mutate({
+      mutation: createCategoryItemQuery,
+      variables: { category },
+      update: (proxy, { data: { createCategoryItem } }) => {
+        if (createCategoryItem) {
+          const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
+          const categories: Category[] = me.categories;
+          const [targetCategory] = categories.filter((c: Category) => c._id === category);
+          if (targetCategory && targetCategory.items)
+            targetCategory.items = [...targetCategory.items, { _id: createCategoryItem, name: '', description: '', __typename: 'Categoryitem' }];
 
-            proxy.writeQuery({ query: getUserQuery, data: { me } });
-          }
-        },
-      })
-      // TODO: Exception error and success alert
-      .catch(err => console.log(err))
-  );
+          proxy.writeQuery({ query: getUserQuery, data: { me } });
+        }
+      },
+    })
+    .then(() => toast.success('Completed add item in user category.'))
+    .catch(err => toast.error(err.message));
 }
 
 function updateCategory(client: ApolloClient<any>, { _id, name }: Category) {
-  return (
-    client
-      .mutate({
-        mutation: updateCategoryQuery,
-        variables: { id: _id, category: { name } },
-        update: (proxy, { data: { updateCategory } }) => {
-          if (updateCategory) {
-            const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
+  return client
+    .mutate({
+      mutation: updateCategoryQuery,
+      variables: { id: _id, category: { name } },
+      update: (proxy, { data: { updateCategory } }) => {
+        if (updateCategory) {
+          const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
+          proxy.writeQuery({ query: getUserQuery, data: { me } });
+        }
+      },
+    })
+    .then(() => toast.success('Completed update category information of user.'))
+    .catch(err => toast.error(err.message));
+}
+
+const updateCategoryItemSequence = debounce(async (client: ApolloClient<any>, category: string, sequences: { _id: string; sequence: number }[]) => {
+  return client
+    .mutate({
+      mutation: updateCategoryItemSequenceQuery,
+      variables: { category, sequences },
+      update: (proxy, { data: { updateCategoryItemSequence } }) => {
+        if (updateCategoryItemSequence) {
+          const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
+          const [targetCategory] = me.categories.filter((c: Category) => c._id === category);
+          if (targetCategory) {
+            for (let i = 0; i < targetCategory.items.length; i++) {
+              const item = targetCategory.items[i];
+              const [find] = sequences.filter(v => v._id === item._id);
+              const { sequence } = find || { sequence: targetCategory.items.length - i };
+              item.sequence = sequence;
+            }
+
+            targetCategory.items.sort((a: any, b: any) => b.sequence - a.sequence);
+            targetCategory.items = targetCategory.items.map(({ sequence, ...v }: any) => ({ ...v }));
+
             proxy.writeQuery({ query: getUserQuery, data: { me } });
           }
-        },
-      })
-      // TODO: Exception error and success alert
-      .catch(err => console.log(err))
-  );
-}
-
-function updateCategoryItemSequence(client: ApolloClient<any>, category: string, sequences: { _id: string; sequence: number }[]) {
-  return (
-    client
-      .mutate({
-        mutation: updateCategoryItemSequenceQuery,
-        variables: { category, sequences },
-        update: (proxy, { data: { updateCategoryItemSequence } }) => {
-          if (updateCategoryItemSequence) {
-            const { me } = proxy.readQuery<any, any>({ query: getUserQuery });
-            const [targetCategory] = me.categories.filter((c: Category) => c._id === category);
-            if (targetCategory) {
-              for (let i = 0; i < targetCategory.items.length; i++) {
-                const item = targetCategory.items[i];
-                const [find] = sequences.filter(v => v._id === item._id);
-                const { sequence } = find || { sequence: targetCategory.items.length - i };
-                item.sequence = sequence;
-              }
-
-              targetCategory.items.sort((a: any, b: any) => b.sequence - a.sequence);
-              targetCategory.items = targetCategory.items.map(({ sequence, ...v }: any) => ({ ...v }));
-
-              proxy.writeQuery({ query: getUserQuery, data: { me } });
-            }
-          }
-        },
-      })
-      // TODO: Exception error and success alert
-      .catch(err => console.log(err))
-  );
-}
+        }
+      },
+    })
+    .then(() => toast.success('Completed update category information of user.'))
+    .catch(err => toast.error(err.message));
+}, 500);

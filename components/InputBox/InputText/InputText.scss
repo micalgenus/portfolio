@@ -48,6 +48,10 @@ $error-item-color: #e7736c;
       opacity: 0.7;
       top: 15px;
     }
+
+    &:disabled {
+      background-color: #fff;
+    }
   }
 
   span {
