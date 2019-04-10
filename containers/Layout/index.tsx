@@ -13,7 +13,7 @@ import { Header, Footer, ScrollTo } from './components';
 import './styles/layout.font.scss';
 import './styles/layout.global.scss';
 import './styles/layout.scss';
-import 'react-toastify/dist/ReactToastify.css';
+import './styles/toast/main.scss';
 
 interface EventListener {
   event: string;
