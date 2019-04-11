@@ -1,8 +1,8 @@
 require('dotenv-load')();
 
 const withConfig = require('next-runtime-dotenv')({
-  public: ['PORTFOLIO_GRAPHQL_URL']
-})
+  public: ['PORTFOLIO_GRAPHQL_URL'],
+});
 
 const modules = [
   require('@zeit/next-css'),
