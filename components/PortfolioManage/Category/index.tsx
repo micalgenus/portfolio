@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import { InputText, CategoryItemManage } from '@/components';
 import { getUserQuery, removeCategoryQuery, updateCategoryQuery, createCategoryItemQuery, updateCategoryItemSequenceQuery } from '@/lib/graphql/query';
-import { Category } from '@/interfaces';
+import { Category, CategoryItem } from '@/interfaces';
 
 import './Category.scss';
 
@@ -93,9 +93,9 @@ export default class CategoryComponent extends Component<Props, State> {
         </div>
         <InputText label="Category" value={name} onChange={e => this.onChangeText(e, 'name', this.updateCategory)} />
 
-        {items.map((v: Category) =>
+        {items.map((v: CategoryItem) =>
           v._id ? (
-            <CategoryItemManage key={v._id} client={client} _id={v._id} category={_id} name={v.name || ''}>
+            <CategoryItemManage key={v._id} client={client} _id={v._id} category={_id} name={v.name || ''} description={v.description || ''}>
               <div />
             </CategoryItemManage>
           ) : null
