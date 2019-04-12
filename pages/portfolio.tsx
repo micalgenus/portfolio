@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 
 import { getUserInfoQuery } from '@/lib/graphql/query';
 
-import { Router, LinkIconsGroup, CategoryTemplate } from '@/components';
+import { Router, LinkIconsGroup, CategoryTemplate, ItemTemplate } from '@/components';
 import { PageProps, LinkItem, Category } from '@/interfaces';
 
 interface Props extends PageProps {}
@@ -39,7 +39,12 @@ export default class PortfolioPage extends Component<Props> {
           return (
             <>
               {this.renderProfile(username, description, email, github, linkedin)}
-              {categories && categories.map((v: Category) => <CategoryTemplate category={v.name || ''}>{JSON.stringify(v)}</CategoryTemplate>)}
+              {categories &&
+                categories.map((v: Category) => (
+                  <CategoryTemplate category={v.name || ''}>
+                    {v.items && v.items.map(i => (i.name ? <ItemTemplate title={i.name} description={i.description || ''} /> : null))}
+                  </CategoryTemplate>
+                ))}
             </>
           );
         }}
