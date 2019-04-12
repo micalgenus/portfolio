@@ -52,15 +52,15 @@ export default class CategoryComponent extends Component<Props, State> {
 
   getCategoryComponents = (e: SortableEvent) => {
     const { newIndex, oldIndex } = e;
-    const startFilter = Math.min(newIndex || 0, oldIndex || 0);
-    const endFilter = Math.max(newIndex || 0, oldIndex || 0);
+    const startFilter = Math.min(newIndex || 0, oldIndex || 0) - 3;
+    const endFilter = Math.max(newIndex || 0, oldIndex || 0) - 3;
 
     const el = this.getSortableElement();
     if (el) {
       const children: Element[] = Array.prototype.filter.call(el.children, (v: Element) => v.className === 'category-item-manage-component');
       return children
         .map((v, i) => ({ _id: v.getAttribute('data-id') || '', sequence: children.length - i }))
-        .filter((_, i) => startFilter <= i + 2 && i + 2 <= endFilter);
+        .filter((_, i) => startFilter <= i && i <= endFilter);
     }
 
     return [];
