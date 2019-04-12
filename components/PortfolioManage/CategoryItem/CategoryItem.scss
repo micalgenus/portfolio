@@ -1,12 +1,28 @@
 .category-item-manage-component {
+  display: flex;
+
   .category-item-handle {
     position: absolute;
-    margin-left: -60px;
-    padding: 10px 30px 20px;
+    margin-left: -27.5px;
+    margin-top: 20px;
     font-size: 0.8em;
   }
 
-  display: flex;
-  border: 1px solid #000;
-  min-height: 10px;
+  .remove-item-button {
+    position: absolute;
+    margin-left: -47.5px;
+    margin-top: 20px;
+    i {
+      font-size: 0.8em;
+    }
+  }
+
+  .category-item-manage-container {
+    width: 100%;
+    font-size: 0.7em;
+
+    .input-text-component {
+      margin: 0;
+    }
+  }
 }
