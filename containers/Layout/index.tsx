@@ -5,7 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import { throttle } from 'lodash';
 
 import { StoreProps } from '@/lib/store';
-import { getLoginToken } from '@/lib/utils/cookie';
+import { getLoginToken, getRememberLoginToken } from '@/lib/utils/cookie';
+import { rememberLogin } from '@/lib/graphql/user';
 import { default as LoginPopup } from '@/containers/LoginPopup';
 
 import { Header, Footer, ScrollTo } from './components';
@@ -36,11 +37,18 @@ class Layout extends Component<StoreProps> {
   }
 
   // Add Window event
-  componentDidMount = () => {
+  componentDidMount = async () => {
     // Only run code in browser
     if (typeof window !== 'undefined') {
-      const token = getLoginToken();
-      if (token && this.props.login) this.props.login.login(token);
+      if (!this.props.login)
+        // TODO: Error exception
+        return;
+
+      const remember = getRememberLoginToken();
+      const loginToken = remember && (await rememberLogin(remember));
+
+      const token = loginToken || getLoginToken();
+      if (token) return this.props.login.login(token);
     }
 
     for (const e of this.events) window.addEventListener(e.event, e.method);

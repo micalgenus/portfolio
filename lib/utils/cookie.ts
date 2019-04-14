@@ -23,10 +23,24 @@ export const setLoginToken = (value: string) => {
 // export const refreshLoginToken = () => {
 // }
 
-export const getLoginToken = () => {
+export const getLoginToken = (): string => {
   return getCookie(AUTH_COOKIE);
 };
 
 export const removeLoginToken = () => {
   deleteCookie(AUTH_COOKIE);
+};
+
+const REMEMBER_TOKEN = 'rememberAuthentication';
+
+export const setRememberLoginToken = (value: string) => {
+  setCookie(REMEMBER_TOKEN, value, 36500);
+};
+
+export const getRememberLoginToken = (): string => {
+  return getCookie(REMEMBER_TOKEN);
+};
+
+export const removeRememberLoginToken = () => {
+  deleteCookie(REMEMBER_TOKEN);
 };

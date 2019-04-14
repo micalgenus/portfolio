@@ -11,17 +11,29 @@ export const signup = async (id: string, username: string, email: string, passwo
   );
 };
 
-export const login = async (id: string, password: string) => {
+export const login = async (id: string, password: string, remember: boolean) => {
   id = id.replace(/"/g, '\\"');
   password = password.replace(/"/g, '\\"');
   return requestGraphqlWithAxiosRetry(
     gql`
-      mutation login($id: String!, $password: String!) {
+      mutation login($id: String!, $password: String!, $remember: Boolean!) {
         login(id: $id, password: $password)
+        rememberMe(id: $id, password: $password) @include(if: $remember)
       }
     `,
-    { id, password }
+    { id, password, remember }
   );
+};
+
+export const rememberLogin = async (token: string): Promise<string | null> => {
+  return requestGraphqlWithAxiosRetry(
+    gql`
+      mutation rememberMeLogin($token: String!) {
+        rememberMeLogin(token: $token)
+      }
+    `,
+    { token }
+  ).then(res => res.rememberMeLogin);
 };
 
 export const getUserInfo = async () => {

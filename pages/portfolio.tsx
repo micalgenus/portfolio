@@ -41,8 +41,8 @@ export default class PortfolioPage extends Component<Props> {
               {this.renderProfile(username, description, email, github, linkedin)}
               {categories &&
                 categories.map((v: Category) => (
-                  <CategoryTemplate category={v.name || ''}>
-                    {v.items && v.items.map(i => (i.name ? <ItemTemplate title={i.name} description={i.description || ''} /> : null))}
+                  <CategoryTemplate key={v._id} category={v.name || ''}>
+                    {v.items && v.items.map(i => (i.name ? <ItemTemplate key={i._id} title={i.name} description={i.description || ''} /> : null))}
                   </CategoryTemplate>
                 ))}
             </>

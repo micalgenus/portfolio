@@ -20,6 +20,7 @@ interface InputState {
 }
 
 interface State extends InputState {
+  remember: boolean;
   error: AllowError[];
 }
 
@@ -33,6 +34,7 @@ export default class LoginPopup extends Component<StoreProps, State> {
     this.state = {
       id: '',
       password: '',
+      remember: false,
       error: [],
     };
   }
@@ -68,10 +70,14 @@ export default class LoginPopup extends Component<StoreProps, State> {
     if (!this.checkValidAllInputs()) return;
 
     // do login
-    login(this.state.id, this.state.password)
+    login(this.state.id, this.state.password, this.state.remember)
       .then(data => {
         if (this.props.login) {
-          this.props.login.login(data.login);
+          if (data.rememberMe) this.props.login.rememberLogin(data.rememberMe);
+          else if (data.login) this.props.login.login(data.login);
+          // TODO: Error exception
+          else return;
+
           this.closePopup();
         } else {
           // TODO: Error exception
@@ -102,6 +108,10 @@ export default class LoginPopup extends Component<StoreProps, State> {
 
   changeSwiperPageToPrev = () => {
     this.swiper && this.swiper.pre();
+  };
+
+  toggleRemember = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ remember: e.target.checked });
   };
 
   closePopup = () => {
@@ -136,12 +146,12 @@ export default class LoginPopup extends Component<StoreProps, State> {
         onKeyPress={this.onKeyPress}
       />
 
-      {/* <div className="account-helper">
+      <div className="account-helper">
         <div className="checkbox-form">
-          <input type="checkbox" name="checkbox" value="value" />
+          <input type="checkbox" name="checkbox" value="value" onChange={this.toggleRemember} />
           <label>Remember Me</label>
         </div>
-      </div> */}
+      </div>
 
       <Button disabled={!this.checkValidAllInputs()} fluid color="blue" className="login-button">
         LOGIN
