@@ -36,19 +36,23 @@ class Layout extends Component<StoreProps> {
     ];
   }
 
+  doLogin = async () => {
+    if (!this.props.login)
+      // TODO: Error exception
+      return;
+
+    const remember = getRememberLoginToken();
+    const loginToken = remember && (await rememberLogin(remember));
+
+    const token = loginToken || getLoginToken();
+    if (token) return this.props.login.login(token);
+  };
+
   // Add Window event
   componentDidMount = async () => {
     // Only run code in browser
     if (typeof window !== 'undefined') {
-      if (!this.props.login)
-        // TODO: Error exception
-        return;
-
-      const remember = getRememberLoginToken();
-      const loginToken = remember && (await rememberLogin(remember));
-
-      const token = loginToken || getLoginToken();
-      if (token) return this.props.login.login(token);
+      this.doLogin();
     }
 
     for (const e of this.events) window.addEventListener(e.event, e.method);
