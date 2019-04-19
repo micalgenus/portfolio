@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { ToastContainer } from 'react-toastify';
+import getConfig from 'next/config';
+import ReactGA from 'react-ga';
 
 import { throttle } from 'lodash';
 
@@ -15,6 +17,8 @@ import './styles/layout.font.scss';
 import './styles/layout.global.scss';
 import './styles/layout.scss';
 import './styles/toast/main.scss';
+
+const { publicRuntimeConfig } = getConfig();
 
 interface EventListener {
   event: string;
@@ -48,11 +52,17 @@ class Layout extends Component<StoreProps> {
     if (token) return this.props.login.login(token);
   };
 
+  googleAnalytics = () => {
+    ReactGA.initialize(publicRuntimeConfig.GOOGLE_ANALYTICS_KEY);
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  };
+
   // Add Window event
   componentDidMount = async () => {
     // Only run code in browser
     if (typeof window !== 'undefined') {
       this.doLogin();
+      this.googleAnalytics();
     }
 
     for (const e of this.events) window.addEventListener(e.event, e.method);
