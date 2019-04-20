@@ -1,5 +1,6 @@
 import React, { Component, FormEvent } from 'react';
 import { observer, inject } from 'mobx-react';
+import getConfig from 'next/config';
 import { Button, Modal, Icon, Divider } from 'semantic-ui-react';
 
 import { Swiper, InputText } from '@/components';
@@ -7,9 +8,14 @@ import { StoreProps } from '@/lib/store';
 import { login } from '@/lib/graphql/user';
 import { checkValidPassword } from '@/lib/utils/user';
 
+import OAuthLoginButton from './oauth';
+
 import SignupPopup from './SignupPopup';
 
 import './LoginPopup.scss';
+
+const { publicRuntimeConfig } = getConfig();
+const { GITHUB_OAUTH_CLIENT_ID } = publicRuntimeConfig;
 
 type AllowError = 'No user with that id' | 'Incorrect password';
 const ErrorMessages = new Map<keyof InputState, AllowError[]>([['id', ['No user with that id']], ['password', ['Incorrect password']]]);
@@ -120,16 +126,24 @@ export default class LoginPopup extends Component<StoreProps, State> {
     hideLoginPopup();
   };
 
+  GithubLoginCallback = () => {
+    window.location.reload();
+  };
+
   renderSocialLogin = () => {
     return (
       <div className="social-login">
         <Button fluid color="blue" onClick={() => this.swiper && this.swiper.next()}>
           Signup
         </Button>
-        {/* <Button icon labelPosition="left" fluid color="black">
-          <Icon size="large" inverted name="github" />
-          Github
-        </Button> */}
+        <OAuthLoginButton
+          path={`https://github.com/login/oauth/authorize?client_id=${GITHUB_OAUTH_CLIENT_ID}&scope=user`}
+          label="Github"
+          icon="github"
+          backgroundColor="black"
+          color="white"
+          callback={this.GithubLoginCallback}
+        />
       </div>
     );
   };

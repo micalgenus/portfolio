@@ -3,7 +3,8 @@ require('dotenv-load')();
 const withConfig = require('next-runtime-dotenv')({
   public: [
     'PORTFOLIO_GRAPHQL_URL',
-    'GOOGLE_ANALYTICS_KEY'
+    'GOOGLE_ANALYTICS_KEY',
+    'GITHUB_OAUTH_CLIENT_ID',
   ],
 });
 
