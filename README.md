@@ -18,11 +18,17 @@ yarn build && yarn start
 
 ```
 PORTFOLIO_GRAPHQL_URL=<graphql-uri>
+PORTFOLIO_OAUTH_URL=<oauth-uri>
+GOOGLE_ANALYTICS_KEY=<google-anaytics-key>
+GITHUB_OAUTH_CLIENT_ID=<github-auth-client-id>
 ```
 
-PORTFOLIO_GRAPHQL_URL: API를 위한 서버 URL를 입력합니다.
+PORTFOLIO_GRAPHQL_URL: GraphQL API를 위한 서버 URL을 입력합니다.
+PORTFOLIO_OAUTH_URL: OAuth API를 위한 서버 URL을 입력합니다.
+GOOGLE_ANALYTICS_KEY: Google Analytics를 이용하기 위한 키를 입력합니다. (선택)
+GITHUB_OAUTH_CLIENT_ID: Github OAuth을 위한 client id를 입력합니다. (선택)
 
-#### GraphQL API Server
+#### GraphQL & OAuth API Server
 
 해당 프로젝트에서 사용하기 위한 API서버를 구축하여야 합니다.
 API 서버: https://github.com/micalgenus/portfolio-serverless (GraphQL)
