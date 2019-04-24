@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Icon, SemanticICONS, StrictButtonProps } from 'semantic-ui-react';
 import { StandardLonghandProperties } from 'csstype';
+import { inject, observer } from 'mobx-react';
 
-interface Props {
+import { StoreProps } from '@/lib/store';
+import { getLoginToken } from '@/lib/utils/cookie';
+
+interface Props extends StoreProps {
   path: string;
   label: string;
   name?: string;
@@ -12,7 +16,18 @@ interface Props {
   callback: () => void;
 }
 
+@inject('login')
+@observer
 export default class OAuthPopup extends Component<Props> {
+  doLogin = async () => {
+    if (!this.props.login)
+      // TODO: Error exception
+      return;
+
+    const token = getLoginToken();
+    if (token) return this.props.login.login(token);
+  };
+
   showPopup = () => {
     const { path, name, label, callback } = this.props;
 
@@ -22,7 +37,8 @@ export default class OAuthPopup extends Component<Props> {
     const _oauthInterval = window.setInterval(() => {
       if (_oauthWindow.closed) {
         window.clearInterval(_oauthInterval);
-        callback();
+
+        this.doLogin().then(() => callback());
       }
     }, 500);
   };

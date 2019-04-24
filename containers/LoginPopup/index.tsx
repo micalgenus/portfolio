@@ -8,7 +8,7 @@ import { StoreProps } from '@/lib/store';
 import { login } from '@/lib/graphql/user';
 import { checkValidPassword } from '@/lib/utils/user';
 
-import OAuthLoginButton from './oauth';
+import OAuthLoginButton from './OAuthPopup';
 
 import SignupPopup from './SignupPopup';
 
@@ -126,8 +126,9 @@ export default class LoginPopup extends Component<StoreProps, State> {
     hideLoginPopup();
   };
 
-  GithubLoginCallback = () => {
-    window.location.reload();
+  OAuthLoginPopupCallback = () => {
+    // window.location.reload();
+    this.closePopup();
   };
 
   renderSocialLogin = () => {
@@ -136,14 +137,16 @@ export default class LoginPopup extends Component<StoreProps, State> {
         <Button fluid color="blue" onClick={() => this.swiper && this.swiper.next()}>
           Signup
         </Button>
-        <OAuthLoginButton
-          path={`https://github.com/login/oauth/authorize?client_id=${GITHUB_OAUTH_CLIENT_ID}&scope=user`}
-          label="Github"
-          icon="github"
-          backgroundColor="black"
-          color="white"
-          callback={this.GithubLoginCallback}
-        />
+        {GITHUB_OAUTH_CLIENT_ID ? (
+          <OAuthLoginButton
+            path={`https://github.com/login/oauth/authorize?client_id=${GITHUB_OAUTH_CLIENT_ID}&scope=user`}
+            label="Github"
+            icon="github"
+            backgroundColor="black"
+            color="white"
+            callback={this.OAuthLoginPopupCallback}
+          />
+        ) : null}
       </div>
     );
   };

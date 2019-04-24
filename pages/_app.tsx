@@ -6,6 +6,8 @@ import Layout from '@/containers/Layout';
 
 import { Store } from '@/lib';
 
+const DISABLE_LAYOUT_PAGES = ['/login'];
+
 export default class NextAppLayout extends App {
   static async getInitialProps({ Component, ctx }: NextAppContext) {
     let pageProps = {};
@@ -20,8 +22,10 @@ export default class NextAppLayout extends App {
   render() {
     const { Component, pageProps, router } = this.props;
 
-    return pageProps.statusCode === 404 ? (
-      <Component {...pageProps} />
+    return pageProps.statusCode === 404 || DISABLE_LAYOUT_PAGES.includes(router.route) ? (
+      <Store>
+        <Component router={router} {...pageProps} />
+      </Store>
     ) : (
       <Container>
         <Head>

@@ -10,7 +10,7 @@ import fetch from 'isomorphic-fetch';
 
 import { getLoginToken } from '@/lib/utils/cookie';
 
-import { RETRY_MAX } from './index';
+import { RETRY_MAX } from '@/lib/config';
 
 import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
