@@ -26,10 +26,12 @@ export default class IndexPage extends Component<Props, State> {
     const { type, code }: any = router.query || {};
     if (!type || !code) return this.setState({ error: 'Invalid request' });
 
-    requestOAuthWithAxiosRetry(type, code).then(res => {
-      if (this.props.login && this.props.login.login) this.props.login.login(res.token);
-      window.close();
-    });
+    requestOAuthWithAxiosRetry(type, code)
+      .then(res => {
+        if (this.props.login && this.props.login.login) this.props.login.login(res.token);
+        window.close();
+      })
+      .catch(err => this.setState({ error: `Error: ${(err && err.response && err.response.data && err.response.data.error) || 'Server Error'}` }));
   };
 
   render() {
