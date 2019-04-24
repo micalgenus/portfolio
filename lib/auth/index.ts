@@ -1,13 +1,11 @@
-import axios from 'axios';
 import getConfig from 'next/config';
 
-// import { axiosRetryWrapper } from '@/lib/config';
+import { axiosRetryWrapper } from '@/lib/config';
 
 const { publicRuntimeConfig } = getConfig();
 
 export const requestOAuthWithAxiosRetry = async (type: string, code: string): Promise<any> => {
-  // return axiosRetryWrapper({
-  return axios({
+  return axiosRetryWrapper({
     method: 'POST',
     url: publicRuntimeConfig.PORTFOLIO_OAUTH_URL,
     params: { type, code },
