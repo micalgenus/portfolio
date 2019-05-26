@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { ApolloClient } from 'apollo-client';
 
 import { Icon } from 'semantic-ui-react';
-import { toast } from 'react-toastify';
 import { debounce } from 'lodash';
 
 import { InputText, TextArea } from '@/components';
-import { removeCategoryItemQuery, getUserQuery, updateCategoryItemQuery } from '@/lib/graphql/query';
 
 import './CategoryItem.scss';
-import { Category, CategoryItem } from '@/interfaces';
+import { updateCategoryItem, removeCategoryItem } from './graphql';
 
 interface Props {
   client: ApolloClient<any>;
@@ -62,33 +60,4 @@ export default class CategoryItemComponent extends Component<Props, State> {
       </div>
     );
   }
-}
-
-function removeCategoryItem(client: ApolloClient<any>, id: string, category: string) {
-  return client
-    .mutate({
-      mutation: removeCategoryItemQuery,
-      variables: { id, category },
-      update: (proxy, { data: { removeCategoryItem } }) => {
-        if (removeCategoryItem) {
-          const { me } = proxy.readQuery<any, any>({ query: getUserQuery }) || { me: {} };
-          const categories: Category[] = me.categories;
-          const [targetCategory] = categories.filter((c: Category) => c._id === category);
-          if (targetCategory && targetCategory.items) targetCategory.items = targetCategory.items.filter((i: CategoryItem) => i._id !== id);
-          proxy.writeQuery({ query: getUserQuery, data: { me } });
-        }
-      },
-    })
-    .then(() => toast.success('Completed remove item in user category.'))
-    .catch(err => toast.error(err.message));
-}
-
-function updateCategoryItem(client: ApolloClient<any>, category: string, { _id, name, description }: CategoryItem) {
-  return client
-    .mutate({
-      mutation: updateCategoryItemQuery,
-      variables: { id: _id, category, item: { name, description } },
-    })
-    .then(() => toast.success('Completed update category information of user.'))
-    .catch(err => toast.error(err.message));
 }
