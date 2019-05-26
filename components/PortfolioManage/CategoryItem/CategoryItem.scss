@@ -18,6 +18,20 @@
     }
   }
 
+  .category-item-handle,
+  .remove-item-button {
+    opacity: 0;
+    transition: 0.2s;
+  }
+
+  &:hover,
+  &:active {
+    .category-item-handle,
+    .remove-item-button {
+      opacity: 1;
+    }
+  }
+
   .category-item-manage-container {
     width: 100%;
     font-size: 0.7em;

@@ -1,5 +1,5 @@
 .category-manage-component {
-  padding-left: 40px;
+  // padding-left: 40px;
   padding-bottom: 0;
 
   .category-handle {
@@ -7,6 +7,20 @@
     margin-left: -55px;
     padding: 30px 27.5px;
     font-size: 1.2em;
+  }
+
+  .category-handle,
+  .remove-category-button {
+    opacity: 0;
+    transition: 0.2s;
+  }
+
+  &:hover,
+  &:active {
+    .category-handle,
+    .remove-category-button {
+      opacity: 1;
+    }
   }
 
   .remove-category-button {
