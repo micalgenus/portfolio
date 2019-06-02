@@ -12,6 +12,33 @@
 # below:
 .git
 .gitignore
+.dockerignore
 
 # Node.js dependencies:
 node_modules/
+
+# Configs
+jest.config.js
+tsconfig.json
+.editorconfig
+.eslintrc
+.prettierrc
+.travis.yml
+app.yaml
+Dockerfile
+.vscode
+
+# test
+coverage
+
+# Logs
+yarn-error.log
+
+# keyfile
+keyfile.json
+keyfile.json.enc
+
+# misc
+LICENSE
+README.md
+.DS_Store

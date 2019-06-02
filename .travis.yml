@@ -39,6 +39,9 @@ deploy:
       branch: develop
   - provider: gae
     keyfile: ./keyfile.json
+    project: micalgenus-com
+    no_promote: true
+    skip_cleanup: true
     on:
       branch: develop
 
