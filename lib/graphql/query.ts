@@ -25,6 +25,19 @@ export const getUserQuery = gql`
   }
 `;
 
+export const getOnlyUserInformationQuery = gql`
+  query {
+    me {
+      id
+      username
+      email
+      github
+      linkedin
+      description
+    }
+  }
+`;
+
 export const getUserInfoQuery = gql`
   query getUserInfo($id: String!) {
     getUserInfo(id: $id) {

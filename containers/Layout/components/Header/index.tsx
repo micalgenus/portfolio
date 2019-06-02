@@ -9,10 +9,12 @@ import './styles/header.scss';
 
 const HEADER_HEIGHT = 60;
 
+const MENU_ITEMS: { name: string; route: string }[] = [{ name: 'Setting', route: '/setting' }, { name: 'Profile', route: '/profile' }];
+
 @inject('login')
 @inject('scroll')
 @observer
-class LayoutHeader extends Component<StoreProps> {
+export default class LayoutHeader extends Component<StoreProps> {
   renderUserMenus = () => {
     const { logout, showLoginPopup, userInformation } = this.props.login || {
       showLoginPopup: () => console.error('showLoginPopop Error'),
@@ -36,11 +38,13 @@ class LayoutHeader extends Component<StoreProps> {
         >
           <Popup.Content>
             <ul className="user-menu-items-popup">
-              <li>
-                <Link route="/profile">
-                  <a>Setting</a>
-                </Link>
-              </li>
+              {MENU_ITEMS.map(menu => (
+                <li>
+                  <Link route={menu.route}>
+                    <a>{menu.name}</a>
+                  </Link>
+                </li>
+              ))}
               <li>
                 <a onClick={logout}>Logout</a>
               </li>
@@ -73,5 +77,3 @@ class LayoutHeader extends Component<StoreProps> {
     );
   }
 }
-
-export default LayoutHeader;
