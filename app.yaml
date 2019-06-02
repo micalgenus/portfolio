@@ -1,0 +1,8 @@
+runtime: nodejs10
+env_variables:
+  NODE_ENV: production
+service: default
+handlers:
+- url: /.*
+  secure: always
+  script: auto
