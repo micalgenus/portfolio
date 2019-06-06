@@ -31,4 +31,13 @@ GITHUB_OAUTH_CLIENT_ID: Github OAuth을 위한 client id를 입력합니다. (�
 #### GraphQL & OAuth API Server
 
 해당 프로젝트에서 사용하기 위한 API서버를 구축하여야 합니다.
-API 서버: https://github.com/micalgenus/portfolio-serverless (GraphQL)
+API 서버: https://github.com/micalgenus/portfolio-serverless (GraphQL + OAuth)
+
+#### Google App Engine
+
+해당 프로젝트를 Google App Engine에 deploy하기 위해서 키가 필요합니다.
+travis-ci를 이용하여 자동으로 deploy하기 위해서는 `keyfile.json`이 필요하며, 해당 설정에 맞게 `.traivs.yml`파일 수정이 필요합니다.
+
+```
+$ travis encrypt-file keyfile.json --add
+```
