@@ -22,7 +22,7 @@ export default class LayoutFooter extends Component {
 
   getServerInfo = () => (
     <p>
-      Hosted by Google Cloud Platform using Nginx and <ExternalLink href="https://hub.docker.com/r/micalgenus/portfolio">Docker</ExternalLink> swarm.
+      Hosted by Google Cloud App Engine
     </p>
   );
 
