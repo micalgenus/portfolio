@@ -45,6 +45,11 @@ deploy:
     on:
       branch: develop
 
+after_deploy:
+  - |
+    export APP_VERSION=$(gcloud app versions list --service=default --sort-by=~LAST_DEPLOYED --format="table(version.id)" | tail -1)
+    gcloud app services set-traffic default --splits $APP_VERSION=1 --migrate
+
 # after_script:
 #   - ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
 # Generate your secure token with the travis gem:
