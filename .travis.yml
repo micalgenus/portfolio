@@ -47,6 +47,7 @@ deploy:
 
 after_deploy:
   - |
+    gcloud auth activate-service-account --key-file=keyfile.json
     export APP_VERSION=$(gcloud app versions list --service=default --sort-by=~LAST_DEPLOYED --format="table(version.id)" | tail -1)
     gcloud app services set-traffic default --splits $APP_VERSION=1 --migrate
 
