@@ -15,8 +15,8 @@ export default class LayoutFooter extends Component {
   getBuildAndTestInfo = () => (
     <p>
       Powered by <ExternalLink href="https://nextjs.org/">Next</ExternalLink>. Tests use{' '}
-      <ExternalLink href="https://travis-ci.org/micalgenus/portfolio">Travis-ci</ExternalLink> and{' '}
-      <ExternalLink href="https://codeclimate.com/github/micalgenus/portfolio">codeclimate</ExternalLink>.
+      <ExternalLink href="https://travis-ci.org/micalgenus/portfolio-serverless">Travis-ci</ExternalLink> and{' '}
+      <ExternalLink href="https://codeclimate.com/github/micalgenus/portfolio-serverless">codeclimate</ExternalLink>.
     </p>
   );
 
