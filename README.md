@@ -41,3 +41,13 @@ travis-ci를 이용하여 자동으로 deploy하기 위해서는 `keyfile.json`�
 ```
 $ travis encrypt-file keyfile.json --add
 ```
+
+#### GCP key
+
+프로젝트에 **Google Cloud Platform**의 key를 받아 `keyfile.json`을 프로젝트에 포함시킵니다.
+해당 계정은 다음과 같은 권한을 가지고 있어야 합니다.
+
+- App Engine Deployer
+- App Engine Service Admin
+- Cloud Build Editor
+- Storage Object Admin
