@@ -24,7 +24,7 @@ install:
 before_script:
   - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
   - export TF_CREDS=keyfile.json
-  - export TF_PROJECT=$(node gcloud.keyfile.js ./keyfile.json project_id)
+  - export TRAVIS_WORKER_GCE_PROJECT_ID=$(node gcloud.keyfile.js ./keyfile.json project_id)
 #   - ./cc-test-reporter before-build
 
 script:
