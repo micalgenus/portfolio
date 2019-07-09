@@ -21,7 +21,11 @@ before_install:
 install:
   - yarn
 
-# before_script:
+before_script:
+  - gcloud auth activate-service-account --key-file=keyfile.json
+  - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
+  - export TF_CREDS=keyfile.json
+  - export GOOGLE_APPLICATION_CREDENTIALS=$TF_CREDS
 #   - ./cc-test-reporter before-build
 
 script:
@@ -46,10 +50,7 @@ deploy:
       branch: develop
 
 after_deploy:
-  - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
-  - export TF_CREDS=keyfile.json
   - export TRAVIS_WORKER_GCE_PROJECT_ID=$(node gcloud.keyfile.js ./keyfile.json project_id)
-  - gcloud auth activate-service-account --key-file=keyfile.json
   - export APP_VERSION=$(gcloud app versions list --service=default --sort-by=~LAST_DEPLOYED --format="table(version.id)" --account=$GCLOUD_ACCOUNT_EMAIL | tail -1)
   - gcloud app services set-traffic default --splits $APP_VERSION=1 --migrate --account=$GCLOUD_ACCOUNT_EMAIL
 
