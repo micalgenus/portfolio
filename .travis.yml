@@ -9,6 +9,7 @@ cache:
 branches:
   only:
     - develop
+    - travis
 
 services:
   - docker
