@@ -5,9 +5,9 @@ node_js:
 cache:
   npm: true
   yarn: true
-  # directories:
-  #   - /home/google-cloud-sdk
-  #   - /home/terraform
+  directories:
+    - $HOME/google-cloud-sdk
+    - $HOME/terraform
 
 branches:
   only:
@@ -16,6 +16,10 @@ branches:
 
 # services:
 #   - docker
+
+env:
+  global:
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_eb0fbafef4ea_key -iv $encrypted_eb0fbafef4ea_iv -in keyfile.json.enc -out keyfile.json -d
