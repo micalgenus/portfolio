@@ -5,9 +5,9 @@ node_js:
 cache:
   npm: true
   yarn: true
-  directories:
-    - /home/google-cloud-sdk
-    - /home/terraform
+  # directories:
+  #   - /home/google-cloud-sdk
+  #   - /home/terraform
 
 branches:
   only:
