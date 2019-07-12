@@ -37,9 +37,6 @@ before_install:
       unzip terraform_0.12.4_linux_amd64.zip -d $HOME/terraform/bin/
     fi
   - export PATH=$PATH:$HOME/terraform/bin
-  - terraform init
-
-  - terraform graph
 
 #   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 #   - chmod +x ./cc-test-reporter
@@ -55,6 +52,10 @@ before_script:
   - export TRAVIS_WORKER_GCE_PROJECT_ID=$TF_PROJECT
   - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
   - export GOOGLE_APPLICATION_CREDENTIALS=$TF_CREDS
+
+  - terraform init
+
+  - terraform graph
 #   - ./cc-test-reporter before-build
 
 script:
