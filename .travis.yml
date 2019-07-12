@@ -53,9 +53,9 @@ before_script:
   - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
   - export GOOGLE_APPLICATION_CREDENTIALS=$TF_CREDS
 
-  - terraform init
+  # - terraform init
 
-  - terraform graph
+  # - terraform graph
 #   - ./cc-test-reporter before-build
 
 script:
