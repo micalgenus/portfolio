@@ -37,6 +37,7 @@ before_install:
       unzip terraform_0.12.4_linux_amd64.zip -d $HOME/terraform/bin/
     fi
   - export PATH=$PATH:$HOME/terraform/bin
+  - terraform init
 
 #   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 #   - chmod +x ./cc-test-reporter
