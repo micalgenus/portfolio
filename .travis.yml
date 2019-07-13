@@ -52,6 +52,10 @@ before_script:
   - export TRAVIS_WORKER_GCE_PROJECT_ID=$TF_PROJECT
   - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
   - export GOOGLE_APPLICATION_CREDENTIALS=$TF_CREDS
+  - export GOOGLE_PROJECT=$TF_PROJECT
+  - export GOOGLE_CLOUD_PROJECT=$TF_PROJECT
+  - export GCLOUD_PROJECT=$TF_PROEJCT
+  - export CLOUDSDK_CORE_PROJECT=$TF_PROJECT
 
   # - terraform init
 
