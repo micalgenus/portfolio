@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Query } from 'react-apollo';
+import { Query, QueryResult } from 'react-apollo';
 
 import { getUserInfoQuery } from '@/lib/graphql/query';
 
@@ -30,7 +30,7 @@ export default class PortfolioPage extends Component<Props> {
   render() {
     return (
       <Query query={getUserInfoQuery} variables={{ id: this.props.router.query.id }}>
-        {({ loading, error, data }) => {
+        {({ loading, error, data }: QueryResult) => {
           if (error) return <div>{Router.push('/') && null}</div>;
           if (loading) return <div>Loading</div>;
 
