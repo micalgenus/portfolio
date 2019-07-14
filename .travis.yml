@@ -5,16 +5,28 @@ node_js:
 cache:
   npm: true
   yarn: true
+  directories:
+    - $HOME/google-cloud-sdk
 
 branches:
   only:
     - develop
+    - travis
 
-services:
-  - docker
+# services:
+#   - docker
+
+env:
+  global:
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_eb0fbafef4ea_key -iv $encrypted_eb0fbafef4ea_iv -in keyfile.json.enc -out keyfile.json -d
+
+  # Install Google Cloud SDK
+  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
+  - source $HOME/google-cloud-sdk/path.bash.inc
+
 #   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 #   - chmod +x ./cc-test-reporter
 
@@ -23,12 +35,9 @@ install:
 
 before_script:
   - gcloud auth activate-service-account --key-file=keyfile.json
-  - export TF_CREDS=keyfile.json
-  - export TF_PROJECT=$(node gcloud.keyfile.js ./keyfile.json project_id)
-  - export TF_VAR_project=$TF_PROJECT
-  - export TRAVIS_WORKER_GCE_PROJECT_ID=$TF_PROJECT
+  - export GOOGLE_APPLICATION_CREDENTIALS=keyfile.json
   - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
-  - export GOOGLE_APPLICATION_CREDENTIALS=$TF_CREDS
+  - export CLOUDSDK_CORE_PROJECT=$(node gcloud.keyfile.js ./keyfile.json project_id)
 #   - ./cc-test-reporter before-build
 
 script:
@@ -36,14 +45,14 @@ script:
   # - yarn run test --coverage
   - yarn type-check
   - yarn build
-  - docker build -t $USERNAME/portfolio:develop .
+  # - docker build -t $USERNAME/portfolio:develop .
 
 deploy:
-  - provider: script
-    script: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout
-    skip_cleanup: true
-    on:
-      branch: develop
+  # - provider: script
+  #   script: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push micalgenus/portfolio:develop && docker logout
+  #   skip_cleanup: true
+  #   on:
+  #     branch: develop
   - provider: gae
     keyfile: ./keyfile.json
     project: micalgenus-com
