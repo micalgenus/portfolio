@@ -7,7 +7,6 @@ cache:
   yarn: true
   directories:
     - $HOME/google-cloud-sdk
-    - $HOME/terraform
 
 branches:
   only:
@@ -28,16 +27,6 @@ before_install:
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
   - source $HOME/google-cloud-sdk/path.bash.inc
 
-  # Install terraform
-  - |
-    if [ ! -d "$HOME/terraform/bin" ]; then
-      rm -rf "$HOME/terraform"
-      mkdir -p $HOME/terraform/bin
-      wget https://releases.hashicorp.com/terraform/0.12.4/terraform_0.12.4_linux_amd64.zip
-      unzip terraform_0.12.4_linux_amd64.zip -d $HOME/terraform/bin/
-    fi
-  - export PATH=$PATH:$HOME/terraform/bin
-
 #   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 #   - chmod +x ./cc-test-reporter
 
@@ -47,19 +36,10 @@ install:
 before_script:
   - gcloud auth activate-service-account --key-file=keyfile.json
   - export TF_CREDS=keyfile.json
-  - export TF_PROJECT=$(node gcloud.keyfile.js ./keyfile.json project_id)
-  - export TF_VAR_project=$TF_PROJECT
-  - export TRAVIS_WORKER_GCE_PROJECT_ID=$TF_PROJECT
+  - export GOOGLE_PROJECT=$(node gcloud.keyfile.js ./keyfile.json project_id)
   - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
   - export GOOGLE_APPLICATION_CREDENTIALS=$TF_CREDS
-  - export GOOGLE_PROJECT=$TF_PROJECT
-  - export GOOGLE_CLOUD_PROJECT=$TF_PROJECT
-  - export GCLOUD_PROJECT=$TF_PROEJCT
-  - export CLOUDSDK_CORE_PROJECT=$TF_PROJECT
 
-  # - terraform init
-
-  # - terraform graph
 #   - ./cc-test-reporter before-build
 
 script:
