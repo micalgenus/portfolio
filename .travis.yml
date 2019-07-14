@@ -35,11 +35,11 @@ install:
 
 before_script:
   - gcloud auth activate-service-account --key-file=keyfile.json
-  - export TF_CREDS=keyfile.json
+  - export GOOGLE_APPLICATION_CREDENTIALS=keyfile.json
   - export GOOGLE_PROJECT=$(node gcloud.keyfile.js ./keyfile.json project_id)
   - export GCLOUD_ACCOUNT_EMAIL=$(node gcloud.keyfile.js ./keyfile.json client_email)
-  - export GOOGLE_APPLICATION_CREDENTIALS=$TF_CREDS
-
+  - export TF_CREDS=$GOOGLE_APPLICATION_CREDENTIALS
+  - export TF_PROJECT=$GOOGLE_PROJECT
 #   - ./cc-test-reporter before-build
 
 script:
