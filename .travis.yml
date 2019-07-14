@@ -61,8 +61,7 @@ deploy:
     on:
       branch: develop
 
-after_script:
-# after_deploy:
+after_deploy:
   - export APP_VERSION=$(gcloud app versions list --service=default --sort-by=~LAST_DEPLOYED --format="table(version.id)" --account=$GCLOUD_ACCOUNT_EMAIL | tail -1)
   - gcloud app services set-traffic default --splits $APP_VERSION=1 --migrate --account=$GCLOUD_ACCOUNT_EMAIL
 
