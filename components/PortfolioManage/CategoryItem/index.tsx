@@ -6,7 +6,7 @@ import { debounce } from 'lodash';
 
 import { InputText, TextArea } from '@/components';
 
-import './CategoryItem.scss';
+import './CategoryItem.css';
 import { updateCategoryItem, removeCategoryItem } from './graphql';
 
 interface Props {

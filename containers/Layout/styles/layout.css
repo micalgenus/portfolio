@@ -1,4 +1,4 @@
-@import './layout.config.scss';
+@import './layout.config.css';
 
 main {
   padding: 0 $content-padding;
@@ -46,7 +46,7 @@ main {
 
   h3 {
     border-left: $heading-box-width solid #8d7edc;
-    padding-left: $content-padding - $heading-box-width;
+    padding-left: calc($content-padding - $heading-box-width);
     margin-left: -$content-padding;
   }
 }

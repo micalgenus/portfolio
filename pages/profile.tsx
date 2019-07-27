@@ -13,7 +13,7 @@ import { getUserQuery, addCategoryQuery, updateCategorySequenceQuery } from '@/l
 import { Router, InputText, CategoryManage } from '@/components';
 import { User } from '@/interfaces';
 
-import '@/scss/profile.scss';
+import '@/scss/profile.css';
 
 interface InputState {
   username?: string;

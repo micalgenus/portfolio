@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { ExternalLink } from '@/components';
 
-import './styles/footer.scss';
+import './styles/footer.css';
 
 export default class LayoutFooter extends Component {
   getCopyRight = () => (

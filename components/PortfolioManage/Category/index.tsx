@@ -10,7 +10,7 @@ import { CategoryItem } from '@/interfaces';
 
 import { updateCategory, updateCategoryItemSequence, addCategoryItem, removeCategory } from './graphql';
 
-import './Category.scss';
+import './Category.css';
 
 interface Props {
   _id: string;

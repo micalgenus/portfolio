@@ -1,6 +1,6 @@
 import React, { Component, ReactElement } from 'react';
 
-import './Swiper.scss';
+import './Swiper.css';
 
 interface State {
   components: ReactElement[];

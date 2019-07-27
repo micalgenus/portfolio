@@ -1,4 +1,4 @@
-@keyframes #{$rt-namespace}__zoomIn {
+@keyframes Toastify__zoomIn {
   from {
     opacity: 0;
     transform: scale3d(0.3, 0.3, 0.3);
@@ -8,7 +8,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__zoomOut {
+@keyframes Toastify__zoomOut {
   from {
     opacity: 1;
   }
@@ -21,10 +21,10 @@
   }
 }
 
-.#{$rt-namespace}__zoom-enter {
-  animation-name: #{$rt-namespace}__zoomIn;
+Toastify__zoom-enter {
+  animation-name: Toastify__zoomIn;
 }
 
-.#{$rt-namespace}__zoom-exit {
-  animation-name: #{$rt-namespace}__zoomOut;
+Toastify__zoom-exit {
+  animation-name: Toastify__zoomOut;
 }

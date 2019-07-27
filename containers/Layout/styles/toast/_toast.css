@@ -1,4 +1,4 @@
-.#{$rt-namespace}__toast {
+Toastify__toast {
   position: relative;
   min-height: $rt-toast-min-height;
   box-sizing: border-box;
@@ -38,8 +38,8 @@
   }
 }
 
-@media #{$rt-mobile} {
-  .#{$rt-namespace}__toast {
+@media 'only screen and (max-width : 480px)' !default {
+  Toastify__toast {
     margin-bottom: 0;
   }
 }

@@ -1,4 +1,4 @@
-@import '../../../styles/layout.config.scss';
+@import '../../../styles/layout.config.css';
 
 header {
   display: flex;

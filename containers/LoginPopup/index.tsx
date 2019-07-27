@@ -12,7 +12,7 @@ import OAuthLoginButton from './OAuthPopup';
 
 import SignupPopup from './SignupPopup';
 
-import './LoginPopup.scss';
+import './LoginPopup.css';
 
 const { publicRuntimeConfig } = getConfig();
 const { GITHUB_OAUTH_CLIENT_ID } = publicRuntimeConfig;

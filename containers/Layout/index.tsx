@@ -13,10 +13,10 @@ import { default as LoginPopup } from '@/containers/LoginPopup';
 
 import { Header, Footer, ScrollTo } from './components';
 
-import './styles/layout.font.scss';
-import './styles/layout.global.scss';
-import './styles/layout.scss';
-import './styles/toast/main.scss';
+import './styles/layout.font.css';
+import './styles/layout.global.css';
+import './styles/layout.css';
+import './styles/toast/main.css';
 
 const { publicRuntimeConfig } = getConfig();
 

@@ -1,4 +1,4 @@
-.#{$rt-namespace}__toast-container {
+Toastify__toast-container {
   z-index: $rt-z-index;
   -webkit-transform: translate3d(0, 0, #{$rt-z-index}px);
   position: fixed;
@@ -34,8 +34,8 @@
   }
 }
 
-@media #{$rt-mobile} {
-  .#{$rt-namespace}__toast-container {
+@media 'only screen and (max-width : 480px)' !default {
+  Toastify__toast-container {
     width: 100vw;
     padding: 0;
     left: 0;

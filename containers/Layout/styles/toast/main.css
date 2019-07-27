@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+@import '_variables.css';
+@import '_toastContainer.css';
+@import '_toast.css';
+@import '_closeButton.css';
+@import '_progressBar.css';
+
+// entrance and exit animations
+@import 'animations/_bounce.css';
+@import 'animations/_zoom.css';
+@import 'animations/_flip.css';
+@import 'animations/_slide.css';

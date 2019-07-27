@@ -1,4 +1,4 @@
-@keyframes #{$rt-namespace}__flipIn {
+@keyframes Toastify__flipIn {
   from {
     transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
     animation-timing-function: ease-in;
@@ -20,7 +20,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__flipOut {
+@keyframes Toastify__flipOut {
   from {
     transform: perspective(400px);
   }
@@ -34,10 +34,10 @@
   }
 }
 
-.#{$rt-namespace}__flip-enter {
-  animation-name: #{$rt-namespace}__flipIn;
+Toastify__flip-enter {
+  animation-name: Toastify__flipIn;
 }
 
-.#{$rt-namespace}__flip-exit {
-  animation-name: #{$rt-namespace}__flipOut;
+Toastify__flip-exit {
+  animation-name: Toastify__flipOut;
 }

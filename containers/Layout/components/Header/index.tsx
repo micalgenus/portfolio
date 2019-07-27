@@ -5,7 +5,7 @@ import { Popup } from 'semantic-ui-react';
 import { ScrollBar, Link } from '@/components';
 import { StoreProps } from '@/lib/store';
 
-import './styles/header.scss';
+import './styles/header.css';
 
 const HEADER_HEIGHT = 60;
 

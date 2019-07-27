@@ -9,7 +9,6 @@ const withConfig = require('next-runtime-dotenv')({
 
 const modules = [
   require('@zeit/next-css'),
-  require('@zeit/next-sass'),
   require('@zeit/next-typescript'),
   require('next-env')(),
   withConfig,

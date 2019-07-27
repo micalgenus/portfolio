@@ -5,7 +5,7 @@ import { Icon } from 'semantic-ui-react';
 
 import { StoreProps } from '@/lib/store';
 
-import './styles/scroll.scss';
+import './styles/scroll.css';
 
 @inject('scroll')
 @observer

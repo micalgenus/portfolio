@@ -2,7 +2,7 @@
   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-@keyframes #{$rt-namespace}__bounceInRight {
+@keyframes Toastify__bounceInRight {
   from,
   60%,
   75%,
@@ -29,7 +29,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__bounceOutRight {
+@keyframes Toastify__bounceOutRight {
   20% {
     opacity: 1;
     transform: translate3d(-20px, 0, 0);
@@ -40,7 +40,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__bounceInLeft {
+@keyframes Toastify__bounceInLeft {
   from,
   60%,
   75%,
@@ -67,7 +67,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__bounceOutLeft {
+@keyframes Toastify__bounceOutLeft {
   20% {
     opacity: 1;
     transform: translate3d(20px, 0, 0);
@@ -78,7 +78,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__bounceInUp {
+@keyframes Toastify__bounceInUp {
   from,
   60%,
   75%,
@@ -105,7 +105,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__bounceOutUp {
+@keyframes Toastify__bounceOutUp {
   20% {
     transform: translate3d(0, -10px, 0);
   }
@@ -120,7 +120,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__bounceInDown {
+@keyframes Toastify__bounceInDown {
   from,
   60%,
   75%,
@@ -147,7 +147,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__bounceOutDown {
+@keyframes Toastify__bounceOutDown {
   20% {
     transform: translate3d(0, 10px, 0);
   }
@@ -162,36 +162,36 @@
   }
 }
 
-.#{$rt-namespace}__bounce-enter {
+Toastify__bounce-enter {
   &--top-left,
   &--bottom-left {
-    animation-name: #{$rt-namespace}__bounceInLeft;
+    animation-name: Toastify__bounceInLeft;
   }
   &--top-right,
   &--bottom-right {
-    animation-name: #{$rt-namespace}__bounceInRight;
+    animation-name: Toastify__bounceInRight;
   }
   &--top-center {
-    animation-name: #{$rt-namespace}__bounceInDown;
+    animation-name: Toastify__bounceInDown;
   }
   &--bottom-center {
-    animation-name: #{$rt-namespace}__bounceInUp;
+    animation-name: Toastify__bounceInUp;
   }
 }
 
-.#{$rt-namespace}__bounce-exit {
+Toastify__bounce-exit {
   &--top-left,
   &--bottom-left {
-    animation-name: #{$rt-namespace}__bounceOutLeft;
+    animation-name: Toastify__bounceOutLeft;
   }
   &--top-right,
   &--bottom-right {
-    animation-name: #{$rt-namespace}__bounceOutRight;
+    animation-name: Toastify__bounceOutRight;
   }
   &--top-center {
-    animation-name: #{$rt-namespace}__bounceOutUp;
+    animation-name: Toastify__bounceOutUp;
   }
   &--bottom-center {
-    animation-name: #{$rt-namespace}__bounceOutDown;
+    animation-name: Toastify__bounceOutDown;
   }
 }

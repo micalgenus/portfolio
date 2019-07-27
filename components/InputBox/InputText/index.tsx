@@ -1,7 +1,7 @@
 import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
 import { Popup } from 'semantic-ui-react';
 
-import './InputText.scss';
+import './InputText.css';
 
 interface Props {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;

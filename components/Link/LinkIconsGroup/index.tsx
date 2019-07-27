@@ -4,7 +4,7 @@ import { ExternalLinkIcon } from '@/components';
 
 import { LinkItem } from '@/interfaces';
 
-import './LinkIconsGroup.scss';
+import './LinkIconsGroup.css';
 
 interface Props {
   links?: LinkItem[];

@@ -1,4 +1,4 @@
-@keyframes #{$rt-namespace}__trackProgress {
+@keyframes Toastify__trackProgress {
   0% {
     transform: scaleX(1);
   }
@@ -7,7 +7,7 @@
   }
 }
 
-.#{$rt-namespace}__progress-bar {
+Toastify__progress-bar {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -19,7 +19,7 @@
   transform-origin: left;
 
   &--animated {
-    animation: #{$rt-namespace}__trackProgress linear 1 forwards;
+    animation: Toastify__trackProgress linear 1 forwards;
   }
 
   &--controlled {

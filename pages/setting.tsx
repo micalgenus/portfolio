@@ -13,7 +13,7 @@ import { getOnlyUserInformationQuery, updateUserInfoQuery } from '@/lib/graphql/
 import { Router, InputText, TextArea } from '@/components';
 import { User } from '@/interfaces';
 
-import '@/scss/profile.scss';
+import '@/scss/profile.css';
 
 interface InputState {
   username?: string;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './ScrollBar.scss';
+import './ScrollBar.css';
 
 interface Props {
   top: number;

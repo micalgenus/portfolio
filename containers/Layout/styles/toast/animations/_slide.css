@@ -2,7 +2,7 @@
   transform: translate3d(0, 0, 0);
 }
 
-@keyframes #{$rt-namespace}__slideInRight {
+@keyframes Toastify__slideInRight {
   from {
     transform: translate3d(110%, 0, 0);
     visibility: visible;
@@ -12,7 +12,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideInLeft {
+@keyframes Toastify__slideInLeft {
   from {
     transform: translate3d(-110%, 0, 0);
     visibility: visible;
@@ -22,7 +22,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideInUp {
+@keyframes Toastify__slideInUp {
   from {
     transform: translate3d(0, 110%, 0);
     visibility: visible;
@@ -32,7 +32,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideInDown {
+@keyframes Toastify__slideInDown {
   from {
     transform: translate3d(0, -110%, 0);
     visibility: visible;
@@ -42,7 +42,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideOutRight {
+@keyframes Toastify__slideOutRight {
   from {
     @include transform;
   }
@@ -52,7 +52,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideOutLeft {
+@keyframes Toastify__slideOutLeft {
   from {
     @include transform;
   }
@@ -62,7 +62,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideOutDown {
+@keyframes Toastify__slideOutDown {
   from {
     @include transform;
   }
@@ -72,7 +72,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideOutUp {
+@keyframes Toastify__slideOutUp {
   from {
     @include transform;
   }
@@ -82,36 +82,36 @@
   }
 }
 
-.#{$rt-namespace}__slide-enter {
+Toastify__slide-enter {
   &--top-left,
   &--bottom-left {
-    animation-name: #{$rt-namespace}__slideInLeft;
+    animation-name: Toastify__slideInLeft;
   }
   &--top-right,
   &--bottom-right {
-    animation-name: #{$rt-namespace}__slideInRight;
+    animation-name: Toastify__slideInRight;
   }
   &--top-center {
-    animation-name: #{$rt-namespace}__slideInDown;
+    animation-name: Toastify__slideInDown;
   }
   &--bottom-center {
-    animation-name: #{$rt-namespace}__slideInUp;
+    animation-name: Toastify__slideInUp;
   }
 }
 
-.#{$rt-namespace}__slide-exit {
+Toastify__slide-exit {
   &--top-left,
   &--bottom-left {
-    animation-name: #{$rt-namespace}__slideOutLeft;
+    animation-name: Toastify__slideOutLeft;
   }
   &--top-right,
   &--bottom-right {
-    animation-name: #{$rt-namespace}__slideOutRight;
+    animation-name: Toastify__slideOutRight;
   }
   &--top-center {
-    animation-name: #{$rt-namespace}__slideOutUp;
+    animation-name: Toastify__slideOutUp;
   }
   &--bottom-center {
-    animation-name: #{$rt-namespace}__slideOutDown;
+    animation-name: Toastify__slideOutDown;
   }
 }
