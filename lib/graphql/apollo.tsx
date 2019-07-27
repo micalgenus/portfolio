@@ -29,8 +29,10 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const client = new ApolloClient({
+  ssrMode: true,
   link: concat(authMiddleware, concat(retryLink, httpLink)),
   cache: new InMemoryCache(),
+  ssrForceFetchDelay: 1000,
 });
 
 export default class ApolloClientProvider extends Component {
