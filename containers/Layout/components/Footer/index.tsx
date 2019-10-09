@@ -14,17 +14,13 @@ export default class LayoutFooter extends Component {
 
   getBuildAndTestInfo = () => (
     <p>
-      Powered by <ExternalLink href="https://nextjs.org/">Next</ExternalLink>. Tests use{' '}
+      Made with <ExternalLink href="https://nextjs.org/">Next</ExternalLink>. Tests use{' '}
       <ExternalLink href="https://travis-ci.org/micalgenus/portfolio-serverless">Travis-ci</ExternalLink> and{' '}
       <ExternalLink href="https://codeclimate.com/github/micalgenus/portfolio-serverless">codeclimate</ExternalLink>.
     </p>
   );
 
-  getServerInfo = () => (
-    <p>
-      Hosted by Google Cloud App Engine
-    </p>
-  );
+  getServerInfo = () => <p>Hosted by Google Cloud App Engine</p>;
 
   render() {
     return (
