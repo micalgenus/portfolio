@@ -1,7 +1,7 @@
 $select-item-color: #2185d0;
 
 div.modal.active {
-  position: relative;
+  /* position: relative; */
   .content {
     padding: 60px 12.5% 75px;
 
